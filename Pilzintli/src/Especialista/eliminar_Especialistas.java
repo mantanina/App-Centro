@@ -329,7 +329,23 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_statusActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        System.out.println("FUNCION BUSQUEDA NO IMPLEMENTADA");
+        
+        FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
+        DatosEspecialista especialista = new DatosEspecialista();
+        String idBusqueda = id_Esp.getText();
+        
+        especialista = FSQLE.EliminarEspecialista(idBusqueda);
+        
+        nom_Esp.setText(especialista.getNombre());
+        apellpate_Esp.setText(especialista.getApellidoPaterno());
+        apellmat_Esp.setText(especialista.getApellidoMaterno());
+        profesion_Esp.setText(especialista.getProfesion());
+        cedula_esp.setText(especialista.getCedula());
+        Especialidad_Esp.setText(especialista.getEspecialidad());
+        telefono_Esp.setText(especialista.getTelefono());
+        correo_Esp.setText(especialista.getCorreo());
+        
+        
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void id_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_EspActionPerformed
