@@ -46,13 +46,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`padre` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido_paterno` VARCHAR(45) NOT NULL,
-  `apellido_materno` VARCHAR(45) NOT NULL,
-  `direccion` VARCHAR(30) NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apellido_paterno` VARCHAR(50) NOT NULL,
+  `apellido_materno` VARCHAR(50) NOT NULL,
+  `direccion` VARCHAR(70) NOT NULL,
   `cp` VARCHAR(5) NOT NULL,
-  `municipio` VARCHAR(40) NOT NULL,
-  `estado` VARCHAR(25) NOT NULL,
+  `municipio` VARCHAR(50) NOT NULL,
+  `estado` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -62,12 +62,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`paciente` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido_paterno` VARCHAR(45) NOT NULL,
-  `apellido_materno` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apellido_paterno` VARCHAR(50) NOT NULL,
+  `apellido_materno` VARCHAR(50) NOT NULL,
   `fecha_nacimiento` DATE NOT NULL,
   `escolaridad` VARCHAR(14) NOT NULL,
-  `diagnostico` VARCHAR(45) NULL,
+  `diagnostico` VARCHAR(40) NULL,
   `padre_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`padre_id`) REFERENCES padre(id))
@@ -79,14 +79,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`especialista` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido_paterno` VARCHAR(45) NOT NULL,
-  `apellido_materno` VARCHAR(45) NOT NULL,
-  `profesion` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apellido_paterno` VARCHAR(50) NOT NULL,
+  `apellido_materno` VARCHAR(50) NOT NULL,
+  `profesion` VARCHAR(40) NOT NULL,
   `cedula` VARCHAR(10) NOT NULL,
-  `especialidad` VARCHAR(45) NOT NULL,
+  `especialidad` VARCHAR(40) NOT NULL,
   `telefono` VARCHAR(10) NOT NULL,
-  `correo` VARCHAR(50) NOT NULL,
+  `correo` VARCHAR(80) NOT NULL,
   `status` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -148,7 +148,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`inventario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre_articulo` VARCHAR(45) NOT NULL,
+  `nombre_articulo` VARCHAR(50) NOT NULL,
   `cantidad` INT NOT NULL,
   `estado` VARCHAR(10) NOT NULL,
   `cantidad_deseable` INT NOT NULL,
