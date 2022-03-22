@@ -1,4 +1,4 @@
-package Interfaces;
+package Especialista;
 
 public class eliminar_Especialistas extends javax.swing.JFrame {
 
