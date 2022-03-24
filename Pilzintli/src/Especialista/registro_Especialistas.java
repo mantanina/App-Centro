@@ -5,13 +5,44 @@
  */
 package Especialista;
 
+import ConexionDB.DbConnection;
+import Tutor.DatosPadreoTutor;
+import Tutor.DatosTutorDAO;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Havst
  */
 
-//UwU
 public class registro_Especialistas extends javax.swing.JFrame {
+    //Instanciar la clase para utilizar el status del especialista
+    DatosEspecialista especialista = new DatosEspecialista();
+
+    //Metodo para agregar un especialista en la base de datos 
+    public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
+        DbConnection conex = new DbConnection();
+
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+
+            String insertSql1 = "INSERT INTO especialista (nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono,correo,status) VALUES "
+                    + "('" + nom_Esp.getText() + "', '" + apellpate_Esp.getText() + "', '" + apellmat_Esp.getText() + "', '" + profesion_Esp.getText() + "', '" + cedula_esp.getText() + "', '" + Especialidad_Esp.getText() + "','" + telefono_Esp.getText() + "','" + correo_Esp.getText() + "','" + especialista.getStatus() + "')";
+            System.out.println("" + insertSql1);
+            estatuto.executeUpdate(insertSql1);
+
+            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            estatuto.close();
+            conex.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
+        }
+    }
 
     /**
      * Creates new form Especialistas
@@ -39,7 +70,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_resgistrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         Especialidad_Esp = new javax.swing.JTextField();
@@ -75,10 +106,10 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         jLabel9.setText("Correo Electrónico");
 
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_resgistrar.setText("Registrar");
+        btn_resgistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_resgistrarActionPerformed(evt);
             }
         });
 
@@ -144,7 +175,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
             }
         });
 
-        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Inactivo" }));
         cbx_status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_statusActionPerformed(evt);
@@ -198,7 +229,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btn_resgistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -250,7 +281,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
                     .addComponent(Especialidad_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_resgistrar)
                     .addComponent(jButton3)
                     .addComponent(jButton2))
                 .addGap(22, 22, 22))
@@ -270,9 +301,52 @@ public class registro_Especialistas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
+        
+        //Variable para verificar la seleccion del combo box
+        int combo = 0;
+        
+        //If para verificar la seleccion del status
+        if (cbx_status.getSelectedItem() == "Seleccionar") { 
+            combo = 3;
+        }
+
+        //If para verificar que se hayan llenado los campos
+        if (!nom_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
+                && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
+                && !cedula_esp.getText().equalsIgnoreCase("") && !Especialidad_Esp.getText().equalsIgnoreCase("")
+                && !telefono_Esp.getText().equalsIgnoreCase("") && !correo_Esp.getText().equalsIgnoreCase("")
+                && combo != 3) {
+            
+            //seteos de los campos para el registro de los datos 
+            especialista.setNombre(nom_Esp.getText());
+            especialista.setApellidoPaterno(apellpate_Esp.getText());
+            especialista.setApellidoMaterno(apellmat_Esp.getText());
+            especialista.setProfesion(profesion_Esp.getText());
+            especialista.setCedula(cedula_esp.getText());
+            especialista.setEspecialidad(Especialidad_Esp.getText());
+            especialista.setTelefono(telefono_Esp.getText());
+            especialista.setCorreo(correo_Esp.getText());
+
+            //ifs para la seleccion del combo 
+            if (cbx_status.getSelectedItem() == "Activo") {
+                especialista.setStatus(1);
+            } else {
+                especialista.setStatus(0);
+            }
+
+            //Registra el especialista
+            RegistrarEspecialistA(especialista);
+            
+            //resetea el combo para uso futuro 
+            combo = 0;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
+// If que valida que los campos tengan algún dato para poder registrar
+    }//GEN-LAST:event_btn_resgistrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
@@ -315,6 +389,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_statusActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Limpiar los campos
         nom_Esp.setText(" ");
         apellpate_Esp.setText(" ");
         apellmat_Esp.setText(" ");
@@ -354,9 +429,9 @@ public class registro_Especialistas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() { 
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registro_Especialistas().setVisible(true); 
+                new registro_Especialistas().setVisible(true);
             }
         });
     }
@@ -365,10 +440,10 @@ public class registro_Especialistas extends javax.swing.JFrame {
     private javax.swing.JTextField Especialidad_Esp;
     private javax.swing.JTextField apellmat_Esp;
     private javax.swing.JTextField apellpate_Esp;
+    private javax.swing.JButton btn_resgistrar;
     private javax.swing.JComboBox<String> cbx_status;
     private javax.swing.JTextField cedula_esp;
     private javax.swing.JTextField correo_Esp;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
