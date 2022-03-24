@@ -20,7 +20,7 @@ public class NU extends javax.swing.JFrame {
     public NU() {
         initComponents();
         List nombre =new ArrayList();
-        
+       
         
         
     }
