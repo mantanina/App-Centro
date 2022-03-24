@@ -5,6 +5,9 @@
  */
 package Usuario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Owen Axel H
@@ -16,6 +19,10 @@ public class NU extends javax.swing.JFrame {
      */
     public NU() {
         initComponents();
+        List nombre =new ArrayList();
+        
+        
+        
     }
 
     /**
@@ -129,7 +136,7 @@ public class NU extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_salidaActionPerformed
 
     /**
