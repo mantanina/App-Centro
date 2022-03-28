@@ -1,6 +1,9 @@
 package Especialista;
 
+
 import javax.swing.JOptionPane;
+import Menu.Principal;
+import javax.swing.JFrame;
 
 public class eliminar_Especialistas extends javax.swing.JFrame {
 
@@ -15,6 +18,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         telefono_Esp.setEditable(false);
         correo_Esp.setEditable(false);
         status_esp.setEditable(false);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -329,6 +333,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
+        new Principal().setVisible(true);
         dispose();
     }//GEN-LAST:event_boton_SalirActionPerformed
 
@@ -440,11 +445,14 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new eliminar_Especialistas().setVisible(true);
+                
+                
             }
         });
     }
