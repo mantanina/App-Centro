@@ -16,10 +16,13 @@ import javax.swing.JOptionPane;
  *
  * @author Havst
  */
-
 public class registro_Especialistas extends javax.swing.JFrame {
+
     //Instanciar la clase para utilizar el status del especialista
     DatosEspecialista especialista = new DatosEspecialista();
+
+    //Variable para verificar la seleccion del combo box
+   // int combo = 0;
 
     //Metodo para agregar un especialista en la base de datos 
     public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
@@ -302,50 +305,50 @@ public class registro_Especialistas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
+        //seteos de los campos para el registro de los datos 
+        especialista.setNombre(nom_Esp.getText());
+        especialista.setApellidoPaterno(apellpate_Esp.getText());
+        especialista.setApellidoMaterno(apellmat_Esp.getText());
+        especialista.setProfesion(profesion_Esp.getText());
+        especialista.setCedula(cedula_esp.getText());
+        especialista.setEspecialidad(Especialidad_Esp.getText());
+        especialista.setTelefono(telefono_Esp.getText());
+        especialista.setCorreo(correo_Esp.getText());
+
+        //ifs para la seleccion del combo 
+        if (cbx_status.getSelectedItem() == "Activo") {
+            especialista.setStatus(1);
+            //combo = 0;
+        } else {
+            especialista.setStatus(0);
+           // combo = 1;
+        }
+        //Registra el especialista
+        RegistrarEspecialistA(especialista);
         
-        //Variable para verificar la seleccion del combo box
-        int combo = 0;
-        
+        //----------------------------------Prueba de validación-------------------------------
+        /*
+        System.out.println(combo);
         //If para verificar la seleccion del status
-        if (cbx_status.getSelectedItem() == "Seleccionar") { 
+
+        if (cbx_status.getSelectedItem() == "Seleccionar") {
             combo = 3;
         }
-
+         System.out.println(combo);   
         //If para verificar que se hayan llenado los campos
         if (!nom_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
                 && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
                 && !cedula_esp.getText().equalsIgnoreCase("") && !Especialidad_Esp.getText().equalsIgnoreCase("")
                 && !telefono_Esp.getText().equalsIgnoreCase("") && !correo_Esp.getText().equalsIgnoreCase("")
                 && combo != 3) {
-            
-            //seteos de los campos para el registro de los datos 
-            especialista.setNombre(nom_Esp.getText());
-            especialista.setApellidoPaterno(apellpate_Esp.getText());
-            especialista.setApellidoMaterno(apellmat_Esp.getText());
-            especialista.setProfesion(profesion_Esp.getText());
-            especialista.setCedula(cedula_esp.getText());
-            especialista.setEspecialidad(Especialidad_Esp.getText());
-            especialista.setTelefono(telefono_Esp.getText());
-            especialista.setCorreo(correo_Esp.getText());
 
-            //ifs para la seleccion del combo 
-            if (cbx_status.getSelectedItem() == "Activo") {
-                especialista.setStatus(1);
-            } else {
-                especialista.setStatus(0);
-            }
-
-            //Registra el especialista
-            RegistrarEspecialistA(especialista);
             
-            //resetea el combo para uso futuro 
-            combo = 0;
 
         } else {
             JOptionPane.showMessageDialog(null, "Llene todos los campos",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
-// If que valida que los campos tengan algún dato para poder registrar
+        combo = 0;*/
     }//GEN-LAST:event_btn_resgistrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -398,6 +401,15 @@ public class registro_Especialistas extends javax.swing.JFrame {
         Especialidad_Esp.setText(" ");
         telefono_Esp.setText(" ");
         correo_Esp.setText(" ");
+
+        //elimina las opciones
+        cbx_status.removeAllItems();
+
+        //Agrega las opciones
+        cbx_status.addItem("Seleccionar");
+        cbx_status.addItem("Activo");
+        cbx_status.addItem("Inactivo");
+        //combo = 3;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
