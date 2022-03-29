@@ -11,6 +11,10 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -61,6 +65,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         textFecha = new javax.swing.JTextField();
         DatosTutorBoton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -177,6 +182,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
 
         jLabel10.setText("Datos del padre o tutor:");
 
+        jLabel9.setText("la fecha debe ir en el siguiente formato año/mes/dia");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,8 +242,13 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(107, 107, 107))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(381, 381, 381)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -272,7 +284,9 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(139, 139, 139)
                         .addComponent(jLabel6)))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DatosTutorBoton)
                     .addComponent(jLabel10))
@@ -322,11 +336,13 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        PacientesDAO dao = new PacientesDAO();
        Pacientes mipaciente = new Pacientes();
-       
+     
        mipaciente.setNombre((textNombre.getText()));
        mipaciente.setApellido_paterno(textApellidoPaterno.getText());
        mipaciente.setApellido_materno(textApellidoMaterno.getText());
-       mipaciente.setFecha_nacimiento(textFecha.getText());
+        mipaciente.setFecha_nacimiento(textFecha.getText());
+
+       
        mipaciente.setEscolaridad(textEscolaridad.getText());
        //mipaciente.setStatus(text);
        mipaciente.setDiagnostico(textDiagnostico.getText());  
@@ -425,6 +441,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
