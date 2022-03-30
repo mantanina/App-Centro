@@ -6,7 +6,7 @@ package Usuario;
 
 /**
  *
- * @author Arreola N
+ * @author Arreola el JOvenciTO
  */
 public class registro_Usuarios extends javax.swing.JFrame {
 
