@@ -17,7 +17,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
         initComponents();
         
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
-        this.setTitle("Bajas Especialista");
+        this.setTitle("Modificaciones Especialista");
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -42,9 +42,8 @@ public class modificar_Especialista extends javax.swing.JFrame {
 
         });
         
+        id_Esp.setEditable(false);
         nom_Esp.setEditable(false);
-        apellpate_Esp.setEditable(false);
-        apellmat_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
         cedula_esp.setEditable(false);
         Especialidad_Esp.setEditable(false);

@@ -89,5 +89,33 @@ public class FuncionesSQLEspecialista {
         }
 
     }
+    public void ModificarDatos(String nombre, String apellidoPaterno, String apellidoMaterno, String profesion, String cedula, String especialidad, String telefono, String correo,String status,String id ) {
+
+        DbConnection conexion;
+        Statement estatuto;
+        String solicitudSQL;
+
+        try {
+
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "UPDATE especialista SET nombre = '"+ nombre +"' , apellido_paterno = '" + apellidoPaterno+"', apellido_materno = '" + apellidoMaterno+"', profesion = '" + profesion+"', cedula = '" + cedula+"', especialidad = '" + especialidad+"', telefono = '" + telefono+"', correo = '" + correo+"', status = '" + status+"' where id like " + id;
+            System.out.println(solicitudSQL);
+            
+            estatuto.executeUpdate(solicitudSQL);
+            
+            JOptionPane.showMessageDialog(null,"Status Actualizado!","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            
+            estatuto.close();
+            conexion.desconectar();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }
 
 }
