@@ -255,7 +255,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_altas_TutorActionPerformed
 
     private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
-        new registro_Usuarios().setVisible(true);
+        try {
+            new registro_Usuarios().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_altas_UsuarioActionPerformed
 

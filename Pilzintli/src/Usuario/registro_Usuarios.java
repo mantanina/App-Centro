@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class registro_Usuarios extends javax.swing.JFrame {
 
-    public registro_Usuarios() {
+    public registro_Usuarios() throws IOException {
         initComponents(); 
         
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -243,7 +243,11 @@ public class registro_Usuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registro_Usuarios().setVisible(true);
+                try {
+                    new registro_Usuarios().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(registro_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
