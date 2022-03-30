@@ -5,8 +5,20 @@
  */
 package Usuario;
 
+import Especialista.registro_Especialistas;
+import Menu.Principal;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,8 +29,35 @@ public class NU extends javax.swing.JFrame {
     /**
      * Creates new form NU
      */
-    public NU() {
+    public NU() throws IOException {
         initComponents();
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Altas Nivel Usuario");
+        this.setIconImage(imagenIcono);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(registro_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
+        
         List nombre =new ArrayList();
        
         
@@ -137,6 +176,13 @@ public class NU extends javax.swing.JFrame {
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
        
+        try {
+            new registro_Usuarios().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+        
     }//GEN-LAST:event_salidaActionPerformed
 
     /**
@@ -169,7 +215,11 @@ public class NU extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NU().setVisible(true);
+                try {
+                    new NU().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(NU.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

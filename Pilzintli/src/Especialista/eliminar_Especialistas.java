@@ -1,14 +1,47 @@
 package Especialista;
 
-
 import javax.swing.JOptionPane;
-import Menu.Principal;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class eliminar_Especialistas extends javax.swing.JFrame {
 
-    public eliminar_Especialistas() {
+    public eliminar_Especialistas() throws IOException {
         initComponents();
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Bajas Especialista");
+        this.setIconImage(imagenIcono);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
+        
         nom_Esp.setEditable(false);
         apellpate_Esp.setEditable(false);
         apellmat_Esp.setEditable(false);
@@ -18,8 +51,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         telefono_Esp.setEditable(false);
         correo_Esp.setEditable(false);
         status_esp.setEditable(false);
-        eliminar_Especialistas.setDefaultLookAndFeelDecorated(false);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -316,7 +348,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                 FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
             }
         }
-        
+
         nom_Esp.setText("");
         apellpate_Esp.setText("");
         apellmat_Esp.setText("");
@@ -326,14 +358,23 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         telefono_Esp.setText("");
         correo_Esp.setText("");
         status_esp.setText("");
-        
+
         botonBuscarActionPerformed(evt);
 
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
-        new Principal().setVisible(true);
-        dispose();
+        int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+            try {
+                new Menu.Principal().setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    dispose();
+                }
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void Especialidad_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Especialidad_EspActionPerformed
@@ -431,8 +472,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                     break;
                 }
             }
-            
-        
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -446,14 +486,17 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new eliminar_Especialistas().setVisible(true);
-                
-                
+                try {
+                    new eliminar_Especialistas().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
     }
