@@ -13,5 +13,7 @@ import ConexionDB.DbConnection;
  */
 public class nid {
     DbConnection conex = new DbConnection();
-    public void InsertarN()
+    public void InsertarN(){
+        
+    }
 }
