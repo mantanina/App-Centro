@@ -10,5 +10,23 @@ package Usuario;
  * @author Owen Axel H
  */
 public class nivel {
+    private String Nombre  ;
+    private String rol;
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
     
 }

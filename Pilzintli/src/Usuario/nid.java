@@ -6,6 +6,8 @@
 package Usuario;
 
 import ConexionDB.DbConnection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -13,7 +15,8 @@ import ConexionDB.DbConnection;
  */
 public class nid {
     DbConnection conex = new DbConnection();
-    public void InsertarN(){
-        
+    public void InsertarN(String rol) throws SQLException{
+         Statement estatuto = conex.getConnection().createStatement();
+         
     }
 }
