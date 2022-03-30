@@ -14,7 +14,7 @@ public class registro_Usuarios extends javax.swing.JFrame {
      * Creates new form registro_Usuarios
      */
     public registro_Usuarios() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
