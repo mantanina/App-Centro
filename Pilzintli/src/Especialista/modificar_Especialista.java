@@ -348,9 +348,8 @@ public class modificar_Especialista extends javax.swing.JFrame {
             }
         }
 
+        id_Esp.setText("");
         nom_Esp.setText("");
-        apellpate_Esp.setText("");
-        apellmat_Esp.setText("");
         profesion_Esp.setText("");
         cedula_esp.setText("");
         Especialidad_Esp.setText("");

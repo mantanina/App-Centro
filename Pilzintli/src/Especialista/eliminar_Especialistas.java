@@ -350,8 +350,6 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         id_Esp.setText("");
         nom_Esp.setText("");
-        apellpate_Esp.setText("");
-        apellmat_Esp.setText("");
         profesion_Esp.setText("");
         cedula_esp.setText("");
         Especialidad_Esp.setText("");
