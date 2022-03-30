@@ -5,6 +5,18 @@
  */
 package Tutor;
 
+import Paciente.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author edgar
@@ -14,8 +26,34 @@ public class DatosTutor extends javax.swing.JFrame {
     /**
      * Creates new form DatosTutor
      */
-    public DatosTutor() {
+    public DatosTutor() throws IOException {
         initComponents();
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Altas Tutor");
+        this.setIconImage(imagenIcono);
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(RegistrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
     }
 
     /**
@@ -69,7 +107,7 @@ public class DatosTutor extends javax.swing.JFrame {
 
         jLabel9.setText("Estado:");
 
-        jButton1.setText("Salir");
+        jButton1.setText("Registro Pacientes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -102,8 +140,7 @@ public class DatosTutor extends javax.swing.JFrame {
                         .addGap(221, 221, 221)
                         .addComponent(jLabel3)
                         .addGap(232, 232, 232)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -177,8 +214,7 @@ public class DatosTutor extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel9)))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Municipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +254,17 @@ public class DatosTutor extends javax.swing.JFrame {
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+        int opc = JOptionPane.showConfirmDialog(null, "Regresar al Registro de Pacientes?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+            try {
+                new RegistrarPacientes().setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    dispose();
+                }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
@@ -265,7 +311,11 @@ public class DatosTutor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DatosTutor().setVisible(true);
+                try {
+                    new DatosTutor().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(DatosTutor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

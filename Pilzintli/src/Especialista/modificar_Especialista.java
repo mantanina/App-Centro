@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class eliminar_Especialistas extends javax.swing.JFrame {
+public class modificar_Especialista extends javax.swing.JFrame {
 
-    public eliminar_Especialistas() throws IOException {
+    public modificar_Especialista() throws IOException {
         initComponents();
         
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
@@ -33,7 +33,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                     try {
                         new Menu.Principal().setVisible(true);
                     } catch (IOException ex) {
-                        Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
                 }
@@ -371,7 +371,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             try {
                 new Menu.Principal().setVisible(true);
             } catch (IOException ex) {
-                Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
             }
                     dispose();
                 }
@@ -474,14 +474,18 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
 
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -492,9 +496,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new eliminar_Especialistas().setVisible(true);
+                    new modificar_Especialista().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }

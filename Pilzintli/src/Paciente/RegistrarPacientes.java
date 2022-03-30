@@ -6,10 +6,20 @@
 package Paciente;
 
 import Tutor.DatosTutor;
+import Menu.*;
 import ConexionDB.DbConnection;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -25,8 +35,34 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarPacientes
      */
-    public RegistrarPacientes() {
+    public RegistrarPacientes() throws IOException {
         initComponents();
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Altas Paciente");
+        this.setIconImage(imagenIcono);
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
     }
 
     /**
@@ -164,11 +200,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         });
 
         DatosTutorBoton.setText("Registrar");
-        DatosTutorBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DatosTutorBotonMouseClicked(evt);
-            }
-        });
         DatosTutorBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DatosTutorBotonActionPerformed(evt);
@@ -362,19 +393,14 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_textApellidoPaternoActionPerformed
 
     private void DatosTutorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatosTutorBotonActionPerformed
-        //línea 1-instanciamos un objeto de la clase Formulario2.java
-        DatosTutor verformulario2=new DatosTutor(); 
- 
-         //línea 2-hacemos visible el formulario que queremos llamar 
-         verformulario2.setVisible(true); 
-         
-
+       
+       try {
+          new DatosTutor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(DatosTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_DatosTutorBotonActionPerformed
-
-    private void DatosTutorBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatosTutorBotonMouseClicked
-        RegistrarPacientes cerrar = new RegistrarPacientes();
-        dispose();
-    }//GEN-LAST:event_DatosTutorBotonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -406,7 +432,11 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrarPacientes().setVisible(true);
+                try {
+                    new RegistrarPacientes().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(RegistrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

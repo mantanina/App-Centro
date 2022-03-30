@@ -4,6 +4,21 @@
  */
 package Menu;
 
+import Especialista.*;
+import Paciente.*;
+import Usuario.*;
+import Tutor.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author david
@@ -13,8 +28,29 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal() throws IOException {
         initComponents();
+
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Sistema Administrativo para Piltzintli");
+        this.setIconImage(imagenIcono);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Salir del Sistema?", "Cerrar Sesión", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+
+            }
+
+        });
+
     }
 
     /**
@@ -24,65 +60,212 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jMenu3 = new javax.swing.JMenu();
+        barraMenu = new javax.swing.JMenuBar();
+        menu_Archivo = new javax.swing.JMenu();
+        archivo_Salir = new javax.swing.JMenuItem();
+        menu_Altas = new javax.swing.JMenu();
+        altas_Especialista = new javax.swing.JMenuItem();
+        altas_Paciente = new javax.swing.JMenuItem();
+        altas_Tutor = new javax.swing.JMenuItem();
+        altas_Usuario = new javax.swing.JMenuItem();
+        menu_Modificaciones = new javax.swing.JMenu();
+        mod_Especialista = new javax.swing.JMenuItem();
+        mod_Paciente = new javax.swing.JMenuItem();
+        mod_Tutor = new javax.swing.JMenuItem();
+        mod_Usuario = new javax.swing.JMenuItem();
+        menu_Bajas = new javax.swing.JMenu();
+        bajas_Especialista = new javax.swing.JMenuItem();
+        bajas_Paciente = new javax.swing.JMenuItem();
+        bajas_Tutor = new javax.swing.JMenuItem();
+        bajas_Usuario = new javax.swing.JMenuItem();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("MÓDULO DE INFORMACIÓN");
+        menu_Archivo.setText("Archivo");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Especialistas");
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Pacientes");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Padres / Tutores");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        archivo_Salir.setText("Salir");
+        archivo_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                archivo_SalirActionPerformed(evt);
             }
         });
+        menu_Archivo.add(archivo_Salir);
+
+        barraMenu.add(menu_Archivo);
+
+        menu_Altas.setText("Altas");
+
+        altas_Especialista.setText("Especialistas");
+        altas_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Especialista);
+
+        altas_Paciente.setText("Pacientes");
+        altas_Paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_PacienteActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Paciente);
+
+        altas_Tutor.setText("Tutores");
+        altas_Tutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_TutorActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Tutor);
+
+        altas_Usuario.setText("Usuarios");
+        altas_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_UsuarioActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Usuario);
+
+        barraMenu.add(menu_Altas);
+
+        menu_Modificaciones.setText("Modificaciones");
+
+        mod_Especialista.setText("Especialistas");
+        mod_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Modificaciones.add(mod_Especialista);
+
+        mod_Paciente.setText("Pacientes");
+        menu_Modificaciones.add(mod_Paciente);
+
+        mod_Tutor.setText("Tutores");
+        menu_Modificaciones.add(mod_Tutor);
+
+        mod_Usuario.setText("Usuarios");
+        menu_Modificaciones.add(mod_Usuario);
+
+        barraMenu.add(menu_Modificaciones);
+
+        menu_Bajas.setText("Bajas");
+
+        bajas_Especialista.setText("Especialistas");
+        bajas_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bajas_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Bajas.add(bajas_Especialista);
+
+        bajas_Paciente.setText("Pacientes");
+        menu_Bajas.add(bajas_Paciente);
+
+        bajas_Tutor.setText("Tutores");
+        bajas_Tutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bajas_TutorActionPerformed(evt);
+            }
+        });
+        menu_Bajas.add(bajas_Tutor);
+
+        bajas_Usuario.setText("Usuarios");
+        menu_Bajas.add(bajas_Usuario);
+
+        barraMenu.add(menu_Bajas);
+
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(187, Short.MAX_VALUE))
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(537, Short.MAX_VALUE))
+            .addGap(0, 629, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void altas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_EspecialistaActionPerformed
+        try {
+
+            new registro_Especialistas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
+
+    }//GEN-LAST:event_altas_EspecialistaActionPerformed
+
+    private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_mod_EspecialistaActionPerformed
+
+    private void bajas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_EspecialistaActionPerformed
+        try {
+
+            new eliminar_Especialistas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
+    }//GEN-LAST:event_bajas_EspecialistaActionPerformed
+
+    private void archivo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivo_SalirActionPerformed
+        // TODO add your handling code here:
+
+        int opcion = JOptionPane.showConfirmDialog(null, "Salir del Sistema?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (opcion == 0) {
+            dispose();
+        }
+    }//GEN-LAST:event_archivo_SalirActionPerformed
+
+    private void altas_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_PacienteActionPerformed
+
+        try {
+
+            new RegistrarPacientes().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
+    }//GEN-LAST:event_altas_PacienteActionPerformed
+
+    private void altas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_TutorActionPerformed
+        try {
+            new DatosTutor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+        
+    }//GEN-LAST:event_altas_TutorActionPerformed
+
+    private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
+        try {
+            new Usuario.registro_Usuarios().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_altas_UsuarioActionPerformed
+
+    private void bajas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_TutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bajas_TutorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +282,9 @@ public class Principal extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
+
             }
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -114,15 +299,34 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                try {
+                    new Principal().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem altas_Especialista;
+    private javax.swing.JMenuItem altas_Paciente;
+    private javax.swing.JMenuItem altas_Tutor;
+    private javax.swing.JMenuItem altas_Usuario;
+    private javax.swing.JMenuItem archivo_Salir;
+    private javax.swing.JMenuItem bajas_Especialista;
+    private javax.swing.JMenuItem bajas_Paciente;
+    private javax.swing.JMenuItem bajas_Tutor;
+    private javax.swing.JMenuItem bajas_Usuario;
+    private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu menu_Altas;
+    private javax.swing.JMenu menu_Archivo;
+    private javax.swing.JMenu menu_Bajas;
+    private javax.swing.JMenu menu_Modificaciones;
+    private javax.swing.JMenuItem mod_Especialista;
+    private javax.swing.JMenuItem mod_Paciente;
+    private javax.swing.JMenuItem mod_Tutor;
+    private javax.swing.JMenuItem mod_Usuario;
     // End of variables declaration//GEN-END:variables
 }
