@@ -14,9 +14,12 @@ import java.sql.Statement;
  * @author Owen Axel H
  */
 public class nid {
+    nivel n =new nivel();
     DbConnection conex = new DbConnection();
     public void InsertarN(String rol) throws SQLException{
          Statement estatuto = conex.getConnection().createStatement();
-         
+         String sqlselect="SELECT  `username`  FROM `usuario`" ;
+        n.setNombre(sqlselect);
+        
     }
 }
