@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class eliminar_Especialistas extends javax.swing.JFrame {
+public class modificar_Especialista extends javax.swing.JFrame {
 
-    public eliminar_Especialistas() throws IOException {
+    public modificar_Especialista() throws IOException {
         initComponents();
-
+        
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
-        this.setTitle("Bajas Especialista");
+        this.setTitle("Modificaciones Especialista");
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -33,7 +33,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                     try {
                         new Menu.Principal().setVisible(true);
                     } catch (IOException ex) {
-                        Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
                 }
@@ -41,7 +41,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
 
         });
-
+        
         id_Esp.setEditable(false);
         nom_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
@@ -89,7 +89,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Eliminar Especialistas");
+        jLabel1.setText("Modificar Especialistas");
 
         jLabel2.setText("Nombre");
 
@@ -240,7 +240,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                                             .addComponent(apellpate_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(apellmat_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -364,15 +364,15 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
-        if (opc == JOptionPane.YES_OPTION) {
+                if (opc == JOptionPane.YES_OPTION) {
 
             try {
                 new Menu.Principal().setVisible(true);
             } catch (IOException ex) {
-                Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
             }
-            dispose();
-        }
+                    dispose();
+                }
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void Especialidad_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Especialidad_EspActionPerformed
@@ -419,7 +419,8 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         String apellidoP = apellpate_Esp.getText();
         String apellidoM = apellmat_Esp.getText();
 
-        especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
+        //AGREGAR AQUI LAS DOS VARIABLES PARA BUSCAR POR APELLIDO PATERNO Y MATERNO
+        especialista = FSQLE.BuscarEspecialista(apellidoP,apellidoM);
 
         if (!(especialista.getNombre().equals(""))) {
 
@@ -427,8 +428,6 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
             id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
-            apellpate_Esp.setText(especialista.getApellidoPaterno());
-            apellmat_Esp.setText(especialista.getApellidoMaterno());
             profesion_Esp.setText(especialista.getProfesion());
             cedula_esp.setText(especialista.getCedula());
             Especialidad_Esp.setText(especialista.getEspecialidad());
@@ -474,14 +473,18 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
 
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(eliminar_Especialistas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -492,9 +495,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new eliminar_Especialistas().setVisible(true);
+                    new modificar_Especialista().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }

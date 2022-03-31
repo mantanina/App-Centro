@@ -4,17 +4,46 @@
  */
 package Usuario;
 
+import Menu.Principal;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Arreola N
+ * @author Arreola el JOvenciTO
  */
 public class registro_Usuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form registro_Usuarios
-     */
-    public registro_Usuarios() {
-        initComponents();
+    public registro_Usuarios() throws IOException {
+        initComponents(); 
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
+        
     }
 
     /**
@@ -160,7 +189,12 @@ public class registro_Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+          new NU().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(NU.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -171,7 +205,12 @@ public class registro_Usuarios extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
- dispose();
+ try {
+          new Menu.Principal().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -204,7 +243,11 @@ public class registro_Usuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registro_Usuarios().setVisible(true);
+                try {
+                    new registro_Usuarios().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(registro_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

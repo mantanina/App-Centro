@@ -9,22 +9,21 @@ import javax.swing.JOptionPane;
 
 public class FuncionesSQLEspecialista {
 
-    public DatosEspecialista BuscarEspecialista(String id) {
+    public DatosEspecialista BuscarEspecialista(String apP, String apM) {
 
         DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
-        String idBusqueda;
         ResultSet resultado;
         DatosEspecialista especialista = null;
 
         try {
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
-            idBusqueda = id;
             especialista = new DatosEspecialista();
 
-            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM especialista where id like " + idBusqueda;
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM "
+                    + "especialista where apellido_paterno like '" + apP +"' and apellido_materno like '" + apM + "'";
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -73,6 +72,34 @@ public class FuncionesSQLEspecialista {
             situacion = status;
 
             solicitudSQL = "UPDATE especialista SET status = '" + situacion + "' where id like " + idBusqueda;
+            System.out.println(solicitudSQL);
+            
+            estatuto.executeUpdate(solicitudSQL);
+            
+            JOptionPane.showMessageDialog(null,"Status Actualizado!","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            
+            estatuto.close();
+            conexion.desconectar();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }
+    public void ModificarDatos(String nombre, String apellidoPaterno, String apellidoMaterno, String profesion, String cedula, String especialidad, String telefono, String correo,String status,String id ) {
+
+        DbConnection conexion;
+        Statement estatuto;
+        String solicitudSQL;
+
+        try {
+
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "UPDATE especialista SET nombre = '"+ nombre +"' , apellido_paterno = '" + apellidoPaterno+"', apellido_materno = '" + apellidoMaterno+"', profesion = '" + profesion+"', cedula = '" + cedula+"', especialidad = '" + especialidad+"', telefono = '" + telefono+"', correo = '" + correo+"', status = '" + status+"' where id like " + id;
             System.out.println(solicitudSQL);
             
             estatuto.executeUpdate(solicitudSQL);

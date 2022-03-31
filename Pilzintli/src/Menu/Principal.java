@@ -4,7 +4,20 @@
  */
 package Menu;
 
-import Especialista.eliminar_Especialistas;
+import Especialista.*;
+import Paciente.*;
+import Usuario.*;
+import Tutor.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +28,29 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal() throws IOException {
         initComponents();
+
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Sistema Administrativo para Piltzintli");
+        this.setIconImage(imagenIcono);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Salir del Sistema?", "Cerrar Sesión", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+
+            }
+
+        });
+
     }
 
     /**
@@ -27,79 +61,99 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        barraMenu = new javax.swing.JMenuBar();
+        menu_Archivo = new javax.swing.JMenu();
         archivo_Salir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        menu_Altas = new javax.swing.JMenu();
+        altas_Especialista = new javax.swing.JMenuItem();
+        altas_Paciente = new javax.swing.JMenuItem();
+        altas_Tutor = new javax.swing.JMenuItem();
+        altas_Usuario = new javax.swing.JMenuItem();
+        menu_Modificaciones = new javax.swing.JMenu();
+        mod_Especialista = new javax.swing.JMenuItem();
+        mod_Paciente = new javax.swing.JMenuItem();
+        mod_Tutor = new javax.swing.JMenuItem();
+        mod_Usuario = new javax.swing.JMenuItem();
+        menu_Bajas = new javax.swing.JMenu();
         bajas_Especialista = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        bajas_Paciente = new javax.swing.JMenuItem();
+        bajas_Tutor = new javax.swing.JMenuItem();
+        bajas_Usuario = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Archivo");
+        menu_Archivo.setText("Archivo");
 
         archivo_Salir.setText("Salir");
-        jMenu1.add(archivo_Salir);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Altas");
-
-        jMenuItem1.setText("Especialistas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        archivo_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                archivo_SalirActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menu_Archivo.add(archivo_Salir);
 
-        jMenuItem2.setText("Pacientes");
-        jMenu2.add(jMenuItem2);
+        barraMenu.add(menu_Archivo);
 
-        jMenuItem3.setText("Tutores");
-        jMenu2.add(jMenuItem3);
+        menu_Altas.setText("Altas");
 
-        jMenuItem4.setText("Usuarios");
-        jMenu2.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu6.setText("Modificaciones");
-
-        jMenuItem5.setText("Especialistas");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        altas_Especialista.setText("Especialistas");
+        altas_Especialista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                altas_EspecialistaActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem5);
+        menu_Altas.add(altas_Especialista);
 
-        jMenuItem6.setText("Pacientes");
-        jMenu6.add(jMenuItem6);
+        altas_Paciente.setText("Pacientes");
+        altas_Paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_PacienteActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Paciente);
 
-        jMenuItem7.setText("Tutores");
-        jMenu6.add(jMenuItem7);
+        altas_Tutor.setText("Tutores");
+        altas_Tutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_TutorActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Tutor);
 
-        jMenuItem8.setText("Usuarios");
-        jMenu6.add(jMenuItem8);
+        altas_Usuario.setText("Usuarios");
+        altas_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_UsuarioActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Usuario);
 
-        jMenuBar1.add(jMenu6);
+        barraMenu.add(menu_Altas);
 
-        jMenu7.setText("Bajas");
+        menu_Modificaciones.setText("Modificaciones");
+
+        mod_Especialista.setText("Especialistas");
+        mod_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Modificaciones.add(mod_Especialista);
+
+        mod_Paciente.setText("Pacientes");
+        menu_Modificaciones.add(mod_Paciente);
+
+        mod_Tutor.setText("Tutores");
+        menu_Modificaciones.add(mod_Tutor);
+
+        mod_Usuario.setText("Usuarios");
+        menu_Modificaciones.add(mod_Usuario);
+
+        barraMenu.add(menu_Modificaciones);
+
+        menu_Bajas.setText("Bajas");
 
         bajas_Especialista.setText("Especialistas");
         bajas_Especialista.addActionListener(new java.awt.event.ActionListener() {
@@ -107,20 +161,25 @@ public class Principal extends javax.swing.JFrame {
                 bajas_EspecialistaActionPerformed(evt);
             }
         });
-        jMenu7.add(bajas_Especialista);
+        menu_Bajas.add(bajas_Especialista);
 
-        jMenuItem10.setText("Pacientes");
-        jMenu7.add(jMenuItem10);
+        bajas_Paciente.setText("Pacientes");
+        menu_Bajas.add(bajas_Paciente);
 
-        jMenuItem11.setText("Tutores");
-        jMenu7.add(jMenuItem11);
+        bajas_Tutor.setText("Tutores");
+        bajas_Tutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bajas_TutorActionPerformed(evt);
+            }
+        });
+        menu_Bajas.add(bajas_Tutor);
 
-        jMenuItem12.setText("Usuarios");
-        jMenu7.add(jMenuItem12);
+        bajas_Usuario.setText("Usuarios");
+        menu_Bajas.add(bajas_Usuario);
 
-        jMenuBar1.add(jMenu7);
+        barraMenu.add(menu_Bajas);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,22 +195,77 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-            // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void altas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_EspecialistaActionPerformed
+        try {
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+            new registro_Especialistas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
+
+    }//GEN-LAST:event_altas_EspecialistaActionPerformed
+
+    private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_mod_EspecialistaActionPerformed
 
     private void bajas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_EspecialistaActionPerformed
-        // TODO add your handling code here:
-        
-        
-        new eliminar_Especialistas().setVisible(true);
+        try {
+
+            new eliminar_Especialistas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
-    
+
     }//GEN-LAST:event_bajas_EspecialistaActionPerformed
+
+    private void archivo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivo_SalirActionPerformed
+        // TODO add your handling code here:
+
+        int opcion = JOptionPane.showConfirmDialog(null, "Salir del Sistema?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (opcion == 0) {
+            dispose();
+        }
+    }//GEN-LAST:event_archivo_SalirActionPerformed
+
+    private void altas_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_PacienteActionPerformed
+
+        try {
+
+            new RegistrarPacientes().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
+    }//GEN-LAST:event_altas_PacienteActionPerformed
+
+    private void altas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_TutorActionPerformed
+        try {
+            new DatosTutor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+        
+    }//GEN-LAST:event_altas_TutorActionPerformed
+
+    private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
+        try {
+            new registro_Usuarios().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_altas_UsuarioActionPerformed
+
+    private void bajas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_TutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bajas_TutorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,9 +282,9 @@ public class Principal extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-                
+
             }
-            
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -181,36 +295,38 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                try {
+                    new Principal().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem altas_Especialista;
+    private javax.swing.JMenuItem altas_Paciente;
+    private javax.swing.JMenuItem altas_Tutor;
+    private javax.swing.JMenuItem altas_Usuario;
     private javax.swing.JMenuItem archivo_Salir;
     private javax.swing.JMenuItem bajas_Especialista;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem bajas_Paciente;
+    private javax.swing.JMenuItem bajas_Tutor;
+    private javax.swing.JMenuItem bajas_Usuario;
+    private javax.swing.JMenuBar barraMenu;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenu menu_Altas;
+    private javax.swing.JMenu menu_Archivo;
+    private javax.swing.JMenu menu_Bajas;
+    private javax.swing.JMenu menu_Modificaciones;
+    private javax.swing.JMenuItem mod_Especialista;
+    private javax.swing.JMenuItem mod_Paciente;
+    private javax.swing.JMenuItem mod_Tutor;
+    private javax.swing.JMenuItem mod_Usuario;
     // End of variables declaration//GEN-END:variables
 }
