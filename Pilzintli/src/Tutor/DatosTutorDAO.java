@@ -20,10 +20,16 @@ public class DatosTutorDAO {
         try{
             Statement estatuto = conex.getConnection().createStatement();
             
-            String insertSql1 = "INSERT INTO padre (nombre, apellido_paterno, apellido_materno, direccion, cp, municipio, estado) VALUES "
-                    + "('" + datostutor.getNombretutor()+ "', '" + datostutor.getApellidopaterno() + "', '" + datostutor.getApellidomaterno()
-                    + "', '" + datostutor.getDireccion() + "', '" + datostutor.getCodigopostal() + "', '" + datostutor.getMunicipio() + "','" + datostutor.getEstado() + "')";
-            
+//                String sqlInsert = "INSERT INTO padre VALUES ("+datostutor.getNombretutor()+
+//                                                                ", '"+datostutor.getApellidopaterno()+
+//                                                                ", '"+datostutor.getApellidomaterno()+
+//                                                                ", '"+datostutor.getDireccion()+
+//                                                                ", '"+datostutor.getCodigopostal()+
+//                                                                ", '"+datostutor.getMunicipio()+
+//                                                                ", '"+datostutor.getEstado()+
+//                                                                "');";
+                String insertSql1 = "INSERT INTO padre (nombre, apellido_paterno, apellido_materno, direccion, cp, municipio, estado) VALUES "
+                + "('Edgar', 'Sanabria', 'Ramirez', 'benito juarez', '45900', 'chapala','jalisco');";
                 System.out.println(""+insertSql1);
                 estatuto.executeUpdate(insertSql1);
                 

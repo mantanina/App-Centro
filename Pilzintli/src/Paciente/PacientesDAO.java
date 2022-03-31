@@ -6,7 +6,6 @@
 package Paciente;
 
 import ConexionDB.DbConnection;
-import Tutor.DatosPadreoTutor;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -25,16 +24,14 @@ public class PacientesDAO {
         try{
             Statement estatuto = conex.getConnection().createStatement();
             
-                 String insertSql = "INSERT INTO padre (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, escolaridad, diagnostico) VALUES "
-                    + "('" + pacientes.getNombre()+ "', '" 
-                    + pacientes.getApellido_paterno() + "', '" 
-                    + pacientes.getApellido_materno() + "', '" 
-                    + pacientes.getFecha_nacimiento() + "', '" 
-                    + pacientes.getEscolaridad() + "', '" 
-                    + pacientes.getDiagnostico() + "')";
-            
-                System.out.println(""+insertSql);
-                estatuto.executeUpdate(insertSql);
+                String sqlInsert = "INSERT INTO paciente VALUES ("+pacientes.getNombre()+", '"
+                                                                   +pacientes.getApellido_paterno()+", '"
+                                                                   +pacientes.getApellido_materno()+", '"
+                                                                   +pacientes.getFecha_nacimiento()+", '"
+                                                                   +pacientes.getEscolaridad()+", '"
+                                                                   +pacientes.getDiagnostico()+"');";
+                System.out.println(""+sqlInsert);
+                estatuto.executeUpdate(sqlInsert);
                 
                 JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente",
                                               "Informacion",JOptionPane.INFORMATION_MESSAGE);

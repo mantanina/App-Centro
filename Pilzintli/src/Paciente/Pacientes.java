@@ -5,8 +5,6 @@
  */
 package Paciente;
 
-import java.util.Date;
-
 
 
 /**
