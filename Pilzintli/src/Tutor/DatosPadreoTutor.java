@@ -27,7 +27,7 @@ public class DatosPadreoTutor {
         this.nombretutor = nombretutor;
         this.apellidopaterno = apellidopaterno;
         this.apellidomaterno = apellidomaterno;
-        this.direccion =direccion;
+        this.direccion = direccion;
         this.codigopostal = codigopostal;
         this.municipio = municipio;
         this.estado = estado;

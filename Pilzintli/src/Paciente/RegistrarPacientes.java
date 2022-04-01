@@ -8,6 +8,7 @@ package Paciente;
 import Tutor.DatosTutor;
 import Menu.*;
 import ConexionDB.DbConnection;
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,7 +30,7 @@ import javax.swing.JOptionPane;
  * @author 1234
  */
 public class RegistrarPacientes extends javax.swing.JFrame {
-    
+    private boolean paciente =false;
     DefaultTableModel modelo = new DefaultTableModel();
     Object fila[] = new Object[3];
     
@@ -76,6 +78,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -90,13 +93,11 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         textApellidoMaterno = new javax.swing.JTextField();
         textDiagnostico = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         textFecha = new javax.swing.JTextField();
         DatosTutorBoton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -106,6 +107,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                 jTextField5ActionPerformed(evt);
             }
         });
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 700));
@@ -165,19 +168,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "id", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha de nacimiento", "Escolaridad", "Diagnostico"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,14 +175,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ok");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
+        textFecha.setEditable(false);
         textFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFechaActionPerformed(evt);
@@ -207,6 +190,13 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         });
 
         jLabel10.setText("Datos del padre o tutor:");
+
+        jButton3.setText("Insertar Fecha");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -227,7 +217,12 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addGap(168, 168, 168)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(textEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(textApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DatosTutorBoton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -243,10 +238,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(122, 122, 122))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel6)
                 .addGap(291, 291, 291)
@@ -254,20 +245,14 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(105, 105, 105))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(DatosTutorBoton)
-                        .addGap(105, 105, 105))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(107, 107, 107))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(381, 381, 381)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jButton3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -275,9 +260,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(82, 82, 82)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,16 +286,14 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(139, 139, 139)
                         .addComponent(jLabel6)))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DatosTutorBoton)
-                    .addComponent(jLabel10))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnGuardar)
+                    .addComponent(DatosTutorBoton)
+                    .addComponent(jLabel10))
                 .addContainerGap())
         );
 
@@ -324,7 +305,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -349,19 +330,28 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private void textDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDiagnosticoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDiagnosticoActionPerformed
-
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        PacientesDAO dao = new PacientesDAO();
        Pacientes mipaciente = new Pacientes();
-       
+        if (!textNombre.getText().equalsIgnoreCase("") && !textApellidoPaterno.getText().equalsIgnoreCase("")
+                && !textApellidoMaterno.getText().equalsIgnoreCase("") && !textFecha.getText().equalsIgnoreCase("")
+                && !textEscolaridad.getText().equalsIgnoreCase("") && !textDiagnostico.getText().equalsIgnoreCase("")) {
+
        mipaciente.setNombre((textNombre.getText()));
        mipaciente.setApellido_paterno(textApellidoPaterno.getText());
        mipaciente.setApellido_materno(textApellidoMaterno.getText());
        mipaciente.setFecha_nacimiento(textFecha.getText());
        mipaciente.setEscolaridad(textEscolaridad.getText());
-       //mipaciente.setStatus(text);
-       mipaciente.setDiagnostico(textDiagnostico.getText());  
+       mipaciente.setDiagnostico(textDiagnostico.getText());
        dao.RegistrarPacientes(mipaciente);
+      //se activa la variable paciente para que el usuario no pueda registrar un padre antes de registrar al paciente
+       paciente=true;
+       } else {
+            //Mensaje de que llene todos los campos
+            JOptionPane.showMessageDialog(null, "No se puede realizar el registro por que algunos de los campos estan vacios.",
+                    "Informacion campos vacios", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -376,16 +366,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       	
-    DbConnection conecta = new DbConnection();
-    Connection con = conecta.getConnection();
-    JOptionPane.showMessageDialog(null, "Conexión establecida con éxito");
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void textFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFechaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_textFechaActionPerformed
 
     private void textApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textApellidoPaternoActionPerformed
@@ -393,14 +375,36 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_textApellidoPaternoActionPerformed
 
     private void DatosTutorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatosTutorBotonActionPerformed
-       
-       try {
-          new DatosTutor().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(DatosTutor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
+       if (!textNombre.getText().equalsIgnoreCase("") && !textApellidoPaterno.getText().equalsIgnoreCase("")
+                && !textApellidoMaterno.getText().equalsIgnoreCase("") && !textFecha.getText().equalsIgnoreCase("")
+                && !textEscolaridad.getText().equalsIgnoreCase("") && !textDiagnostico.getText().equalsIgnoreCase("")) {
+           boolean tutor=paciente;
+           if(!tutor==false){
+           
+                try {
+                   new DatosTutor().setVisible(true);
+                 } catch (IOException ex) {
+                     Logger.getLogger(DatosTutor.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 this.dispose();
+            }else{
+               //Mensaje de que llene todos los campos
+            JOptionPane.showMessageDialog(null, "Para poder seguir con el registro debe registrar primero al paciente.",
+                    "Aun no se ha registrado el paciente.", JOptionPane.INFORMATION_MESSAGE);
+           }
+        } else {
+            //Mensaje de que llene todos los campos
+            JOptionPane.showMessageDialog(null, "Para poder continuar todos los campos necesitan estar llenos.",
+                    "Informacion campos vacios", JOptionPane.INFORMATION_MESSAGE);
+            }
     }//GEN-LAST:event_DatosTutorBotonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fechaComoCadena = sdf.format(new Date());
+        System.out.println(fechaComoCadena);
+       textFecha.setText(fechaComoCadena);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,7 +449,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JButton DatosTutorBoton;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -456,8 +461,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField textApellidoMaterno;
     private javax.swing.JTextField textApellidoPaterno;

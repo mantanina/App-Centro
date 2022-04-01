@@ -31,7 +31,7 @@ public class NU extends javax.swing.JFrame {
      */
     public NU() throws IOException {
         initComponents();
-        
+        nivel n =new nivel();
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         this.setTitle("Altas Nivel Usuario");
         this.setIconImage(imagenIcono);
@@ -58,9 +58,10 @@ public class NU extends javax.swing.JFrame {
 
         });
         
-        List nombre =new ArrayList();
-       
-        
+        List nombre =new ArrayList() ;
+        for(int x=0; x>=n.getNombre().length(); x++){
+        nombre.add(n.getNombre());
+        }
         
     }
 
@@ -118,6 +119,11 @@ public class NU extends javax.swing.JFrame {
         jLabel3.setText("Nivel");
 
         nombres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        nombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,6 +190,10 @@ public class NU extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_salidaActionPerformed
+
+    private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
+       
+    }//GEN-LAST:event_nombresActionPerformed
 
     /**
      * @param args the command line arguments

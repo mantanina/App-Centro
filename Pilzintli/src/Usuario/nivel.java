@@ -12,7 +12,15 @@ package Usuario;
 public class nivel {
     private String Nombre  ;
     private String rol;
+    private int role;
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
     public String getNombre() {
         return Nombre;
     }

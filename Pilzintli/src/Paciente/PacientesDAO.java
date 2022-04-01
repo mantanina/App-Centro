@@ -24,16 +24,18 @@ public class PacientesDAO {
         try{
             Statement estatuto = conex.getConnection().createStatement();
             
-                String sqlInsert = "INSERT INTO paciente VALUES ("+pacientes.getNombre()+", '"
-                                                                   +pacientes.getApellido_paterno()+", '"
-                                                                   +pacientes.getApellido_materno()+", '"
-                                                                   +pacientes.getFecha_nacimiento()+", '"
-                                                                   +pacientes.getEscolaridad()+", '"
-                                                                   +pacientes.getDiagnostico()+"');";
+                String sqlInsert = "INSERT INTO paciente (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, escolaridad, diagnostico,padre_id) VALUES "
+                    + "('" + pacientes.getNombre()
+                    + "', '" + pacientes.getApellido_paterno()
+                    + "', '" + pacientes.getApellido_materno()
+                    + "', '" + pacientes.getFecha_nacimiento()
+                    + "', '" + pacientes.getEscolaridad()
+                    + "', '" + pacientes.getDiagnostico()
+                    + "','" + pacientes.getPadre_id()+ "')";
                 System.out.println(""+sqlInsert);
                 estatuto.executeUpdate(sqlInsert);
                 
-                JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente",
+                JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente al paciente",
                                               "Informacion",JOptionPane.INFORMATION_MESSAGE);
                 estatuto.close();
                 conex.desconectar();
