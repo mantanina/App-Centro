@@ -33,7 +33,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         try {
             Statement estatuto = conex.getConnection().createStatement();
 
-            String insertSql1 = "INSERT INTO especialista (nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono,correo,status) VALUES "
+            String insertSql1 = "INSERT INTO usuario (nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono,correo,status) VALUES "
                     + "('" + nom_Esp.getText() + "', '" + apellpate_Esp.getText() + "', '" + apellmat_Esp.getText() + "', '" + profesion_Esp.getText() + "', '" + cedula_esp.getText() + "', '" + Especialidad_Esp.getText() + "','" + telefono_Esp.getText() + "','" + correo_Esp.getText() + "','" + especialista.getStatus() + "')";
             System.out.println("" + insertSql1);
             estatuto.executeUpdate(insertSql1);
@@ -434,7 +434,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         //Agrega las estatus para seleccionarlo(para que en automatico te de la opcion "seleccionar")
         cbx_status.addItem("Seleccionar");
-        cbx_status.addItem("Activo");
+        cbx_status.addItem("Activado");
         cbx_status.addItem("Inactivo");
     }//GEN-LAST:event_jButton3ActionPerformed
 
