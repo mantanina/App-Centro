@@ -5,29 +5,23 @@ package Especialista;
 
 import Menu.*;
 import ConexionDB.DbConnection;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.*;
+import java.util.regex.*;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
 /**
  *
  * @author Havst
  */
 public class registro_Especialistas extends javax.swing.JFrame {
-
-    //Instanciar la clase para utilizar el status del especialista
+    
+//Instanciar la clase para utilizar el status del especialista
     DatosEspecialista especialista = new DatosEspecialista();
-
+    
     //Metodo para agregar un especialista en la base de datos 
     public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
         DbConnection conex = new DbConnection();
@@ -35,11 +29,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
         try {
             Statement estatuto = conex.getConnection().createStatement();
 
-            String insertSql1 = "INSERT INTO especialista (nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono,correo,status) VALUES "
-                    + "('" + telefono_Esp.getText() + "', '" + apellpate_Esp.getText() + "', '" + apellmat_Esp.getText() + "', '" + profesion_Esp.getText() + "', '" + cedula_esp.getText() + "', '" + Especialidad_Esp.getText() + "','" + nom_Esp.getText() + "','" + correo_Esp.getText() + "','" + especialista.getStatus() + "')";
+            String insertSql1 = "INSERT INTO usuario (nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono,correo,status) VALUES "
+                    + "('" + nom_Esp.getText() + "', '" + apellpate_Esp.getText() + "', '" + apellmat_Esp.getText() + "', '" + profesion_Esp.getText() + "', '" + cedula_esp.getText() + "', '" + Especialidad_Esp.getText() + "','" + telefono_Esp.getText() + "','" + correo_Esp.getText() + "','" + especialista.getStatus() + "')";
             System.out.println("" + insertSql1);
             estatuto.executeUpdate(insertSql1);
-
+            
             JOptionPane.showMessageDialog(null, "Se ha registrado el especialista",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
             estatuto.close();
@@ -201,6 +195,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
             }
         });
 
+        telefono_Esp.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         telefono_Esp.setNextFocusableComponent(correo_Esp);
         telefono_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,10 +345,10 @@ public class registro_Especialistas extends javax.swing.JFrame {
         Pattern patron_telefono = Pattern.compile("[0-9]{10}");
         Matcher telefono = patron_telefono.matcher(telefono_Esp.getText());
         
-        
+        /*
         Pattern patron_letras = Pattern.compile("[a-zA-Z]+");
         Matcher letras = patron_letras.matcher(nom_Esp.getText());
-
+            */
         //-----------------Validación de los campos(Para no introducir datos vacios)-----------------------------
         if (!telefono_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
                 && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
@@ -363,7 +358,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
             if (correo.matches()) {
                 if (telefono.matches()) {
-                    if (letras.matches()) {
+                    //if (letras.matches()) {
                         //seteos de los campos para el registro de los datos 
                         especialista.setNombre(telefono_Esp.getText());
                         especialista.setApellidoPaterno(apellpate_Esp.getText());
@@ -385,11 +380,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
                         //Manda llamar el método y registra el especialista
                         RegistrarEspecialistA(especialista);
-                    } else {
+                    /*} else {
                         //Mensaje de error del telefono
                         JOptionPane.showMessageDialog(null, "Nombre Inválido",
                                 "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                    }
+                    }*/
 
                 } else {
                     //Mensaje de error del telefono
@@ -478,7 +473,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         //Agrega las estatus para seleccionarlo(para que en automatico te de la opcion "seleccionar")
         cbx_status.addItem("Seleccionar");
-        cbx_status.addItem("Activo");
+        cbx_status.addItem("Activado");
         cbx_status.addItem("Inactivo");
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
@@ -513,6 +508,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 try {
                     new registro_Especialistas().setVisible(true);
                 } catch (IOException ex) {
