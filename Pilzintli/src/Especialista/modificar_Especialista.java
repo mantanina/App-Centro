@@ -89,7 +89,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Modificar Especialistas");
+        jLabel1.setText("Eliminar Especialistas");
 
         jLabel2.setText("Nombre");
 
@@ -240,7 +240,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
                                             .addComponent(apellpate_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(apellmat_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -348,8 +348,9 @@ public class modificar_Especialista extends javax.swing.JFrame {
             }
         }
 
-        id_Esp.setText("");
         nom_Esp.setText("");
+        apellpate_Esp.setText("");
+        apellmat_Esp.setText("");
         profesion_Esp.setText("");
         cedula_esp.setText("");
         Especialidad_Esp.setText("");
@@ -416,18 +417,17 @@ public class modificar_Especialista extends javax.swing.JFrame {
 
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
-        String apellidoP = apellpate_Esp.getText();
-        String apellidoM = apellmat_Esp.getText();
+        String idBusqueda = id_Esp.getText();
 
-        //AGREGAR AQUI LAS DOS VARIABLES PARA BUSCAR POR APELLIDO PATERNO Y MATERNO
-        especialista = FSQLE.BuscarEspecialista(apellidoP,apellidoM);
+        especialista = FSQLE.BuscarEspecialista(idBusqueda);
 
         if (!(especialista.getNombre().equals(""))) {
 
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
-            id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
+            apellpate_Esp.setText(especialista.getApellidoPaterno());
+            apellmat_Esp.setText(especialista.getApellidoMaterno());
             profesion_Esp.setText(especialista.getProfesion());
             cedula_esp.setText(especialista.getCedula());
             Especialidad_Esp.setText(especialista.getEspecialidad());

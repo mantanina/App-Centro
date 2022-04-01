@@ -15,7 +15,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
     public eliminar_Especialistas() throws IOException {
         initComponents();
-
+        
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         this.setTitle("Bajas Especialista");
         this.setIconImage(imagenIcono);
@@ -41,9 +41,10 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
 
         });
-
-        id_Esp.setEditable(false);
+        
         nom_Esp.setEditable(false);
+        apellpate_Esp.setEditable(false);
+        apellmat_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
         cedula_esp.setEditable(false);
         Especialidad_Esp.setEditable(false);
@@ -348,8 +349,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
         }
 
-        id_Esp.setText("");
         nom_Esp.setText("");
+        apellpate_Esp.setText("");
+        apellmat_Esp.setText("");
         profesion_Esp.setText("");
         cedula_esp.setText("");
         Especialidad_Esp.setText("");
@@ -364,15 +366,15 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
-        if (opc == JOptionPane.YES_OPTION) {
+                if (opc == JOptionPane.YES_OPTION) {
 
             try {
                 new Menu.Principal().setVisible(true);
             } catch (IOException ex) {
                 Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
             }
-            dispose();
-        }
+                    dispose();
+                }
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void Especialidad_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Especialidad_EspActionPerformed
@@ -416,16 +418,14 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
-        String apellidoP = apellpate_Esp.getText();
-        String apellidoM = apellmat_Esp.getText();
+        String idBusqueda = id_Esp.getText();
 
-        especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
+        especialista = FSQLE.BuscarEspecialista(idBusqueda);
 
         if (!(especialista.getNombre().equals(""))) {
 
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
-            id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
             apellpate_Esp.setText(especialista.getApellidoPaterno());
             apellmat_Esp.setText(especialista.getApellidoMaterno());

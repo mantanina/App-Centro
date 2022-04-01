@@ -9,21 +9,22 @@ import javax.swing.JOptionPane;
 
 public class FuncionesSQLEspecialista {
 
-    public DatosEspecialista BuscarEspecialista(String apP, String apM) {
+    public DatosEspecialista BuscarEspecialista(String id) {
 
         DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
+        String idBusqueda;
         ResultSet resultado;
         DatosEspecialista especialista = null;
 
         try {
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
+            idBusqueda = id;
             especialista = new DatosEspecialista();
 
-            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM "
-                    + "especialista where apellido_paterno like '" + apP +"' and apellido_materno like '" + apM + "'";
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM especialista where id like " + idBusqueda;
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
