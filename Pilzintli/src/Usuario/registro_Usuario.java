@@ -8,6 +8,7 @@ import Menu.*;
 import ConexionDB.DbConnection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -52,7 +53,11 @@ DatoUsuarios usuarios = new DatoUsuarios();
      */
     public registro_Usuario() throws IOException  {
        initComponents(); 
-        
+         
+BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setTitle("Bajas Especialista");
+        this.setIconImage(imagenIcono);
+
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         this.addWindowListener(new WindowAdapter() {
