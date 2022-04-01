@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`paciente` (
   `nombre` VARCHAR(50) NOT NULL,
   `apellido_paterno` VARCHAR(50) NOT NULL,
   `apellido_materno` VARCHAR(50) NOT NULL,
-  `fecha_nacimiento` DATE NOT NULL,
+  `fecha_nacimiento` VARCHAR(50) NOT NULL,
   `escolaridad` VARCHAR(14) NOT NULL,
   `diagnostico` VARCHAR(40) NULL,
   `padre_id` INT NOT NULL,
