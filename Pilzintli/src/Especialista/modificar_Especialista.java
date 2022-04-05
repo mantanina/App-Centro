@@ -78,7 +78,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
         cedula_esp = new javax.swing.JTextField();
         nom_Esp = new javax.swing.JTextField();
         telefono_Esp = new javax.swing.JTextField();
-        cbx_status = new javax.swing.JComboBox<>();
+        cbx_status = new javax.swing.JComboBox<String>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         id_Esp = new javax.swing.JTextField();
@@ -89,7 +89,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Eliminar Especialistas");
+        jLabel1.setText("Modificar Especialistas");
 
         jLabel2.setText("Nombre");
 
@@ -176,7 +176,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
             }
         });
 
-        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Activo", "Inactivo" }));
         cbx_status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_statusActionPerformed(evt);
@@ -240,7 +240,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
                                             .addComponent(apellpate_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(apellmat_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)

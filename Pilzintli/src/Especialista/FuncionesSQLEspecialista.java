@@ -104,7 +104,7 @@ public class FuncionesSQLEspecialista {
             
             estatuto.executeUpdate(solicitudSQL);
             
-            JOptionPane.showMessageDialog(null,"Status Actualizado!","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Datos Actualizados!","Informacion",JOptionPane.INFORMATION_MESSAGE);
             
             estatuto.close();
             conexion.desconectar();
