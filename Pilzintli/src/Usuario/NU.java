@@ -178,7 +178,7 @@ public class NU extends javax.swing.JFrame {
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         try {
-            new registro_Usuario().setVisible(true);
+            new registro_Usuarios().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -187,9 +187,8 @@ public class NU extends javax.swing.JFrame {
     }//GEN-LAST:event_salidaActionPerformed
 
     private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
-      nivel n = new nivel();
-       
-        for(int x=0; x>=n.getNombre().length(); x++){
+        nivel n =new nivel();
+      for(int x=0; x>=n.getNombre().length(); x++){
         nombres.addItem(n.getNombre());
         }
     }//GEN-LAST:event_nombresActionPerformed
