@@ -8,6 +8,7 @@ import Especialista.*;
 import Paciente.*;
 import Usuario.*;
 import Tutor.*;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -16,8 +17,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -25,14 +28,13 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    ImageIcon logoPortada = new ImageIcon("logo.jpg");
+    BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+
     public Principal() throws IOException {
         initComponents();
 
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
-        this.setTitle("Sistema Administrativo para Piltzintli");
+        logo_label.setIcon(logoPortada);
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -61,6 +63,8 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
+        logo_label = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         menu_Archivo = new javax.swing.JMenu();
         archivo_Salir = new javax.swing.JMenuItem();
@@ -79,10 +83,15 @@ public class Principal extends javax.swing.JFrame {
         bajas_Paciente = new javax.swing.JMenuItem();
         bajas_Tutor = new javax.swing.JMenuItem();
         bajas_Usuario = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Sistema Administrativo para Piltzintli");
 
         menu_Archivo.setText("Archivo");
 
@@ -179,17 +188,36 @@ public class Principal extends javax.swing.JFrame {
 
         barraMenu.add(menu_Bajas);
 
+        jMenu1.setText("Consultas");
+        barraMenu.add(jMenu1);
+
+        jMenu2.setText("Ayuda");
+        barraMenu.add(jMenu2);
+
         setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 629, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,7 +236,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_altas_EspecialistaActionPerformed
 
     private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed
-        // TODO add your handling code here:
+
+        try {
+
+            new modificar_Especialista().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+
     }//GEN-LAST:event_mod_EspecialistaActionPerformed
 
     private void bajas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_EspecialistaActionPerformed
@@ -251,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
-        
+
     }//GEN-LAST:event_altas_TutorActionPerformed
 
     private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
@@ -277,22 +313,9 @@ public class Principal extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-
-            }
-
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
         //</editor-fold>
 
@@ -319,7 +342,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem bajas_Tutor;
     private javax.swing.JMenuItem bajas_Usuario;
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JLabel logo_label;
     private javax.swing.JMenu menu_Altas;
     private javax.swing.JMenu menu_Archivo;
     private javax.swing.JMenu menu_Bajas;
