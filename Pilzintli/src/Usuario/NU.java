@@ -178,7 +178,7 @@ public class NU extends javax.swing.JFrame {
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         try {
-            new registro_Usuarios().setVisible(true);
+            new registro_Usuario().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
