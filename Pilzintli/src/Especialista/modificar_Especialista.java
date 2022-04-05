@@ -12,24 +12,24 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class modificar_Especialista extends javax.swing.JFrame {
-
+    
     public modificar_Especialista() throws IOException {
         initComponents();
         
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         this.setTitle("Modificaciones Especialista");
         this.setIconImage(imagenIcono);
-
+        
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
+        
         this.addWindowListener(new WindowAdapter() {
-
+            
             @Override
             public void windowClosing(WindowEvent e) {
                 int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
+                
                 if (opc == JOptionPane.YES_OPTION) {
-
+                    
                     try {
                         new Menu.Principal().setVisible(true);
                     } catch (IOException ex) {
@@ -37,9 +37,9 @@ public class modificar_Especialista extends javax.swing.JFrame {
                     }
                     dispose();
                 }
-
+                
             }
-
+            
         });
         
         id_Esp.setEditable(false);
@@ -50,9 +50,9 @@ public class modificar_Especialista extends javax.swing.JFrame {
         telefono_Esp.setEditable(false);
         correo_Esp.setEditable(false);
         status_esp.setEditable(false);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -332,49 +332,56 @@ public class modificar_Especialista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-
+        
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
-        String idBusqueda = id_Esp.getText();
+        String id = id_Esp.getText();
+        String Nombre = nom_Esp.getText();
+        String ApellidoP = apellpate_Esp.getText();
+        String ApellidoM = apellmat_Esp.getText();
+        String Profesion = profesion_Esp.getText();
+        String Cedula = cedula_esp.getText();
+        String Especialidad = Especialidad_Esp.getText();
+        String Telefono = telefono_Esp.getText();
+        String Correo = correo_Esp.getText();
+        String Situacion = status_esp.getText();
         String status = cbx_status.getSelectedItem().toString();
         String nuevoStatus;
-
+        
         if (status.equals("Activo")) {
             nuevoStatus = "1";
-            FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
+            FSQLE.ModificarDatos(Nombre, ApellidoP, ApellidoM, Profesion, Cedula, Especialidad, Telefono, Correo, nuevoStatus, id);
         } else {
             if (status.equals("Inactivo")) {
                 nuevoStatus = "0";
-                FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
+                FSQLE.ModificarDatos(Nombre, ApellidoP, ApellidoM, Profesion, Cedula, Especialidad, Telefono, Correo, nuevoStatus, id);
             }
         }
-
+        
         id_Esp.setText("");
         nom_Esp.setText("");
-        apellpate_Esp.setText("");
-        apellmat_Esp.setText("");
         profesion_Esp.setText("");
         cedula_esp.setText("");
         Especialidad_Esp.setText("");
         telefono_Esp.setText("");
         correo_Esp.setText("");
         status_esp.setText("");
-
+        
         botonBuscarActionPerformed(evt);
 
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
-                if (opc == JOptionPane.YES_OPTION) {
-
+        
+        if (opc == JOptionPane.YES_OPTION) {
+            
             try {
                 new Menu.Principal().setVisible(true);
             } catch (IOException ex) {
                 Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
             }
-                    dispose();
-                }
+            dispose();
+        }
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void Especialidad_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Especialidad_EspActionPerformed
@@ -415,18 +422,18 @@ public class modificar_Especialista extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_statusActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-
+        
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
         String apellidoP = apellpate_Esp.getText();
         String apellidoM = apellmat_Esp.getText();
-
+        
         especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
-
+        
         if (!(especialista.getNombre().equals(""))) {
-
+            
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-
+            
             id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
             apellpate_Esp.setText(especialista.getApellidoPaterno());
@@ -436,15 +443,24 @@ public class modificar_Especialista extends javax.swing.JFrame {
             Especialidad_Esp.setText(especialista.getEspecialidad());
             telefono_Esp.setText(especialista.getTelefono());
             correo_Esp.setText(especialista.getCorreo());
-
+            
+            nom_Esp.setEditable(true);
+            apellpate_Esp.setEditable(true);
+            apellmat_Esp.setEditable(true);
+            profesion_Esp.setEditable(true);
+            cedula_esp.setEditable(true);
+            Especialidad_Esp.setEditable(true);
+            telefono_Esp.setEditable(true);
+            correo_Esp.setEditable(true);
+            
             if (especialista.getStatus() == 1) {
                 status_esp.setText("Activo");
-
+                
             } else {
                 if (especialista.getStatus() == 0) {
                     status_esp.setText("Inactivo");
                 }
-
+                
             }
         }
 
@@ -474,7 +490,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
                     break;
                 }
             }
-
+            
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(modificar_Especialista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -502,7 +518,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(modificar_Especialista.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
             }
         });
     }
