@@ -31,7 +31,7 @@ public class NU extends javax.swing.JFrame {
      */
     public NU() throws IOException {
         initComponents();
-        nivel n =new nivel();
+        
         BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         this.setTitle("Altas Nivel Usuario");
         this.setIconImage(imagenIcono);
@@ -58,10 +58,6 @@ public class NU extends javax.swing.JFrame {
 
         });
         
-        List nombre =new ArrayList() ;
-        for(int x=0; x>=n.getNombre().length(); x++){
-        nombre.add(n.getNombre());
-        }
         
     }
 
@@ -191,7 +187,11 @@ public class NU extends javax.swing.JFrame {
     }//GEN-LAST:event_salidaActionPerformed
 
     private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
+        nivel n =new nivel();
        
+        for(int x=0; x>=n.getNombre().length(); x++){
+        nombres.addItem(n.getNombre());
+        }
     }//GEN-LAST:event_nombresActionPerformed
 
     /**
