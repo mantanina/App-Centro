@@ -181,7 +181,6 @@ public class NU extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
-       
         try {
             new registro_Usuarios().setVisible(true);
         } catch (IOException ex) {
