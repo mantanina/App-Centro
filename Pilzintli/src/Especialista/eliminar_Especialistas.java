@@ -42,9 +42,8 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         });
         
+        id_Esp.setEditable(false);
         nom_Esp.setEditable(false);
-        apellpate_Esp.setEditable(false);
-        apellmat_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
         cedula_esp.setEditable(false);
         Especialidad_Esp.setEditable(false);
@@ -418,14 +417,17 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
-        String idBusqueda = id_Esp.getText();
 
-        especialista = FSQLE.BuscarEspecialista(idBusqueda);
+        String apellidoP = apellpate_Esp.getText();
+        String apellidoM = apellmat_Esp.getText();
+        
+         especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
 
         if (!(especialista.getNombre().equals(""))) {
 
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
+            id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
             apellpate_Esp.setText(especialista.getApellidoPaterno());
             apellmat_Esp.setText(especialista.getApellidoMaterno());

@@ -348,6 +348,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
             }
         }
 
+        id_Esp.setText("");
         nom_Esp.setText("");
         apellpate_Esp.setText("");
         apellmat_Esp.setText("");
@@ -417,14 +418,16 @@ public class modificar_Especialista extends javax.swing.JFrame {
 
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
-        String idBusqueda = id_Esp.getText();
+        String apellidoP = apellpate_Esp.getText();
+        String apellidoM = apellmat_Esp.getText();
 
-        especialista = FSQLE.BuscarEspecialista(idBusqueda);
+        especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
 
         if (!(especialista.getNombre().equals(""))) {
 
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
+            id_Esp.setText(Integer.toString(especialista.getId()));
             nom_Esp.setText(especialista.getNombre());
             apellpate_Esp.setText(especialista.getApellidoPaterno());
             apellmat_Esp.setText(especialista.getApellidoMaterno());
