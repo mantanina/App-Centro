@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -261,6 +263,17 @@ public class DatosTutor extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         DatosTutorDAO dao = new DatosTutorDAO();
        DatosPadreoTutor mitutor = new DatosPadreoTutor();
+       
+       Pattern nombre = Pattern.compile("[a-zA-Z]+");
+        Matcher letras = nombre.matcher(Nombre.getText());
+        Pattern apellidop = Pattern.compile("[a-zA-Z]+");
+        Matcher letras1 = apellidop.matcher(ApellidoPaterno.getText());
+        Pattern apellidom = Pattern.compile("[a-zA-Z]+");
+        Matcher letras2 = apellidom.matcher(ApellidoMaterno.getText());
+        Pattern codigop = Pattern.compile("\\ d {5}");
+        Matcher codigopostalv = codigop.matcher(CP.getText());
+        
+       
         if (!Nombre.getText().equalsIgnoreCase("") 
                 && !ApellidoPaterno.getText().equalsIgnoreCase("")
                 && !ApellidoMaterno.getText().equalsIgnoreCase("") 
@@ -268,6 +281,11 @@ public class DatosTutor extends javax.swing.JFrame {
                 && !CP.getText().equalsIgnoreCase("") 
                 && !Municipio.getText().equalsIgnoreCase("")
                 && !Estado.getText().equalsIgnoreCase("")) {
+            
+            if (letras.matches()) {
+                if (letras1.matches()) {
+                    if (letras2.matches()) {
+                        if(codigopostalv.matches()){
 
        mitutor.setNombretutor((Nombre.getText()));
        mitutor.setApellidopaterno(ApellidoPaterno.getText());
@@ -277,6 +295,29 @@ public class DatosTutor extends javax.swing.JFrame {
        mitutor.setMunicipio(Municipio.getText());  
        mitutor.setEstado(Estado.getText());  
        dao.RegistrarDatosTutor(mitutor);
+       
+                        }else{
+                                //el codigo postal esta mal escrito
+                                 JOptionPane.showMessageDialog(null, "Codigo Postal Invalido",
+                                         "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                              }
+                    } else {
+                                 //el apellido materno esta mal escrito
+                                 JOptionPane.showMessageDialog(null, "Apellido Materno Invalido",
+                                         "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                          }
+
+                } else {
+                          //el apellido paterno esta mal escrito
+                             JOptionPane.showMessageDialog(null, "Apellido Paterno Invalido",
+                                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+            } else {
+                    //el nombre esta mal escrito
+                     JOptionPane.showMessageDialog(null, "Nombre Invalido",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    }
 
        } else {
             //Mensaje de que llene todos los campos

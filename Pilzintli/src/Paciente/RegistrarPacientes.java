@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -334,9 +336,22 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        PacientesDAO dao = new PacientesDAO();
        Pacientes mipaciente = new Pacientes();
+       
+       Pattern nombre = Pattern.compile("[a-zA-Z]+");
+        Matcher letras = nombre.matcher(textNombre.getText());
+        Pattern apellidop = Pattern.compile("[a-zA-Z]+");
+        Matcher letras1 = apellidop.matcher(textApellidoPaterno.getText());
+        Pattern apellidom = Pattern.compile("[a-zA-Z]+");
+        Matcher letras2 = apellidom.matcher(textApellidoMaterno.getText());
+        
+       
         if (!textNombre.getText().equalsIgnoreCase("") && !textApellidoPaterno.getText().equalsIgnoreCase("")
                 && !textApellidoMaterno.getText().equalsIgnoreCase("") && !textFecha.getText().equalsIgnoreCase("")
                 && !textEscolaridad.getText().equalsIgnoreCase("") && !textDiagnostico.getText().equalsIgnoreCase("")) {
+            
+            if (letras.matches()) {
+                if (letras1.matches()) {
+                    if (letras2.matches()) {
 
        mipaciente.setNombre((textNombre.getText()));
        mipaciente.setApellido_paterno(textApellidoPaterno.getText());
@@ -347,6 +362,23 @@ public class RegistrarPacientes extends javax.swing.JFrame {
        dao.RegistrarPacientes(mipaciente);
       //se activa la variable paciente para que el usuario no pueda registrar un padre antes de registrar al paciente
        paciente=true;
+                    } else {
+                        //el apellido materno esta mal escrito
+                        JOptionPane.showMessageDialog(null, "Apellido Materno Invalido",
+                                "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                } else {
+                    //el apellido paterno esta mal escrito
+                    JOptionPane.showMessageDialog(null, "Apellido Paterno Invalido",
+                            "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            } else {
+                //el nombre esta mal escrito
+                JOptionPane.showMessageDialog(null, "Nombre iNvalido",
+                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }
        } else {
             //Mensaje de que llene todos los campos
             JOptionPane.showMessageDialog(null, "No se puede realizar el registro por que algunos de los campos estan vacios.",
