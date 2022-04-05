@@ -27,7 +27,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="VentanaNivel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="agregarUsuario" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -101,7 +101,7 @@
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="VentanaNivel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Borrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Salida" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="agregarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -167,12 +167,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="VentanaNivel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nivel Usuario"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VentanaNivelActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="agregarUsuario">

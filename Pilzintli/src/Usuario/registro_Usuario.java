@@ -17,44 +17,46 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 /**
-//nada
-/**
+ * //nada /**
  *
  * @author Arreola N
  */
 public class registro_Usuario extends javax.swing.JFrame {
-DatoUsuarios usuarios = new DatoUsuarios();
-    
+
+    DatoUsuarios usuarios = new DatoUsuarios();
+
     //Agregar nuevos usuarios
-    public void registroUsua(DatoUsuarios datousuarios){
-         DbConnection conex = new DbConnection();
-         
-         try{
+    public void registroUsua(DatoUsuarios datousuarios) {
+        DbConnection conex = new DbConnection();
+
+        try {
             Statement estatuto = conex.getConnection().createStatement();
 
             String insertSql1 = "INSERT INTO usuario (username, password ,status, rol_id) VALUES "
-                    + "('" + userName.getText() + "', '" + contraseña.getText() + "', '"+ usuarios.getStatus() + "', '" + idRol.getText() + "')";
+                    + "('" + userName.getText() + "', '" + contraseña.getText() + "', '" + usuarios.getStatus() + "', '" + idRol.getText() + "')";
             System.out.println("" + insertSql1);
             estatuto.executeUpdate(insertSql1);
 
             JOptionPane.showMessageDialog(null, "Se ha registrado el nuevo usuario",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
             estatuto.close();
-            conex.desconectar(); 
-         } catch (SQLException e) {
+            conex.desconectar();
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se registro los datos");
         }
-        
+
     }
+
     /**
      * Creates new form registro_Usuario
      */
-    public registro_Usuario() throws IOException  {
-       initComponents(); 
-         
-BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+    public registro_Usuario() throws IOException {
+        initComponents();
+
+        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         this.setTitle("Bajas Especialista");
         this.setIconImage(imagenIcono);
 
@@ -99,7 +101,7 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         idRol = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         statusUsuario = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        VentanaNivel = new javax.swing.JButton();
         agregarUsuario = new javax.swing.JButton();
         Borrar = new javax.swing.JButton();
         Salida = new javax.swing.JButton();
@@ -141,10 +143,10 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
             }
         });
 
-        jButton1.setText("Nivel Usuario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        VentanaNivel.setText("Nivel Usuario");
+        VentanaNivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                VentanaNivelActionPerformed(evt);
             }
         });
 
@@ -177,7 +179,7 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jButton1)
+                        .addComponent(VentanaNivel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(agregarUsuario))
                     .addGroup(layout.createSequentialGroup()
@@ -233,7 +235,7 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
                     .addComponent(jLabel4))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(VentanaNivel)
                     .addComponent(Borrar)
                     .addComponent(Salida)
                     .addComponent(agregarUsuario)))
@@ -258,9 +260,16 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
         // TODO add your handling code here:
     }//GEN-LAST:event_statusUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void VentanaNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentanaNivelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            new NU().setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
+    }//GEN-LAST:event_VentanaNivelActionPerformed
 
     private void agregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarUsuarioActionPerformed
         // TODO add your handling code here:
@@ -269,12 +278,11 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
             usuarios.setUser(userName.getText());
             usuarios.setContraseña(contraseña.getText());
             usuarios.setRol_id(ALLBITS);
-            
 
             registroUsua(usuarios);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Llene todos los campos incluyendo el status",
-                "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_agregarUsuarioActionPerformed
 
@@ -344,14 +352,14 @@ BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
                 }
             }
         });
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Borrar;
     private javax.swing.JButton Salida;
+    private javax.swing.JButton VentanaNivel;
     private javax.swing.JButton agregarUsuario;
     private javax.swing.JTextField contraseña;
     private javax.swing.JTextField idRol;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

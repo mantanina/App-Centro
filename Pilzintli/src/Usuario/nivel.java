@@ -14,7 +14,7 @@ public class nivel {
     private String rol;
     private int role;
 
-    public int getRole() {
+  public int getRole() {
         return role;
     }
 
