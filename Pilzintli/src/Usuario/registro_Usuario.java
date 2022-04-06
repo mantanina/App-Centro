@@ -57,8 +57,10 @@ public class registro_Usuario extends javax.swing.JFrame {
      */
     public registro_Usuario() throws IOException {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
 
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
         this.setTitle("Bajas Especialista");
         this.setIconImage(imagenIcono);
 

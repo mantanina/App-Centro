@@ -28,11 +28,13 @@ import javax.swing.UIManager;
  */
 public class Principal extends javax.swing.JFrame {
 
-    ImageIcon logoPortada = new ImageIcon("logo.jpg");
-    BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+    ImageIcon logoPortada = new ImageIcon("logo_bcklss.png");
+    BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
 
     public Principal() throws IOException {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
 
         logo_label.setIcon(logoPortada);
         this.setIconImage(imagenIcono);
@@ -201,12 +203,11 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(59, 59, 59)
                         .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
@@ -216,8 +217,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();

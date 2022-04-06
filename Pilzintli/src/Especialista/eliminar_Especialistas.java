@@ -18,7 +18,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     public eliminar_Especialistas() throws IOException {
         initComponents();
         
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setLocationRelativeTo(null);
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
         this.setTitle("Bajas Especialista");
         this.setIconImage(imagenIcono);
 

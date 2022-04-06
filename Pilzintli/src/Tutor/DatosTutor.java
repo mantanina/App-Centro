@@ -33,7 +33,9 @@ public class DatosTutor extends javax.swing.JFrame {
     public DatosTutor() throws IOException {
         initComponents();
         
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setLocationRelativeTo(null);
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
         this.setTitle("Altas Tutor");
         this.setIconImage(imagenIcono);
         

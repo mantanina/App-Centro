@@ -18,7 +18,9 @@ public class modificar_Especialista extends javax.swing.JFrame {
     public modificar_Especialista() throws IOException {
         initComponents();
         
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setLocationRelativeTo(null);
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
         this.setTitle("Modificaciones Especialista");
         this.setIconImage(imagenIcono);
         

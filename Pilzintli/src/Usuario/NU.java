@@ -34,7 +34,9 @@ public class NU extends javax.swing.JFrame {
     public NU() throws IOException {
         initComponents();
         
-        BufferedImage imagenIcono = ImageIO.read(new File("logo.jpg"));
+        this.setLocationRelativeTo(null);
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
         this.setTitle("Altas Nivel Usuario");
         this.setIconImage(imagenIcono);
 
