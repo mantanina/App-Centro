@@ -340,72 +340,93 @@ public class registro_Especialistas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
-        //Validacion de correo electronico
-        Pattern patron_Correo = Pattern.compile("[a-z0-9_.]+@([a-z]+.)+(com|mx|edu)(mx)?");
-        Matcher correo = patron_Correo.matcher(correo_Esp.getText());
+       //Instancia de las validaciones(la clase)
+        FuncionesSQLEspecialista validaionesCampos = new FuncionesSQLEspecialista();
 
-        //validacion del telefono
-        Pattern patron_telefono = Pattern.compile("[0-9]{10}");
-        Matcher telefono = patron_telefono.matcher(telefono_Esp.getText());
-        
-        /*
-        Pattern patron_letras = Pattern.compile("[a-zA-Z]+");
-        Matcher letras = patron_letras.matcher(nom_Esp.getText());
-            */
         //-----------------Validación de los campos(Para no introducir datos vacios)-----------------------------
         if (!telefono_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
                 && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
                 && !cedula_esp.getText().equalsIgnoreCase("") && !Especialidad_Esp.getText().equalsIgnoreCase("")
                 && !nom_Esp.getText().equalsIgnoreCase("") && !correo_Esp.getText().equalsIgnoreCase("")
                 && cbx_status.getSelectedItem() != "Seleccionar") {
+            
+            //validacion de los campos (letras numeros)
+            if (validaionesCampos.valida_letras(nom_Esp.getText()) == true) {
+                if (validaionesCampos.valida_letras(apellpate_Esp.getText()) == true) {
+                    if (validaionesCampos.valida_letras(apellmat_Esp.getText()) == true) {
+                        if (validaionesCampos.valida_letras(profesion_Esp.getText()) == true) {
+                            if (validaionesCampos.valida_correo(correo_Esp.getText()) == true) {
+                                if (validaionesCampos.valida_Telefono(telefono_Esp.getText()) == true) {
+                                    if (validaionesCampos.valida_Cedula(cedula_esp.getText()) == true) {
+                                        if (validaionesCampos.valida_letras(Especialidad_Esp.getText()) == true) {
+                                            //seteos de los campos para el registro de los datos 
+                                            especialista.setNombre(telefono_Esp.getText());
+                                            especialista.setApellidoPaterno(apellpate_Esp.getText());
+                                            especialista.setApellidoMaterno(apellmat_Esp.getText());
+                                            especialista.setProfesion(profesion_Esp.getText());
+                                            especialista.setCedula(cedula_esp.getText());
+                                            especialista.setEspecialidad(Especialidad_Esp.getText());
+                                            especialista.setTelefono(nom_Esp.getText());
+                                            especialista.setCorreo(correo_Esp.getText());
 
-            if (correo.matches()) {
-                if (telefono.matches()) {
-                    //if (letras.matches()) {
-                        //seteos de los campos para el registro de los datos 
-                        especialista.setNombre(telefono_Esp.getText());
-                        especialista.setApellidoPaterno(apellpate_Esp.getText());
-                        especialista.setApellidoMaterno(apellmat_Esp.getText());
-                        especialista.setProfesion(profesion_Esp.getText());
-                        especialista.setCedula(cedula_esp.getText());
-                        especialista.setEspecialidad(Especialidad_Esp.getText());
-                        especialista.setTelefono(nom_Esp.getText());
-                        especialista.setCorreo(correo_Esp.getText());
+                                            //ifs para ver la seleccion del status(combobox)
+                                            if (cbx_status.getSelectedItem() == "Activo") {
+                                                especialista.setStatus(1);
+                                            }
 
-                        //ifs para ver la seleccion del status(combobox)
-                        if (cbx_status.getSelectedItem() == "Activo") {
-                            especialista.setStatus(1);
+                                            if (cbx_status.getSelectedItem() == "Inactivo") {
+                                                especialista.setStatus(0);
+                                            }
+
+                                            //Manda llamar el método y registra el especialista
+                                            RegistrarEspecialistA(especialista);
+
+                                        } else {
+                                            //Mensaje de error por datos erroneos
+                                            JOptionPane.showMessageDialog(null, "Especialidad inválida",
+                                                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                        }
+                                    } else {
+                                        //Mensaje de error por datos erroneos
+                                        JOptionPane.showMessageDialog(null, "Cédula inválida,en caso de que la cedula contenga 7 numeros, coloque un cer al inicio de la cédula",
+                                                "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                } else {
+                                    //Mensaje de error por datos erroneos
+                                    JOptionPane.showMessageDialog(null, "Teléfono inválido",
+                                            "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            } else {
+                                //Mensaje de error por datos erroneos
+                                JOptionPane.showMessageDialog(null, "Correo electrónico inválido",
+                                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            //Mensaje de error por datos erroneos
+                            JOptionPane.showMessageDialog(null, "Profesión inválida",
+                                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
                         }
-
-                        if (cbx_status.getSelectedItem() == "Inactivo") {
-                            especialista.setStatus(0);
-                        }
-
-                        //Manda llamar el método y registra el especialista
-                        RegistrarEspecialistA(especialista);
-                    /*} else {
-                        //Mensaje de error del telefono
-                        JOptionPane.showMessageDialog(null, "Nombre Inválido",
+                    } else {
+                        //Mensaje de error por datos erroneos
+                        JOptionPane.showMessageDialog(null, "Apellido materno inválido",
                                 "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                    }*/
-
+                    }
                 } else {
-                    //Mensaje de error del telefono
-                    JOptionPane.showMessageDialog(null, "Telefono Inválido",
+                    //Mensaje de error por datos erroneos
+                    JOptionPane.showMessageDialog(null, "Apellido paterno inválido",
                             "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 }
-
             } else {
-                //Mensaje de que llene todos los campos
-                JOptionPane.showMessageDialog(null, "Correo electronico Inválido",
+                //Mensaje de error por datos erroneos
+                JOptionPane.showMessageDialog(null, "Nombre inválido",
                         "Informacion", JOptionPane.INFORMATION_MESSAGE);
             }
-
         } else {
             //Mensaje de que llene todos los campos
             JOptionPane.showMessageDialog(null, "Llene todos los campos incluyendo el status",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }//GEN-LAST:event_btn_resgistrarActionPerformed
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed

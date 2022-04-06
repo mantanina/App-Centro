@@ -5,6 +5,8 @@ package Especialista;
 
 import ConexionDB.DbConnection;
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class FuncionesSQLEspecialista {
@@ -115,6 +117,47 @@ public class FuncionesSQLEspecialista {
 
         }
 
+    }
+    
+
+    public boolean valida_letras(String letras) {
+        Pattern patron_letras = Pattern.compile("[a-zA-Z ]+[a-zA-Z ]*[a-zA-Z ]*");
+        Matcher validacioLetra = patron_letras.matcher(letras);
+        if (validacioLetra.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean valida_correo(String correo) {
+        Pattern patron_correo = Pattern.compile("[a-z0-9_.]+@([a-z]+.)+(com|mx|edu)(mx)?");
+        Matcher validacioLetra = patron_correo.matcher(correo);
+        if (validacioLetra.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean valida_Telefono(String telefono) {
+        Pattern patron_Telefono = Pattern.compile("[0-9]{10}");
+        Matcher validacioLetra = patron_Telefono.matcher(telefono);
+        if (validacioLetra.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean valida_Cedula(String cedula) {
+        Pattern patron_Cedula = Pattern.compile("[0-9]{8}");
+        Matcher validacioLetra = patron_Cedula.matcher(cedula);
+        if (validacioLetra.matches()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
