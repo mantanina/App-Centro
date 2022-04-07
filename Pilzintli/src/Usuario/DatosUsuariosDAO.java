@@ -30,7 +30,7 @@ public class DatosUsuariosDAO {
             estatuto = conexion.getConnection().createStatement();
             idBusqueda = id;    
 
-            solicitudSQL = "SELECT id, username,password,status, rol_id FROM usuario where id like " + idBusqueda;
+            solicitudSQL = "SELECT id, username,password,status FROM usuario where id like " + idBusqueda;
             System.out.println(solicitudSQL);
                        
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -41,7 +41,7 @@ public class DatosUsuariosDAO {
                 usuarios.setUser(resultado.getString("username"));
                 usuarios.setContraseña(resultado.getString("password"));
                usuarios.setStatus(resultado.getInt("status"));          
-               usuarios.setRol_id(resultado.getInt("rol_id"));
+          
 
             }
 
