@@ -35,8 +35,8 @@ public class FuncionesCosulta {
             estatuto = conexion.getConnection().createStatement();
             consulta = new DatosCita();
 
-            solicitudSQL = "SELECT id, fecha, hora, paciente_id, especialista_id, tipo_consulta_id, terapia_id, FROM "
-                    + "consulta where id like '" + id +"'";
+            solicitudSQL = "SELECT id, fecha, hora, paciente_id, especialista_id, tipo_consulta_id, terapia_id FROM "
+                    + "consulta where id like " + id;
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -54,7 +54,7 @@ public class FuncionesCosulta {
             }
             
             estatuto1 = conexion.getConnection().createStatement();
-            solicitudSQL1 = "SELECT nombre FROM paciente where id like '" + consulta.getPaciente_id() + "'";
+            solicitudSQL1 = "SELECT nombre FROM paciente where id like " + consulta.getPaciente_id();
             resultado1 = estatuto1.executeQuery(solicitudSQL1);
             
             while(resultado1.next()){
@@ -62,7 +62,7 @@ public class FuncionesCosulta {
             }
             
             estatuto2 = conexion.getConnection().createStatement();
-            solicitudSQL2 = "SELECT nombre FROM especialista where id like '" + consulta.getEspecialista_id() + "'";
+            solicitudSQL2 = "SELECT nombre FROM especialista where id like " + consulta.getEspecialista_id();
             resultado2 = estatuto2.executeQuery(solicitudSQL2);
             
             while(resultado2.next()){
@@ -70,7 +70,7 @@ public class FuncionesCosulta {
             }
             
             estatuto3 = conexion.getConnection().createStatement();
-            solicitudSQL3 = "SELECT tipo_consulta FROM tipo_consulta where id like '" + consulta.getTipo_consulta_id() + "'";
+            solicitudSQL3 = "SELECT tipo_consulta FROM tipo_consulta where id like " + consulta.getTipo_consulta_id();
             resultado3 = estatuto3.executeQuery(solicitudSQL3);
             
             while(resultado3.next()){
@@ -78,7 +78,7 @@ public class FuncionesCosulta {
             }
             
             estatuto4 = conexion.getConnection().createStatement();
-            solicitudSQL4 = "SELECT terapia FROM terapia where id like '" + consulta.getTerapia_id() + "'";
+            solicitudSQL4 = "SELECT terapia FROM terapia where id like " + consulta.getTerapia_id();
             resultado4 = estatuto4.executeQuery(solicitudSQL4);
             
             while(resultado4.next()){
