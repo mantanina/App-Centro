@@ -87,6 +87,7 @@ public class Principal extends javax.swing.JFrame {
         bajas_Usuario = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        ayuda_about = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -194,6 +195,15 @@ public class Principal extends javax.swing.JFrame {
         barraMenu.add(jMenu1);
 
         jMenu2.setText("Ayuda");
+
+        ayuda_about.setText("Acerca De");
+        ayuda_about.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayuda_aboutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(ayuda_about);
+
         barraMenu.add(jMenu2);
 
         setJMenuBar(barraMenu);
@@ -304,6 +314,14 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bajas_TutorActionPerformed
 
+    private void ayuda_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayuda_aboutActionPerformed
+        try {
+            new About().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ayuda_aboutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +356,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem altas_Tutor;
     private javax.swing.JMenuItem altas_Usuario;
     private javax.swing.JMenuItem archivo_Salir;
+    private javax.swing.JMenuItem ayuda_about;
     private javax.swing.JMenuItem bajas_Especialista;
     private javax.swing.JMenuItem bajas_Paciente;
     private javax.swing.JMenuItem bajas_Tutor;
