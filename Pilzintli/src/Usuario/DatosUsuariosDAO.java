@@ -30,7 +30,7 @@ public class DatosUsuariosDAO {
             estatuto = conexion.getConnection().createStatement();
             idBusqueda = id;    
 
-            solicitudSQL = "SELECT id, username,password,status FROM usuario where id like " + idBusqueda;
+           solicitudSQL = "SELECT id, username,password,status, rol_id FROM usuario where id like " + idBusqueda;
             System.out.println(solicitudSQL);
                        
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -41,7 +41,8 @@ public class DatosUsuariosDAO {
                 usuarios.setUser(resultado.getString("username"));
                 usuarios.setContraseña(resultado.getString("password"));
                usuarios.setStatus(resultado.getInt("status"));          
-          
+               usuarios.setRol_id(resultado.getInt("rol_id"));
+
 
             }
 
@@ -57,7 +58,7 @@ public class DatosUsuariosDAO {
 
 public void ModiUsuarios(String status, String id) {
 
-        DbConnection conexion;
+       DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
 
@@ -71,7 +72,7 @@ public void ModiUsuarios(String status, String id) {
             idBusqueda = id;
             situacion = status;
 
-            solicitudSQL = "UPDATE usuario SET status = '" + situacion + "' where id like " + idBusqueda;
+            solicitudSQL = "UPDATE usuarios SET status = '" + situacion + "' where id like " + idBusqueda;
             System.out.println(solicitudSQL);
             
             estatuto.executeUpdate(solicitudSQL);
@@ -81,8 +82,8 @@ public void ModiUsuarios(String status, String id) {
             estatuto.close();
             conexion.desconectar();
             
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
         }

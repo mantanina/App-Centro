@@ -13,18 +13,21 @@ private int id;
     private String user;
     private String contraseña;
  private int status;
+private int rol_id;
 
 
    public DatoUsuarios(){
 }
 
-    public DatoUsuarios(int id, String user, String contraseña, int status) {
+    public DatoUsuarios(int id, String user, String contraseña, int status, int rol_id) {
         this.id = id;
         this.user = user;
         this.contraseña = contraseña;
         this.status = status;
-       
+        this.rol_id = rol_id;
     }
+
+
 
     public int getId() {
         return id;
@@ -57,6 +60,13 @@ private int id;
     public void setStatus(int status) {
         this.status = status;
     }
- 
+
+    public int getRol_id() {
+        return rol_id;
+    }
+
+    public void setRol_id(int rol_id) {
+        this.rol_id = rol_id;
+    }
    
 }
