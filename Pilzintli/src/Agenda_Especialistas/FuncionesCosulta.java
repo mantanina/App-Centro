@@ -10,9 +10,12 @@ import javax.swing.JOptionPane;
 
 public class FuncionesCosulta {
     
-    public DatosCita BuscarCita (String id) {
+    public DatosCita BuscarCita (String apP, String apM, String fecha) {
 
         DbConnection conexion;
+        Statement estatuto0;
+        String solicitudSQL0;
+        ResultSet resultado0;
         Statement estatuto;
         String solicitudSQL;
         ResultSet resultado;
@@ -29,15 +32,26 @@ public class FuncionesCosulta {
         String solicitudSQL4;
         ResultSet resultado4;
         DatosCita consulta = null;
+        int id = 0;
 
         try {
             conexion = new DbConnection();
+            
+            estatuto0 = conexion.getConnection().createStatement();
+            solicitudSQL0 = "SELECT id FROM paciente where apellido_paterno like '" + apP +"' and apellido_materno like '" + apM + "'";
+            resultado0 = estatuto0.executeQuery(solicitudSQL0);
+            
+            while (resultado0.next()){
+                id = resultado0.getInt("id");
+            }
+            
+            
+            
             estatuto = conexion.getConnection().createStatement();
             consulta = new DatosCita();
 
             solicitudSQL = "SELECT id, fecha, hora, paciente_id, especialista_id, tipo_consulta_id, terapia_id FROM "
-                    + "consulta where id like " + id;
-            System.out.println(solicitudSQL);
+                    + "consulta where id like " + id + " and fecha like '" + fecha +"'";
 
             resultado = estatuto.executeQuery(solicitudSQL);
 
@@ -100,6 +114,34 @@ public class FuncionesCosulta {
 
         return consulta;
 
+    }
+    
+    public void actualizarCita (String id, String hora, String fecha){
+        
+        DbConnection conexion;
+        Statement estatuto;
+        String solicitudSQL;
+
+        try {
+
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "UPDATE consulta SET hora = '"+ hora +"', fecha = '" + fecha +"' where id like " + id ;
+            
+            estatuto.executeUpdate(solicitudSQL);
+            
+            JOptionPane.showMessageDialog(null,"Datos Actualizados!","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            
+            estatuto.close();
+            conexion.desconectar();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+               
     }
     
 }

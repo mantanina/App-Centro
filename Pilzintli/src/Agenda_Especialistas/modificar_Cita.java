@@ -14,11 +14,21 @@ import javax.swing.UIManager;
  */
 public class modificar_Cita extends javax.swing.JFrame {
 
-    /**
-     * Creates new form modificar_Cita
-     */
+    private String hora_global;
+    private String id_cita_global;
+    
     public modificar_Cita() {
         initComponents();
+        
+        campo_id_cita.setEditable(false);
+        campo_hora_cita.setEditable(false);
+        campo_pacienteNombre_cita.setEditable(false);
+        campo_especialista_cita.setEditable(false);
+        campo_tipo_cita.setEditable(false);
+        campo_terapia_cita.setEditable(false);
+        boton_Guardar.setEnabled(false);
+        
+           
     }
 
     /**
@@ -36,7 +46,9 @@ public class modificar_Cita extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         campo_hora_cita = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        campo_paciente_cita = new javax.swing.JTextField();
+        campo_pacienteNombre_cita = new javax.swing.JTextField();
+        campo_paciente_apellidoP = new javax.swing.JTextField();
+        campo_paciente_apellidoM = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         campo_especialista_cita = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -45,6 +57,9 @@ public class modificar_Cita extends javax.swing.JFrame {
         campo_terapia_cita = new javax.swing.JTextField();
         boton_Buscar = new javax.swing.JButton();
         boton_Guardar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        combo_hora = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,11 +67,23 @@ public class modificar_Cita extends javax.swing.JFrame {
 
         jLabel2.setText("Numero Cita:");
 
-        jLabel3.setText("Fecha:");
+        jLabel3.setText("Hora:");
 
-        jLabel4.setText("Hora:");
+        jLabel4.setText("Fecha:");
 
         jLabel5.setText("Paciente:");
+
+        campo_paciente_apellidoP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_paciente_apellidoPActionPerformed(evt);
+            }
+        });
+
+        campo_paciente_apellidoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_paciente_apellidoMActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Especialista:");
 
@@ -78,6 +105,17 @@ public class modificar_Cita extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Apellido Paterno:");
+
+        jLabel10.setText("Apellido Materno:");
+
+        combo_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo_hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_horaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,34 +123,52 @@ public class modificar_Cita extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(boton_Buscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(boton_Guardar))
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campo_fecha_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_id_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_hora_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_paciente_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(campo_especialista_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(campo_tipo_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_terapia_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel1)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                                    .addComponent(campo_terapia_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(campo_id_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(campo_hora_cita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(campo_pacienteNombre_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(campo_fecha_cita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addComponent(boton_Guardar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(campo_paciente_apellidoP, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                            .addComponent(jLabel9)
+                                            .addComponent(combo_hora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(campo_paciente_apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(boton_Buscar, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,33 +181,41 @@ public class modificar_Cita extends javax.swing.JFrame {
                     .addComponent(campo_id_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_fecha_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(combo_hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campo_hora_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_hora_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(31, 31, 31)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(campo_fecha_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_paciente_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_especialista_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_tipo_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_terapia_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boton_Buscar)
-                    .addComponent(boton_Guardar))
-                .addGap(19, 19, 19))
+                    .addComponent(campo_pacienteNombre_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(campo_paciente_apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campo_paciente_apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(boton_Buscar)
+                        .addGap(100, 100, 100)
+                        .addComponent(boton_Guardar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campo_especialista_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campo_tipo_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campo_terapia_cita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,10 +225,15 @@ public class modificar_Cita extends javax.swing.JFrame {
         
         FuncionesCosulta FSQLC = new FuncionesCosulta();
         DatosCita datoscita;
-        String id_busqueda;
+        String apP_busqueda;
+        String apM_busqueda;
+        String fechaCita;
         
-        id_busqueda = campo_id_cita.getText();       
-        datoscita = FSQLC.BuscarCita(id_busqueda);
+        apP_busqueda = campo_paciente_apellidoP.getText(); 
+        apM_busqueda = campo_paciente_apellidoM.getText();
+        fechaCita = campo_fecha_cita.getText();
+        
+        datoscita = FSQLC.BuscarCita(apP_busqueda,apM_busqueda,fechaCita);
         
         if (!(datoscita.getNombre_paciente().equals(""))) {
             
@@ -173,10 +242,15 @@ public class modificar_Cita extends javax.swing.JFrame {
             campo_id_cita.setText(Integer.toString(datoscita.getId()));
             campo_fecha_cita.setText(datoscita.getFecha());
             campo_hora_cita.setText(datoscita.getHora());
-            campo_paciente_cita.setText(datoscita.getNombre_paciente());
+            campo_pacienteNombre_cita.setText(datoscita.getNombre_paciente());
             campo_especialista_cita.setText(datoscita.getNombre_Especialista());
             campo_tipo_cita.setText(datoscita.getTipo_consulta());
             campo_terapia_cita.setText(datoscita.getTerapia());
+            
+            hora_global = datoscita.getHora();
+            id_cita_global = Integer.toString(datoscita.getId());
+            anadirComboBox();
+            boton_Guardar.setEnabled(true);
             
         }
         
@@ -185,9 +259,58 @@ public class modificar_Cita extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_BuscarActionPerformed
 
     private void boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_GuardarActionPerformed
-        // TODO add your handling code here:
+        
+        FuncionesCosulta FSQLC = new FuncionesCosulta();
+        String hora;
+        String fecha;
+        
+        hora = (String) combo_hora.getSelectedItem();
+        fecha = campo_fecha_cita.getText();
+        
+        FSQLC.actualizarCita(id_cita_global, hora, fecha);
+        
+        campo_id_cita.setText("");
+        campo_hora_cita.setText("");
+        campo_pacienteNombre_cita.setText("");
+        campo_especialista_cita.setText("");
+        campo_tipo_cita.setText("");
+        campo_terapia_cita.setText("");
+        
+        boton_BuscarActionPerformed(evt);
+        
     }//GEN-LAST:event_boton_GuardarActionPerformed
 
+    private void campo_paciente_apellidoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_paciente_apellidoPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo_paciente_apellidoPActionPerformed
+
+    private void campo_paciente_apellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_paciente_apellidoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo_paciente_apellidoMActionPerformed
+
+    private void combo_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_horaActionPerformed
+
+        
+    }//GEN-LAST:event_combo_horaActionPerformed
+
+    
+    private void anadirComboBox(){
+        
+        combo_hora.removeAllItems();
+        combo_hora.addItem(hora_global);
+        combo_hora.addItem("08:00:00");
+        combo_hora.addItem("09:00:00");
+        combo_hora.addItem("10:00:00");
+        combo_hora.addItem("11:00:00");
+        combo_hora.addItem("12:00:00");
+        combo_hora.addItem("13:00:00");
+        combo_hora.addItem("14:00:00");
+        combo_hora.addItem("15:00:00");
+        combo_hora.addItem("16:00:00");
+        combo_hora.addItem("17:00:00");
+        combo_hora.addItem("18:00:00");
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -219,10 +342,14 @@ public class modificar_Cita extends javax.swing.JFrame {
     private javax.swing.JTextField campo_fecha_cita;
     private javax.swing.JTextField campo_hora_cita;
     private javax.swing.JTextField campo_id_cita;
-    private javax.swing.JTextField campo_paciente_cita;
+    private javax.swing.JTextField campo_pacienteNombre_cita;
+    private javax.swing.JTextField campo_paciente_apellidoM;
+    private javax.swing.JTextField campo_paciente_apellidoP;
     private javax.swing.JTextField campo_terapia_cita;
     private javax.swing.JTextField campo_tipo_cita;
+    private javax.swing.JComboBox<String> combo_hora;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -230,5 +357,6 @@ public class modificar_Cita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
