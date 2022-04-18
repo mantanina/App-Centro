@@ -6,8 +6,14 @@
 package Agenda_Especialistas;
 
 import ConexionDB.DbConnection;
+import Especialista.eliminar_Especialistas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -15,6 +21,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableColumnModel;
@@ -29,9 +37,37 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
     /**
      * Creates new form Cosulta_citas_especialistas
      */
-    public Cosulta_citas_especialistas() throws SQLException {
+    public Cosulta_citas_especialistas() throws SQLException, IOException {
         initComponents();
         combo();
+        
+        this.setLocationRelativeTo(null);
+        
+        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+        this.setTitle("Consulta Citas Especialista");
+        this.setIconImage(imagenIcono);
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (opc == JOptionPane.YES_OPTION) {
+
+                    try {
+                        new Menu.Principal().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(eliminar_Especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+
+            }
+
+        });
     }
 
     public void buscaFecha() throws SQLException {
@@ -269,6 +305,8 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
                 try {
                     new Cosulta_citas_especialistas().setVisible(true);
                 } catch (SQLException ex) {
+                    Logger.getLogger(Cosulta_citas_especialistas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(Cosulta_citas_especialistas.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

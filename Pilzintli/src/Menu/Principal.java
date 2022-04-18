@@ -8,12 +8,14 @@ import Especialista.*;
 import Paciente.*;
 import Usuario.*;
 import Tutor.*;
+import Agenda_Especialistas.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -80,13 +82,15 @@ public class Principal extends javax.swing.JFrame {
         mod_Paciente = new javax.swing.JMenuItem();
         mod_Tutor = new javax.swing.JMenuItem();
         mod_Usuario = new javax.swing.JMenuItem();
+        mod_Citas = new javax.swing.JMenuItem();
         menu_Bajas = new javax.swing.JMenu();
         bajas_Especialista = new javax.swing.JMenuItem();
         bajas_Paciente = new javax.swing.JMenuItem();
         bajas_Tutor = new javax.swing.JMenuItem();
         bajas_Usuario = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menu_Consultas = new javax.swing.JMenu();
+        citas_Especialista = new javax.swing.JMenuItem();
+        menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
@@ -163,6 +167,14 @@ public class Principal extends javax.swing.JFrame {
         mod_Usuario.setText("Usuarios");
         menu_Modificaciones.add(mod_Usuario);
 
+        mod_Citas.setText("Citas");
+        mod_Citas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_CitasActionPerformed(evt);
+            }
+        });
+        menu_Modificaciones.add(mod_Citas);
+
         barraMenu.add(menu_Modificaciones);
 
         menu_Bajas.setText("Bajas");
@@ -191,10 +203,19 @@ public class Principal extends javax.swing.JFrame {
 
         barraMenu.add(menu_Bajas);
 
-        jMenu1.setText("Consultas");
-        barraMenu.add(jMenu1);
+        menu_Consultas.setText("Consultas");
 
-        jMenu2.setText("Ayuda");
+        citas_Especialista.setText("Citas por Especialista");
+        citas_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citas_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Consultas.add(citas_Especialista);
+
+        barraMenu.add(menu_Consultas);
+
+        menu_Ayuda.setText("Ayuda");
 
         ayuda_about.setText("Acerca De");
         ayuda_about.addActionListener(new java.awt.event.ActionListener() {
@@ -202,9 +223,9 @@ public class Principal extends javax.swing.JFrame {
                 ayuda_aboutActionPerformed(evt);
             }
         });
-        jMenu2.add(ayuda_about);
+        menu_Ayuda.add(ayuda_about);
 
-        barraMenu.add(jMenu2);
+        barraMenu.add(menu_Ayuda);
 
         setJMenuBar(barraMenu);
 
@@ -322,6 +343,27 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ayuda_aboutActionPerformed
 
+    private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed
+        try {
+            new modificar_Cita().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_mod_CitasActionPerformed
+
+    private void citas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citas_EspecialistaActionPerformed
+       try {
+            new Cosulta_citas_especialistas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+     
+    }//GEN-LAST:event_citas_EspecialistaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,15 +404,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem bajas_Tutor;
     private javax.swing.JMenuItem bajas_Usuario;
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JMenuItem citas_Especialista;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JLabel logo_label;
     private javax.swing.JMenu menu_Altas;
     private javax.swing.JMenu menu_Archivo;
+    private javax.swing.JMenu menu_Ayuda;
     private javax.swing.JMenu menu_Bajas;
+    private javax.swing.JMenu menu_Consultas;
     private javax.swing.JMenu menu_Modificaciones;
+    private javax.swing.JMenuItem mod_Citas;
     private javax.swing.JMenuItem mod_Especialista;
     private javax.swing.JMenuItem mod_Paciente;
     private javax.swing.JMenuItem mod_Tutor;
