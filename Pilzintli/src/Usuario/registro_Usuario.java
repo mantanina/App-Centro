@@ -304,6 +304,7 @@ public class registro_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         userName.setText(" ");
         contraseña.setText(" ");
+        idRol.setText(" ");
 
 
         //Limpia(remueve) los items del combo
