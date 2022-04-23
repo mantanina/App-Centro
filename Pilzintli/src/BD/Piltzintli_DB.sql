@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`paciente` (
   `escolaridad` VARCHAR(14) NOT NULL,
   `diagnostico` VARCHAR(40) NULL,
   `padre_id` INT NOT NULL,
+  `status` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`padre_id`) REFERENCES padre(id))
 ENGINE = InnoDB;

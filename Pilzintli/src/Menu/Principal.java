@@ -7,7 +7,6 @@ package Menu;
 import Especialista.*;
 import Paciente.*;
 import Usuario.*;
-import Tutor.*;
 import Agenda_Especialistas.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.WindowAdapter;
@@ -75,7 +74,6 @@ public class Principal extends javax.swing.JFrame {
         menu_Altas = new javax.swing.JMenu();
         altas_Especialista = new javax.swing.JMenuItem();
         altas_Paciente = new javax.swing.JMenuItem();
-        altas_Tutor = new javax.swing.JMenuItem();
         altas_Usuario = new javax.swing.JMenuItem();
         menu_Modificaciones = new javax.swing.JMenu();
         mod_Especialista = new javax.swing.JMenuItem();
@@ -130,14 +128,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_Altas.add(altas_Paciente);
 
-        altas_Tutor.setText("Tutores");
-        altas_Tutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altas_TutorActionPerformed(evt);
-            }
-        });
-        menu_Altas.add(altas_Tutor);
-
         altas_Usuario.setText("Usuarios");
         altas_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +152,11 @@ public class Principal extends javax.swing.JFrame {
         menu_Modificaciones.add(mod_Paciente);
 
         mod_Tutor.setText("Tutores");
+        mod_Tutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_TutorActionPerformed(evt);
+            }
+        });
         menu_Modificaciones.add(mod_Tutor);
 
         mod_Usuario.setText("Usuarios");
@@ -312,16 +307,6 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_altas_PacienteActionPerformed
 
-    private void altas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_TutorActionPerformed
-        try {
-            new DatosTutor().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-
-    }//GEN-LAST:event_altas_TutorActionPerformed
-
     private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
         try {
             new registro_Usuario().setVisible(true);
@@ -364,6 +349,10 @@ public class Principal extends javax.swing.JFrame {
      
     }//GEN-LAST:event_citas_EspecialistaActionPerformed
 
+    private void mod_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_TutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mod_TutorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -395,7 +384,6 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem altas_Especialista;
     private javax.swing.JMenuItem altas_Paciente;
-    private javax.swing.JMenuItem altas_Tutor;
     private javax.swing.JMenuItem altas_Usuario;
     private javax.swing.JMenuItem archivo_Salir;
     private javax.swing.JMenuItem ayuda_about;

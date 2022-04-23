@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tutor;
+package Paciente;
 
+import Paciente.DatosPadreoTutor;
 import ConexionDB.DbConnection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,8 +21,9 @@ public class DatosTutorDAO {
         try{
             Statement estatuto = conex.getConnection().createStatement();
             
-            String insertSql1 = "INSERT INTO padre (nombre, apellido_paterno, apellido_materno, direccion, cp, municipio, estado) VALUES "
-                    + "('" + datostutor.getNombretutor()
+            String insertSql1 = "INSERT INTO padre (id, nombre, apellido_paterno, apellido_materno, direccion, cp, municipio, estado) VALUES "
+                    + "('" + datostutor.getIdtutor()
+                    + "', '" + datostutor.getNombretutor()
                     + "', '" + datostutor.getApellidopaterno()
                     + "', '" + datostutor.getApellidomaterno()
                     + "', '" + datostutor.getDireccion()

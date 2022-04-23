@@ -19,19 +19,21 @@ public class Pacientes {
     private String escolaridad;
     private String diagnostico;
     private int padre_id;
+    private int status;
 
     public Pacientes() {
     }
     
     
     
-    public Pacientes(String nombre,String apellido_paterno,String apellido_materno,String fecha_nacimiento,String escolaridad, int padre_id){
+    public Pacientes(String nombre,String apellido_paterno,String apellido_materno,String fecha_nacimiento,String escolaridad, int padre_id, int status){
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.fecha_nacimiento =fecha_nacimiento;
         this.escolaridad = escolaridad;
         this.padre_id =padre_id;
+        this.status = status;
      
     }    
 
@@ -90,6 +92,14 @@ public class Pacientes {
 
     public void setPadre_id(int padre_id) {
         this.padre_id = padre_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
     

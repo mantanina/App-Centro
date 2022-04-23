@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tutor;
+package Paciente;
 
 /**
  *
@@ -17,13 +17,14 @@ public class DatosPadreoTutor {
     private String codigopostal;
     private String municipio;
     private String estado;
+    private int idtutor;
 
     public DatosPadreoTutor() {
     }
     
     
     
-    public DatosPadreoTutor(String nombretutor,String apellidopaterno,String apellidomaterno,String direccion,String codigopostal, String municipio, String estado){
+    public DatosPadreoTutor(String nombretutor,String apellidopaterno,String apellidomaterno,String direccion,String codigopostal, String municipio, String estado,int idtutor){
         this.nombretutor = nombretutor;
         this.apellidopaterno = apellidopaterno;
         this.apellidomaterno = apellidomaterno;
@@ -31,6 +32,7 @@ public class DatosPadreoTutor {
         this.codigopostal = codigopostal;
         this.municipio = municipio;
         this.estado = estado;
+        this.idtutor =idtutor;
      
     }
 
@@ -88,6 +90,14 @@ public class DatosPadreoTutor {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getIdtutor() {
+        return idtutor;
+    }
+
+    public void setIdtutor(int idtutor) {
+        this.idtutor = idtutor;
     }
     
     

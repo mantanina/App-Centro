@@ -49,14 +49,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altas_PacienteActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="altas_Tutor">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tutores"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altas_TutorActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="altas_Usuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
@@ -89,6 +81,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tutores"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mod_TutorActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mod_Usuario">
               <Properties>
