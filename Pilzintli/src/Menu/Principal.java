@@ -9,6 +9,7 @@ import Paciente.*;
 import Usuario.*;
 import Agenda_Especialistas.*;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Desktop;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -90,6 +91,7 @@ public class Principal extends javax.swing.JFrame {
         citas_Especialista = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
+        Manual = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -219,6 +221,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Ayuda.add(ayuda_about);
+
+        Manual.setText("Manual");
+        Manual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManualActionPerformed(evt);
+            }
+        });
+        menu_Ayuda.add(Manual);
 
         barraMenu.add(menu_Ayuda);
 
@@ -353,6 +363,15 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mod_TutorActionPerformed
 
+    private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
+       try{
+           File objetofile = new File ("archivo.pdf");
+           Desktop.getDesktop().open(objetofile);
+       }catch (IOException ex){
+           System.out.println(ex);
+       }
+    }//GEN-LAST:event_ManualActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +401,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Manual;
     private javax.swing.JMenuItem altas_Especialista;
     private javax.swing.JMenuItem altas_Paciente;
     private javax.swing.JMenuItem altas_Usuario;
