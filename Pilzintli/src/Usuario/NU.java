@@ -75,11 +75,11 @@ public class NU extends javax.swing.JFrame {
    }
    private void llenadoni(){
    nid n=new nid();
-   ArrayList <?>listanivel =n.getnivel();
-   nombres.removeAllItems();
+   ArrayList <nivel>listanivel =n.getnivel();
+   nivel.removeAllItems();
    
    for(int i=0; i<listanivel.size();i++){
-       nombres.addItem(listanivel.get(i).getnivel());
+       nivel.addItem(listanivel.get(i).getRol());
    }
    }
     /**

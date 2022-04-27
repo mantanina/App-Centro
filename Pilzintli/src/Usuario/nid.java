@@ -48,11 +48,11 @@ public class nid {
         return listanombres;
      }
      
-     public ArrayList<?>getnivel(){
+     public ArrayList<nivel>getnivel(){
      // conexion nid con= nid.getConexion();
         Statement stmt;
         ResultSet rs;
-        ArrayList<?>listanivel=new ArrayList<>();
+        ArrayList<nivel>listanivel=new ArrayList<nivel>();
         try {
             
             stmt= conex.getConnection().createStatement();
