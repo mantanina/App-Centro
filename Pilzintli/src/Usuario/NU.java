@@ -73,6 +73,15 @@ public class NU extends javax.swing.JFrame {
        nombres.addItem(listaNombre.get(i).getNombre());
    }
    }
+   private void llenadoni(){
+   nid n=new nid();
+   ArrayList <?>listanivel =n.getnivel();
+   nombres.removeAllItems();
+   
+   for(int i=0; i<listanivel.size();i++){
+       nombres.addItem(listanivel.get(i).getnivel());
+   }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -47,4 +47,24 @@ public class nid {
         }
         return listanombres;
      }
+     
+     public ArrayList<?>getnivel(){
+     // conexion nid con= nid.getConexion();
+        Statement stmt;
+        ResultSet rs;
+        ArrayList<?>listanivel=new ArrayList<>();
+        try {
+            
+            stmt= conex.getConnection().createStatement();
+            rs= stmt.executeQuery("SELECT `rol` FROM `rol`");
+            while(rs.next()){
+                nivel n = new  nivel();
+                n.setRol(rs.getString("rol"));
+                listanivel.add(n);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(nid.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listanivel;
+     }
 }
