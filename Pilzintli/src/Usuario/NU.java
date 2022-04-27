@@ -61,10 +61,18 @@ public class NU extends javax.swing.JFrame {
             }
 
         });
-        
+        llenado();
         
     }
-
+   private void llenado(){
+   nid n=new nid();
+   ArrayList <nivel>listaNombre =n.getnombre();
+   nombres.removeAllItems();
+   
+   for(int i=0; i<listaNombre.size();i++){
+       nombres.addItem(listaNombre.get(i).getNombre());
+   }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,10 +199,7 @@ public class NU extends javax.swing.JFrame {
     }//GEN-LAST:event_salidaActionPerformed
 
     private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
-        nivel n =new nivel();
-      for(int x=0; x>=n.getNombre().length(); x++){
-        nombres.addItem(n.getNombre());
-        }
+       
     }//GEN-LAST:event_nombresActionPerformed
 
     /**
