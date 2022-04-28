@@ -368,10 +368,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
                                             especialista.setEspecialidad(Especialidad_Esp.getText());
                                             especialista.setTelefono(nom_Esp.getText());
                                             especialista.setCorreo(correo_Esp.getText());
-
+                                              
                                             //ifs para ver la seleccion del status(combobox)
                                             if (cbx_status.getSelectedItem() == "Activo") {
                                                 especialista.setStatus(1);
+                                               
                                             }
 
                                             if (cbx_status.getSelectedItem() == "Inactivo") {

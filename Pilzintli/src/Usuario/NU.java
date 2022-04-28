@@ -64,6 +64,7 @@ public class NU extends javax.swing.JFrame {
         llenado();
         
     }
+    // estas private llenan los nombre y los roles 
    private void llenado(){
    nid n=new nid();
    ArrayList <nivel>listaNombre =n.getnombre();

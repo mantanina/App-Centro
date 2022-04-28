@@ -252,6 +252,22 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel40)
+                                .addGap(172, 172, 172)
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel41)
+                                .addGap(73, 73, 73))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel37)
+                                .addGap(197, 197, 197)
+                                .addComponent(jLabel38)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel35)
+                                .addGap(70, 70, 70))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -294,28 +310,12 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                                             .addComponent(textDiagnostico)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(56, 56, 56)
-                                        .addComponent(jLabel36)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel40)
-                                .addGap(172, 172, 172)
-                                .addComponent(jLabel39)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel41)
-                                .addGap(73, 73, 73))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel37)
-                                .addGap(197, 197, 197)
-                                .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel35)
-                                .addGap(70, 70, 70))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelar))))
+                                        .addComponent(jLabel36))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnGuardar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnCancelar)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -331,7 +331,7 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(245, 245, 245)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 94, Short.MAX_VALUE)))
+                        .addGap(0, 102, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(227, 227, 227)
@@ -366,11 +366,11 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                     .addComponent(textEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(pacientestatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabel10))
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
@@ -534,14 +534,17 @@ public class RegistrarPacientes extends javax.swing.JFrame {
        mipaciente.setDiagnostico(textDiagnostico.getText());
        mipaciente.setPadre_id(idTutor);
        //ifs para ver la seleccion del status(combobox)
+       
         if (pacientestatus.getSelectedItem() == "Activo") {
                     mipaciente.setStatus(1);
+                    
         }
 
             if (pacientestatus.getSelectedItem() == "Inactivo") {
                  mipaciente.setStatus(0);
             }
        daoPaciente.RegistrarPacientes(mipaciente);
+       
       //se activa la variable paciente para que el usuario no pueda registrar un padre antes de registrar al paciente
        paciente=true;
                     } else {
@@ -648,75 +651,21 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ApellidoMaterno;
-    private javax.swing.JTextField ApellidoMaterno1;
-    private javax.swing.JTextField ApellidoMaterno2;
     private javax.swing.JTextField ApellidoMaternoT;
-    private javax.swing.JTextField ApellidoPaterno;
-    private javax.swing.JTextField ApellidoPaterno1;
-    private javax.swing.JTextField ApellidoPaterno2;
     private javax.swing.JTextField ApellidoPaternoT;
-    private javax.swing.JTextField CP;
-    private javax.swing.JTextField CP1;
-    private javax.swing.JTextField CP2;
     private javax.swing.JTextField CPT;
-    private javax.swing.JTextField Direccion;
-    private javax.swing.JTextField Direccion1;
-    private javax.swing.JTextField Direccion2;
     private javax.swing.JTextField DireccionT;
-    private javax.swing.JTextField Estado;
-    private javax.swing.JTextField Estado1;
-    private javax.swing.JTextField Estado2;
     private javax.swing.JTextField EstadoT;
-    private javax.swing.JButton Guardar;
-    private javax.swing.JButton Guardar1;
-    private javax.swing.JButton Guardar2;
-    private javax.swing.JButton Limpiar;
-    private javax.swing.JButton Limpiar1;
-    private javax.swing.JButton Limpiar2;
-    private javax.swing.JTextField Municipio;
-    private javax.swing.JTextField Municipio1;
-    private javax.swing.JTextField Municipio2;
     private javax.swing.JTextField MunicipioT;
-    private javax.swing.JTextField Nombre;
-    private javax.swing.JTextField Nombre1;
-    private javax.swing.JTextField Nombre2;
     private javax.swing.JTextField NombreT;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
@@ -731,9 +680,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JComboBox<String> pacientestatus;
     private javax.swing.JTextField textApellidoMaterno;
