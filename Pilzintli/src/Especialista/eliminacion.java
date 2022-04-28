@@ -22,7 +22,7 @@ public class eliminacion {
         
         try {
             stmt= conex.getConnection().createStatement();
-            
+            stmt.executeQuery("INSERT INTO  `paciente` (`status`) values  (`0`)");
             
             
             
