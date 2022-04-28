@@ -8,6 +8,7 @@ package Paciente;
 
 import Menu.*;
 import ConexionDB.DbConnection;
+import Especialista.eliminacion;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -542,6 +543,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
 
             if (pacientestatus.getSelectedItem() == "Inactivo") {
                  mipaciente.setStatus(0);
+                 eliminacion el =new eliminacion();
+                 el.inactivar();
             }
        daoPaciente.RegistrarPacientes(mipaciente);
        
