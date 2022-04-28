@@ -62,7 +62,7 @@ public class NU extends javax.swing.JFrame {
 
         });
         llenado();
-        
+       llenadoni();
     }
     // estas private llenan los nombre y los roles 
    private void llenado(){
