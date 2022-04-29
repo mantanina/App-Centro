@@ -77,12 +77,37 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
         Date fecha = agenda_Calendario.getDate();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fech = formato.format(fecha);
-
+        
+        Date fecha1= agenda_Calendario1.getDate();
+        SimpleDateFormat formato1 = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFinal = formato1.format(fecha1);
+        
         PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
+        
         ResultSet rs = null;
+        ResultSet rs1 = null;
+        
         DbConnection conn = new DbConnection();
         java.sql.Connection con = conn.getConnection();
-        String sql = "SELECT fecha,hora,paciente_id,especialista_id,tipo_consulta_id,terapia_id FROM consulta WHERE fecha='" + fech + "'";// where fecha="+fech;
+        
+        //Obtener lo de el especialista
+        String prueba = (String) cmb_especialistas.getSelectedItem();
+        String otra = prueba.replaceAll("[^a-z^A-Z]", "");
+        int is = 1;
+        //Obtener lo de el especialista
+        String sql1 = "SELECT nombre from especialista WHERE id='"+is+"'" ;
+        System.out.println(sql1);
+        ps1 = (PreparedStatement) con.prepareStatement(sql1);
+        rs1 = ps1.executeQuery();
+        String rapido = "w";
+        while (rs.next()) {
+           rapido = rs1.getString("id");
+        }
+        
+        System.out.println("esto es lo rapido" +rapido);
+        
+        String sql = "SELECT fecha,hora,paciente_id,especialista_id,tipo_consulta_id,terapia_id FROM consulta WHERE id=" +otra+ " AND fecha BETWEEN '" + fech+ "' AND'"+ fechaFinal+ "'";
         System.out.println(sql);
         ps = (PreparedStatement) con.prepareStatement(sql);
         rs = ps.executeQuery();
@@ -149,12 +174,14 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         agenda_Calendario = new com.toedter.calendar.JDateChooser();
+        agenda_Calendario1 = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Especialistas");
+        jLabel1.setText("Especialista");
 
         btn_Buscar.setText("Buscar");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +227,9 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
 
         jLabel2.setText("Consultar citas por especialistas");
 
-        jLabel3.setText("Fecha");
+        jLabel3.setText("Fecha inicial");
+
+        jLabel4.setText("Fecha Final");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -222,14 +251,19 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(420, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addContainerGap(363, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmb_especialistas, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3))
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(cmb_especialistas, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(agenda_Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(agenda_Calendario1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(agenda_Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -244,12 +278,17 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(jLabel1))
                     .addComponent(agenda_Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(btn_Buscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(agenda_Calendario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(btn_Buscar)))
+                    .addComponent(jLabel4))
                 .addGap(26, 26, 26))
         );
 
@@ -259,7 +298,7 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,6 +354,7 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser agenda_Calendario;
+    private com.toedter.calendar.JDateChooser agenda_Calendario1;
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JComboBox<String> cmb_especialistas;
     private javax.swing.JButton jButton2;
@@ -322,6 +362,7 @@ public class Cosulta_citas_especialistas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
