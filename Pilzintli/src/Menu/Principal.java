@@ -9,12 +9,15 @@ import Paciente.*;
 import Usuario.*;
 import Agenda_Especialistas.*;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.mysql.jdbc.Driver;
+import java.sql.*;
 import java.awt.Desktop;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +26,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -32,10 +44,16 @@ public class Principal extends javax.swing.JFrame {
 
     ImageIcon logoPortada = new ImageIcon("logo_bcklss.png");
     BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+    Connection conexion;
+    PreparedStatement ps;
+    static String bd = "Piltzintli";
+    static String login = "root";
+    static String password = "";
+    static String url = "jdbc:mysql://localhost/" + bd;
 
     public Principal() throws IOException {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
 
         logo_label.setIcon(logoPortada);
@@ -89,6 +107,8 @@ public class Principal extends javax.swing.JFrame {
         bajas_Usuario = new javax.swing.JMenuItem();
         menu_Consultas = new javax.swing.JMenu();
         citas_Especialista = new javax.swing.JMenuItem();
+        menu_Reportes = new javax.swing.JMenu();
+        reporte_Diario = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
         Manual = new javax.swing.JMenuItem();
@@ -211,6 +231,18 @@ public class Principal extends javax.swing.JFrame {
         menu_Consultas.add(citas_Especialista);
 
         barraMenu.add(menu_Consultas);
+
+        menu_Reportes.setText("Reportes");
+
+        reporte_Diario.setText("Diario");
+        reporte_Diario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_DiarioActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_Diario);
+
+        barraMenu.add(menu_Reportes);
 
         menu_Ayuda.setText("Ayuda");
 
@@ -348,7 +380,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mod_CitasActionPerformed
 
     private void citas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citas_EspecialistaActionPerformed
-       try {
+        try {
             new Cosulta_citas_especialistas().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -356,7 +388,7 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
-     
+
     }//GEN-LAST:event_citas_EspecialistaActionPerformed
 
     private void mod_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_TutorActionPerformed
@@ -364,13 +396,49 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mod_TutorActionPerformed
 
     private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
-       try{
-           File objetofile = new File ("archivo.pdf");
-           Desktop.getDesktop().open(objetofile);
-       }catch (IOException ex){
-           System.out.println(ex);
-       }
+        try {
+            File objetofile = new File("archivo.pdf");
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_ManualActionPerformed
+
+    private void reporte_DiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_DiarioActionPerformed
+
+        String query;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, login, password);
+
+            query = "SELECT consulta.id, consulta.hora, paciente.nombre, paciente.apellido_paterno, paciente.apellido_materno, especialista.nombre, pago.cantidad "
+                    + "FROM consulta INNER JOIN paciente ON consulta.paciente_id = paciente.id INNER JOIN especialista ON consulta.especialista_id = especialista.id INNER JOIN pago ON pago.consulta_id = consulta.id "
+                    + "WHERE consulta.fecha = CURDATE()";
+
+            InputStream archivoJRXML = Principal.class.getResourceAsStream("reporteDiario.jrxml");
+            JasperDesign diario = JRXmlLoader.load(archivoJRXML);
+            JRDesignQuery updateDiario = new JRDesignQuery();
+            updateDiario.setText(query);
+
+            diario.setQuery(updateDiario);
+
+            JasperReport jreport = JasperCompileManager.compileReport(diario);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
+            
+            JasperViewer.viewReport(jprint,false);
+
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_reporte_DiarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,7 +462,8 @@ public class Principal extends javax.swing.JFrame {
                 try {
                     new Principal().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Principal.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -422,10 +491,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_Bajas;
     private javax.swing.JMenu menu_Consultas;
     private javax.swing.JMenu menu_Modificaciones;
+    private javax.swing.JMenu menu_Reportes;
     private javax.swing.JMenuItem mod_Citas;
     private javax.swing.JMenuItem mod_Especialista;
     private javax.swing.JMenuItem mod_Paciente;
     private javax.swing.JMenuItem mod_Tutor;
     private javax.swing.JMenuItem mod_Usuario;
+    private javax.swing.JMenuItem reporte_Diario;
     // End of variables declaration//GEN-END:variables
 }
