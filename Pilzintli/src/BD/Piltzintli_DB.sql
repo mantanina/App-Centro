@@ -147,12 +147,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Piltzintli`.`inventario`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Piltzintli`.`inventario`;
+
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`inventario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre_articulo` VARCHAR(50) NOT NULL,
-  `cantidad` INT NOT NULL,
-  `estado` VARCHAR(10) NOT NULL,
-  `cantidad_deseable` INT NOT NULL,
+  `cantidad_disponible` INT NOT NULL,
+  `fecha_entrada` DATE NOT NULL,
+  `fecha_salida` DATE NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
