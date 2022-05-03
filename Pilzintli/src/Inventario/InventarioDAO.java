@@ -31,11 +31,11 @@ public class InventarioDAO {
             ResultSet res = consulta.executeQuery();
             while (res.next()) {                
                 Datos_Inventario inventariodatos = new Datos_Inventario();
-                inventariodatos.setId_inventario(Integer.parseInt(res.getString("Codigo")));
-                inventariodatos.setNombre_articulo(res.getString("Titulo"));
-                inventariodatos.setCantidad_disponible(Integer.parseInt(res.getString("Cantidad")));
-                inventariodatos.setFecha_entrada(res.getString("Fecha de entrada"));
-                inventariodatos.setFecha_salida(res.getString("Fecha de salida"));
+                inventariodatos.setId_inventario(Integer.parseInt(res.getString("id")));
+                inventariodatos.setNombre_articulo(res.getString("nombre_articulo"));
+                inventariodatos.setCantidad_disponible(Integer.parseInt(res.getString("cantidad_disponible")));
+                inventariodatos.setFecha_entrada(res.getString("Fecha_entrada"));
+                inventariodatos.setFecha_salida(res.getString("Fecha_salida"));
                 
                 registro.add(inventariodatos);
             }

@@ -144,9 +144,11 @@ public class Inventario_Bajas extends javax.swing.JFrame {
                                 .addComponent(Codigodelproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(eliminarproducto))
-                            .addComponent(MostrarInventario)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(140, Short.MAX_VALUE))
+                            .addComponent(MostrarInventario))))
+                .addContainerGap(332, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,11 +193,18 @@ public class Inventario_Bajas extends javax.swing.JFrame {
     }//GEN-LAST:event_MostrarInventarioActionPerformed
 
     private void eliminarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarproductoActionPerformed
-       Datos_Inventario miinventario = new Datos_Inventario();
+       if(Codigodelproducto.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun codigo",
+                                "Informacion", JOptionPane.INFORMATION_MESSAGE);
+       }else{
+                  Datos_Inventario miinventario = new Datos_Inventario();
        InventarioDAO daoinventario = new InventarioDAO();
        
        miinventario.setId_inventario(Integer.parseInt(Codigodelproducto.getText()));
-       daoinventario.EliminarInventario(miinventario);
+       daoinventario.EliminarInventario(miinventario); 
+                   }
+        
+       
     }//GEN-LAST:event_eliminarproductoActionPerformed
     private void llenarinventario(){
         InventarioDAO dao = new InventarioDAO();
