@@ -8,6 +8,7 @@ import Especialista.*;
 import Paciente.*;
 import Usuario.*;
 import Agenda_Especialistas.*;
+import Inventario.Inventario_Bajas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.Driver;
 import java.sql.*;
@@ -105,6 +106,7 @@ public class Principal extends javax.swing.JFrame {
         bajas_Paciente = new javax.swing.JMenuItem();
         bajas_Tutor = new javax.swing.JMenuItem();
         bajas_Usuario = new javax.swing.JMenuItem();
+        bajasinventario = new javax.swing.JMenuItem();
         menu_Consultas = new javax.swing.JMenu();
         citas_Especialista = new javax.swing.JMenuItem();
         menu_Reportes = new javax.swing.JMenu();
@@ -205,6 +207,11 @@ public class Principal extends javax.swing.JFrame {
         menu_Bajas.add(bajas_Especialista);
 
         bajas_Paciente.setText("Pacientes");
+        bajas_Paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bajas_PacienteActionPerformed(evt);
+            }
+        });
         menu_Bajas.add(bajas_Paciente);
 
         bajas_Tutor.setText("Tutores");
@@ -217,6 +224,14 @@ public class Principal extends javax.swing.JFrame {
 
         bajas_Usuario.setText("Usuarios");
         menu_Bajas.add(bajas_Usuario);
+
+        bajasinventario.setText("Inventario");
+        bajasinventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bajasinventarioActionPerformed(evt);
+            }
+        });
+        menu_Bajas.add(bajasinventario);
 
         barraMenu.add(menu_Bajas);
 
@@ -440,6 +455,20 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_reporte_DiarioActionPerformed
 
+    private void bajas_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_PacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bajas_PacienteActionPerformed
+
+    private void bajasinventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajasinventarioActionPerformed
+        try {
+
+            new Inventario_Bajas().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_bajasinventarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -480,6 +509,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem bajas_Paciente;
     private javax.swing.JMenuItem bajas_Tutor;
     private javax.swing.JMenuItem bajas_Usuario;
+    private javax.swing.JMenuItem bajasinventario;
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JMenuItem citas_Especialista;
     private javax.swing.JLabel jLabel1;
