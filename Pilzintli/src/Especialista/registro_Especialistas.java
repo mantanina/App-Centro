@@ -109,6 +109,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         nom_Esp = new javax.swing.JTextField();
         cbx_status = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
+        RT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,7 +199,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
             }
         });
 
-        telefono_Esp.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        telefono_Esp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         telefono_Esp.setNextFocusableComponent(correo_Esp);
         telefono_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +223,13 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         jLabel10.setText("Status");
+
+        RT.setText("Registro de Terapia");
+        RT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,14 +260,19 @@ public class registro_Especialistas extends javax.swing.JFrame {
                     .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefono_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefono_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(RT)))
                 .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -316,7 +329,9 @@ public class registro_Especialistas extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(38, 38, 38)
                         .addComponent(jLabel7))
-                    .addComponent(Especialidad_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Especialidad_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RT)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_resgistrar)
@@ -502,6 +517,12 @@ public class registro_Especialistas extends javax.swing.JFrame {
         cbx_status.addItem("Inactivo");
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
+    private void RTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RTActionPerformed
+        // boten que llamara la ventana para dar de alta una terapia;
+        
+        
+    }//GEN-LAST:event_RTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -534,6 +555,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Especialidad_Esp;
+    private javax.swing.JButton RT;
     private javax.swing.JTextField apellmat_Esp;
     private javax.swing.JTextField apellpate_Esp;
     private javax.swing.JButton btn_limpiar;
