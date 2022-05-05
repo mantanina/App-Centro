@@ -34,6 +34,9 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Terapautas = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        TerapiaALV = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        Guardaciòn = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -48,15 +51,39 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
 
         jLabel2.setText("Seleciona el Teraperuta");
 
+        TerapiaALV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TerapiaALVActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Escribe la Terapia");
+
+        Guardaciòn.setText("Guardar");
+        Guardaciòn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardaciònActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(Terapautas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TerapiaALV)
+                            .addComponent(Terapautas, 0, 144, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(Guardaciòn)))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -66,7 +93,13 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Terapautas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TerapiaALV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(61, 61, 61)
+                .addComponent(Guardaciòn)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,6 +108,14 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
     private void TerapautasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerapautasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TerapautasActionPerformed
+
+    private void TerapiaALVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerapiaALVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TerapiaALVActionPerformed
+
+    private void GuardaciònActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardaciònActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardaciònActionPerformed
     //Llenado de nombres de terapeutas
     private void llenado(){
     RT lista = new RT();
@@ -125,8 +166,11 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Guardaciòn;
     private javax.swing.JComboBox<String> Terapautas;
+    private javax.swing.JTextField TerapiaALV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
