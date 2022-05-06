@@ -7,6 +7,8 @@ package Usuario;
 
 import Agenda_Especialistas.*;
 import ConexionDB.DbConnection;
+import Especialista.DatosEspecialista;
+import Especialista.FuncionesSQLEspecialista;
 import Especialista.eliminar_Especialistas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.*;
@@ -34,6 +36,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Havst
  */
 public class eliminar_Usuario extends javax.swing.JFrame {
+    //Instanciar la clase para utilizarla validacion de letras
+
+    FuncionesSQLEspecialista validacion = new FuncionesSQLEspecialista();
 
     /**
      * Creates new form Cosulta_citas_especialistas
@@ -106,14 +111,13 @@ public class eliminar_Usuario extends javax.swing.JFrame {
         ResultSet rs = null;
         DbConnection conn = new DbConnection();
         java.sql.Connection con = conn.getConnection();
-        String sql = "SELECT id,username,status,rol_id FROM usuario WHERE username='" + txt_nombreUsuario.getText() + "'";// where fecha="+fech;
+        String sql = "select username,status from usuario u inner join rol r on u.rol_id = r.id;";// where fecha="+fech;
         System.out.println(sql);
         ps = (PreparedStatement) con.prepareStatement(sql);
         rs = ps.executeQuery();
 
         ResultSetMetaData rsMD = (ResultSetMetaData) rs.getMetaData();
         int cantidadColumnas = rsMD.getColumnCount();
-        modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Status");
         modelo.addColumn("Rol");
@@ -129,17 +133,20 @@ public class eliminar_Usuario extends javax.swing.JFrame {
     }
 
     public void eliminarUsuario() {
+        //Hace la conexión a la base de datos
         DbConnection conn = new DbConnection();
         java.sql.Connection con = conn.getConnection();
 
-        int fila = tabla.getSelectedRow();
-        String valor = tabla.getValueAt(fila, 0).toString();
+        //Elimina el Usuario
         try {
-
-            PreparedStatement solicitudSQL = (PreparedStatement) con.prepareStatement("DELETE FROM usuario WHERE id=" + valor + "");
+            PreparedStatement solicitudSQL = (PreparedStatement) con.prepareStatement("DELETE FROM usuario WHERE username='" + txt_nombreUsuario.getText() + "';");
+            //Ejecuta el query para eliminar el usuario
             solicitudSQL.executeUpdate();
+
+            //Mensaje de confirmación que el usuario se elimino satisfactoriamente
             JOptionPane.showMessageDialog(null, "Se eliminó el usuario");
         } catch (Exception e) {
+            //Mensaje de error, no se eliminó el usuario
             JOptionPane.showMessageDialog(null, "No se eliminó");
         }
     }
@@ -182,20 +189,20 @@ public class eliminar_Usuario extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Status", "Rol"
+                "Nombre", "Status", "Rol"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -297,11 +304,15 @@ public class eliminar_Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
-        if (!txt_nombreUsuario.getText().equalsIgnoreCase("")) {
-            try {
-                buscaUsuario();
-            } catch (SQLException ex) {
-                System.out.println(ex);
+        if (!txt_nombreUsuario.getText().equalsIgnoreCase("") && !txt_nombreUsuario.getText().equalsIgnoreCase(" ")) {
+            if (validacion.valida_letras(txt_nombreUsuario.getText()) == true) {
+                try {
+                    buscaUsuario();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "No se encontró el usuario");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre inválido, introduce solo letras");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Introduce el nombre del usuario");
@@ -318,12 +329,25 @@ public class eliminar_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            eliminarUsuario();
-            actualizarTabla();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se eliminó");
+        //validacion de que la caja de texto contenga algúna letra
+        if (!txt_nombreUsuario.getText().equalsIgnoreCase("") && !txt_nombreUsuario.getText().equalsIgnoreCase(" ")) {
+
+            //validación para verificar que se introduscan letras
+            if (validacion.valida_letras(txt_nombreUsuario.getText()) == true) {
+                try {
+                    eliminarUsuario();
+                    actualizarTabla();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "No se eliminó");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre inválido, solo introdusca letras");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Introdusca el nombre");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
