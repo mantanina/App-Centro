@@ -82,17 +82,16 @@ public class eliminar_Usuario extends javax.swing.JFrame {
         ResultSet rs = null;
         DbConnection conn = new DbConnection();
         java.sql.Connection con = conn.getConnection();
-        String sql = "SELECT id,username,status,rol_id FROM usuario";// where fecha="+fech;
+        String sql = "select username,status,rol from usuario u inner join rol r on u.rol_id = r.id;";// where fecha="+fech;
         System.out.println(sql);
         ps = (PreparedStatement) con.prepareStatement(sql);
         rs = ps.executeQuery();
 
         ResultSetMetaData rsMD = (ResultSetMetaData) rs.getMetaData();
         int cantidadColumnas = rsMD.getColumnCount();
-        modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Status");
-        modelo.addColumn("Rol");
+        modelo.addColumn("Rol");    
 
         while (rs.next()) {
             Object[] filas = new Object[cantidadColumnas];
@@ -111,7 +110,7 @@ public class eliminar_Usuario extends javax.swing.JFrame {
         ResultSet rs = null;
         DbConnection conn = new DbConnection();
         java.sql.Connection con = conn.getConnection();
-        String sql = "select username,status from usuario u inner join rol r on u.rol_id = r.id;";// where fecha="+fech;
+        String sql = "select username,status,rol from usuario u inner join rol r on u.rol_id = r.id where username ='"+txt_nombreUsuario.getText()+"';";// where fecha="+fech;
         System.out.println(sql);
         ps = (PreparedStatement) con.prepareStatement(sql);
         rs = ps.executeQuery();
@@ -124,6 +123,7 @@ public class eliminar_Usuario extends javax.swing.JFrame {
 
         while (rs.next()) {
             Object[] filas = new Object[cantidadColumnas];
+            
             for (int i = 0; i < cantidadColumnas; i++) {
                 filas[i] = rs.getObject(i + 1);
             }
