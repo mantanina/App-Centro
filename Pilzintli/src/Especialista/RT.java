@@ -32,14 +32,9 @@ public class RT {
                 r.setNombreT(rs.getString("nombre"));
                 listanombres.add(r);
             }
-            
-            
        } catch (SQLException ex) {
            Logger.getLogger(RT.class.getName()).log(Level.SEVERE, null, ex);
        }
         return listanombres;
-        
-    
-}
-
+    }
 }

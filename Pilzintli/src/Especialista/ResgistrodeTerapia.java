@@ -117,19 +117,15 @@ public class ResgistrodeTerapia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_GuardaciònActionPerformed
     //Llenado de nombres de terapeutas
-    private void llenado(){
-    RT lista = new RT();
     
+    private void llenado(){
+    RT lista = new RT();    
    ArrayList <reTe>listaNombre =lista.getnombre();
-   Terapautas.removeAllItems();
-   
+   Terapautas.removeAllItems();   
    for(int i=0; i<listaNombre.size();i++){
        Terapautas.addItem(listaNombre.get(i).getNombreT());
-       
+    }
    }
-   }
-    
-    
     /**
      * @param args the command line arguments
      */
