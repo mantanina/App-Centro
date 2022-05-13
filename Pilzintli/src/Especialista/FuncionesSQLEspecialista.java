@@ -5,10 +5,17 @@ package Especialista;
 
 import ConexionDB.DbConnection;
 import java.sql.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase contienen métodos sql y demas para diversas funcionalidades del
+ * sistema
+ *
+ * @author Salvador Quiterio Saucedo
+ * @author Cesar David Reyes Guillen
+ * @since jPilzintli 1.0.0
+ */
 public class FuncionesSQLEspecialista {
 
     public DatosEspecialista BuscarEspecialista(String apP, String apM) {
@@ -25,7 +32,7 @@ public class FuncionesSQLEspecialista {
             especialista = new DatosEspecialista();
 
             solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM "
-                    + "especialista where apellido_paterno like '" + apP +"' and apellido_materno like '" + apM + "'";
+                    + "especialista where apellido_paterno like '" + apP + "' and apellido_materno like '" + apM + "'";
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -75,14 +82,14 @@ public class FuncionesSQLEspecialista {
 
             solicitudSQL = "UPDATE especialista SET status = '" + situacion + "' where id like " + idBusqueda;
             System.out.println(solicitudSQL);
-            
+
             estatuto.executeUpdate(solicitudSQL);
-            
-            JOptionPane.showMessageDialog(null,"Status Actualizado!","Informacion",JOptionPane.INFORMATION_MESSAGE);
-            
+
+            JOptionPane.showMessageDialog(null, "Status Actualizado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
             estatuto.close();
             conexion.desconectar();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -90,7 +97,8 @@ public class FuncionesSQLEspecialista {
         }
 
     }
-    public void ModificarDatos(String nombre, String apellidoPaterno, String apellidoMaterno, String profesion, String cedula, String especialidad, String telefono, String correo,String status,String id ) {
+
+    public void ModificarDatos(String nombre, String apellidoPaterno, String apellidoMaterno, String profesion, String cedula, String especialidad, String telefono, String correo, String status, String id) {
 
         DbConnection conexion;
         Statement estatuto;
@@ -101,16 +109,16 @@ public class FuncionesSQLEspecialista {
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
 
-            solicitudSQL = "UPDATE especialista SET nombre = '"+ nombre +"' , apellido_paterno = '" + apellidoPaterno+"', apellido_materno = '" + apellidoMaterno+"', profesion = '" + profesion+"', cedula = '" + cedula+"', especialidad = '" + especialidad+"', telefono = '" + telefono+"', correo = '" + correo+"', status = '" + status+"' where id like " + id;
+            solicitudSQL = "UPDATE especialista SET nombre = '" + nombre + "' , apellido_paterno = '" + apellidoPaterno + "', apellido_materno = '" + apellidoMaterno + "', profesion = '" + profesion + "', cedula = '" + cedula + "', especialidad = '" + especialidad + "', telefono = '" + telefono + "', correo = '" + correo + "', status = '" + status + "' where id like " + id;
             System.out.println(solicitudSQL);
-            
+
             estatuto.executeUpdate(solicitudSQL);
-            
-            JOptionPane.showMessageDialog(null,"Datos Actualizados!","Informacion",JOptionPane.INFORMATION_MESSAGE);
-            
+
+            JOptionPane.showMessageDialog(null, "Datos Actualizados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
             estatuto.close();
             conexion.desconectar();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -118,8 +126,17 @@ public class FuncionesSQLEspecialista {
         }
 
     }
-    
 
+    /**
+     * Método que valida que se hayan introducido solo letras
+     *
+     * @author Salvador Quiterio Saucedo
+     * @param letras Recibe el texto (letras)a validar de los campos de
+     * texto(JTextFile)
+     * @return Regresa valor booleano de la validación, True(No háy valores
+     * inválidos) False(Hay valores inválidos)
+     * @since jPilzintli 1.0.0
+     */
     public boolean valida_letras(String letras) {
         Pattern patron_letras = Pattern.compile("[a-zA-Z ]+[a-zA-Z ]*[a-zA-Z ]*");
         Matcher validacioLetra = patron_letras.matcher(letras);
@@ -130,6 +147,15 @@ public class FuncionesSQLEspecialista {
         }
     }
 
+    /**
+     * Método que valida que se hayan introducido un correo electrónico válido
+     *
+     * @author Salvador Quiterio Saucedo
+     * @param correo Recibe el valor de la caja de texto correo electronico
+     * @return Regresa valor booleano de la validación, True(No háy valores
+     * inválidos) False(Hay valores inválidos)
+     * @since jPilzintli 1.0.0
+     */
     public boolean valida_correo(String correo) {
         Pattern patron_correo = Pattern.compile("[a-z0-9_.]+@([a-z]+.)+(com|mx|edu)(mx)?");
         Matcher validacioLetra = patron_correo.matcher(correo);
@@ -140,6 +166,15 @@ public class FuncionesSQLEspecialista {
         }
     }
 
+    /**
+     * Método que valida que se haya introducido un teléfono válido
+     *
+     * @author Salvador Quiterio Saucedo
+     * @param telefono Recibe el valor de la caja de texto teléfono
+     * @return Regresa valor booleano de la validación, True(No háy valores
+     * inválidos) False(Hay valores inválidos)
+     * @since jPilzintli 1.0.0
+     */
     public boolean valida_Telefono(String telefono) {
         Pattern patron_Telefono = Pattern.compile("[0-9]{10}");
         Matcher validacioLetra = patron_Telefono.matcher(telefono);
@@ -150,6 +185,16 @@ public class FuncionesSQLEspecialista {
         }
     }
 
+    /**
+     * Método que valida que se haya introducido una cédula válida
+     *
+     * @author Salvador Quiterio Saucedo
+     * @param cedula Recibe el valor de la caja de texto cédula
+     * @return Regresa valor booleano de la validación, True(No háy valores
+     * inválidos) False(Hay valores inválidos)
+     * @since jPilzintli 1.0.0
+     */
+    
     public boolean valida_Cedula(String cedula) {
         Pattern patron_Cedula = Pattern.compile("[0-9]{8}");
         Matcher validacioLetra = patron_Cedula.matcher(cedula);
@@ -159,5 +204,4 @@ public class FuncionesSQLEspecialista {
             return false;
         }
     }
-
 }

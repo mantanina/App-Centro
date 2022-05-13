@@ -1,6 +1,3 @@
-/*
- Salvador Quiterio Saucedo 
- */
 package Especialista;
 
 import Menu.*;
@@ -11,19 +8,27 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.util.logging.*;
-import java.util.regex.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 /**
+ * Éste Jframe de Java pretende el registro de especialistas al sistema
  *
- * @author Havst
+ * @author Salvador Quiterio Saucedo
+ * @author Cesar David Reyes Guillen
+ * @since jPilzintli 1.0.0
  */
 public class registro_Especialistas extends javax.swing.JFrame {
-    
-//Instanciar la clase para utilizar el status del especialista
+
     DatosEspecialista especialista = new DatosEspecialista();
-    
-    //Metodo para agregar un especialista en la base de datos 
+
+    /**
+     * Método que registra el especialista a partir de los campos de texto
+     *
+     * @param datosEspecialista Trae consigo los datos insertados a los campos
+     * de texto
+     * @since jPilzintli 1.0.0
+     */
     public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
         DbConnection conex = new DbConnection();
 
@@ -34,7 +39,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
                     + "('" + nom_Esp.getText() + "', '" + apellpate_Esp.getText() + "', '" + apellmat_Esp.getText() + "', '" + profesion_Esp.getText() + "', '" + cedula_esp.getText() + "', '" + Especialidad_Esp.getText() + "','" + telefono_Esp.getText() + "','" + correo_Esp.getText() + "','" + especialista.getStatus() + "')";
             System.out.println("" + insertSql1);
             estatuto.executeUpdate(insertSql1);
-            
+
             JOptionPane.showMessageDialog(null, "Se ha registrado el especialista",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
             estatuto.close();
@@ -51,7 +56,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
      */
     public registro_Especialistas() throws IOException {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
 
         BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
@@ -353,18 +358,22 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón de la interfaz que hace el evento de registro al sistema junto con
+     * la validación
+     * @param evt Evento que registra el especialista
+     * @since jPilzintli 1.0.0
+     */
     private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
-       //Instancia de las validaciones(la clase)
+        //Instancia de las validaciones(la clase)
         FuncionesSQLEspecialista validaionesCampos = new FuncionesSQLEspecialista();
 
-        //-----------------Validación de los campos(Para no introducir datos vacios)-----------------------------
         if (!telefono_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
                 && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
                 && !cedula_esp.getText().equalsIgnoreCase("") && !Especialidad_Esp.getText().equalsIgnoreCase("")
                 && !nom_Esp.getText().equalsIgnoreCase("") && !correo_Esp.getText().equalsIgnoreCase("")
                 && cbx_status.getSelectedItem() != "Seleccionar") {
-            
+
             //validacion de los campos (letras numeros)
             if (validaionesCampos.valida_letras(nom_Esp.getText()) == true) {
                 if (validaionesCampos.valida_letras(apellpate_Esp.getText()) == true) {
@@ -383,11 +392,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
                                             especialista.setEspecialidad(Especialidad_Esp.getText());
                                             especialista.setTelefono(nom_Esp.getText());
                                             especialista.setCorreo(correo_Esp.getText());
-                                              
+
                                             //ifs para ver la seleccion del status(combobox)
                                             if (cbx_status.getSelectedItem() == "Activo") {
                                                 especialista.setStatus(1);
-                                               
+
                                             }
 
                                             if (cbx_status.getSelectedItem() == "Inactivo") {
@@ -444,7 +453,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_resgistrarActionPerformed
-
+/**
+ * Botón para salir de la interfáz
+ * @param evt Evento para salir del sistema
+ * @since jPilzintli 1.0.0
+ */
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
 
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -496,7 +509,11 @@ public class registro_Especialistas extends javax.swing.JFrame {
     private void cbx_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_statusActionPerformed
 
     }//GEN-LAST:event_cbx_statusActionPerformed
-
+/**
+ * Botón para limpiar los campos de texto de la interfáz
+ * @param evt Evento para la ejecución del evento
+ * @since jPilzintli 1.0.0
+ */
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         //Limpiar los campos de texto
         telefono_Esp.setText("");
@@ -519,8 +536,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
     private void RTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RTActionPerformed
         // boten que llamara la ventana para dar de alta una terapia;
-        
-        
     }//GEN-LAST:event_RTActionPerformed
 
     /**
@@ -543,7 +558,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 try {
                     new registro_Especialistas().setVisible(true);
                 } catch (IOException ex) {
