@@ -2,10 +2,13 @@
 package Agenda_Especialistas;
 
 import ConexionDB.DbConnection;
+import Paciente.Pacientes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 
 
 public class FuncionesCosulta {
@@ -142,6 +145,41 @@ public class FuncionesCosulta {
 
         }
                
+    }
+    
+    public ArrayList<Pacientes> ConsultarPacienteCita(){
+        
+        ArrayList<Pacientes> registroc = new ArrayList<Pacientes>();
+        
+        DbConnection conex = new DbConnection();
+        
+        try{
+            Pacientes registropaci = new Pacientes();
+            PreparedStatement consultac = conex.getConnection().
+                    prepareStatement("SELECT id, nombre, apellido_paterno, apellido_materno, status FROM paciente where apellido_paterno like"+ registropaci.getApellido_paterno() );
+            ResultSet res = consultac.executeQuery();
+            while (res.next()) {                
+                
+                registropaci.setId(res.getInt("id"));
+                registropaci.setNombre(res.getString("nombre"));
+                registropaci.setApellido_paterno(res.getString("apellido paterno"));
+                registropaci.setApellido_materno(res.getString("apellido materno"));
+                registropaci.setStatus(res.getInt("status"));
+                
+                registroc.add(registropaci);
+            }
+            res.close();
+            consultac.close();
+            conex.desconectar();
+            
+        }
+        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Hubo un error en la consulta de del paciente\n"+e);
+        }
+        
+        
+        return registroc;
     }
     
 }

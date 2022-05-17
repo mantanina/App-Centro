@@ -13,6 +13,7 @@ public class DatosCita {
     private String tipo_consulta;
     private int terapia_id;
     private String terapia;
+    private String apellidopaciente;
 
     public DatosCita() {
     }
@@ -117,6 +118,14 @@ public class DatosCita {
 
     public void setTerapia(String terapia) {
         this.terapia = terapia;
+    }
+
+    public String getApellidopaciente() {
+        return apellidopaciente;
+    }
+
+    public void setApellidopaciente(String apellidopaciente) {
+        this.apellidopaciente = apellidopaciente;
     }
     
     

@@ -12,6 +12,7 @@ package Paciente;
  * @author 1234
  */
 public class Pacientes {
+    private int id;
     private String nombre;
     private String apellido_paterno;
     private String apellido_materno;
@@ -26,7 +27,7 @@ public class Pacientes {
     
     
     
-    public Pacientes(String nombre,String apellido_paterno,String apellido_materno,String fecha_nacimiento,String escolaridad, int padre_id, int status){
+    public Pacientes(String nombre,String apellido_paterno,String apellido_materno,String fecha_nacimiento,String escolaridad, int padre_id, int status, int id){
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -34,6 +35,7 @@ public class Pacientes {
         this.escolaridad = escolaridad;
         this.padre_id =padre_id;
         this.status = status;
+        this.id = id;
      
     }    
 
@@ -100,6 +102,14 @@ public class Pacientes {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     

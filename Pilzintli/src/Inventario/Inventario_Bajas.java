@@ -36,7 +36,7 @@ public class Inventario_Bajas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
-        this.setTitle("Modificar Citas");
+        this.setTitle("Inventario bajas");
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
