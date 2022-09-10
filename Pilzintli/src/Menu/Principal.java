@@ -13,6 +13,8 @@ import java.sql.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +32,7 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import net.sf.jasperreports.engine.JasperExportManager;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.text.PDFTextStripperByArea;
+
 
 /**
  *
@@ -111,7 +107,6 @@ public class Principal extends javax.swing.JFrame {
         reporte_Diario = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
-        Manual = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -242,7 +237,7 @@ public class Principal extends javax.swing.JFrame {
 
         barraMenu.add(menu_Reportes);
 
-        menu_Ayuda.setText("Ayuda");
+        menu_Ayuda.setText("Programa");
 
         ayuda_about.setText("Acerca De");
         ayuda_about.addActionListener(new java.awt.event.ActionListener() {
@@ -251,14 +246,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Ayuda.add(ayuda_about);
-
-        Manual.setText("Manual");
-        Manual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManualActionPerformed(evt);
-            }
-        });
-        menu_Ayuda.add(Manual);
 
         barraMenu.add(menu_Ayuda);
 
@@ -344,17 +331,6 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ayuda_aboutActionPerformed
-
-    private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
-
-        InputStream is = Principal.class.getClassLoader().getResourceAsStream("D:\\Documentos\\Code\\Java\\App-Centro\\Pilzintli\\src\\Recursos\\archivo.pdf");
-        try {
-            JasperViewer.viewReport(is, false);
-        } catch (JRException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_ManualActionPerformed
 
     private void reporte_DiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_DiarioActionPerformed
 
@@ -470,7 +446,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Manual;
     private javax.swing.JMenuItem altas_Especialista;
     private javax.swing.JMenuItem altas_Paciente;
     private javax.swing.JMenuItem altas_citas;
