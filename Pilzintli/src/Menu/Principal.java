@@ -30,11 +30,12 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import java.io.File; 
-import java.io.IOException; 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-import org.apache.pdfbox.pdmodel.PDDocument; 
-import org.apache.pdfbox.text.PDFTextStripper; 
+import net.sf.jasperreports.engine.JasperExportManager;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 
 /**
@@ -346,9 +347,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
 
-        
-        
-        
+        InputStream is = Principal.class.getClassLoader().getResourceAsStream("D:\\Documentos\\Code\\Java\\App-Centro\\Pilzintli\\src\\Recursos\\archivo.pdf");
+        try {
+            JasperViewer.viewReport(is, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_ManualActionPerformed
 
     private void reporte_DiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_DiarioActionPerformed
