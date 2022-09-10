@@ -103,17 +103,17 @@ public class FuncionesSQLEspecialista {
         DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
-
+    /// Metrodo para modificar los datos del especialita 
         try {
 
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
-
+    /// UPDATE es el metodo para hacer las modificaciones 
             solicitudSQL = "UPDATE especialista SET nombre = '" + nombre + "' , apellido_paterno = '" + apellidoPaterno + "', apellido_materno = '" + apellidoMaterno + "', profesion = '" + profesion + "', cedula = '" + cedula + "', especialidad = '" + especialidad + "', telefono = '" + telefono + "', correo = '" + correo + "', status = '" + status + "' where id like " + id;
             System.out.println(solicitudSQL);
 
             estatuto.executeUpdate(solicitudSQL);
-
+    /// si todo esta bien mandara un mensje que se a actualizado los datos 
             JOptionPane.showMessageDialog(null, "Datos Actualizados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
             estatuto.close();

@@ -21,7 +21,10 @@ public class DatosPadreoTutor {
 
     public DatosPadreoTutor() {
     }
-    
+    /*
+   Este metodo nos permite estar en la tabla de Tutores
+   y nos mostrara lo que tiene en la base de datos
+*/
     
     
     public DatosPadreoTutor(String nombretutor,String apellidopaterno,String apellidomaterno,String direccion,String codigopostal, String municipio, String estado,int idtutor){

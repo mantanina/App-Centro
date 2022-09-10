@@ -9,7 +9,7 @@ package Consultas;
  * @author Arreola N
  */
 public class DatosConsultas {
-
+     /// Nos permite acceder a las celdas de la tabla 
     private int id;
     private String fecha;
     private String hora;
@@ -17,7 +17,7 @@ public class DatosConsultas {
     private int especialista_id;
     private int tipo_consulta_id;
     private int terapia_id;
-
+   //--------------------------------------------------
     public DatosConsultas() {
     }
 
@@ -30,11 +30,11 @@ public class DatosConsultas {
         this.tipo_consulta_id = tipo_consulta_id;
         this.terapia_id = terapia_id;
     }
-
+   /// el get toma la informacion 
     public int getId() {
         return id;
     }
-
+   /// el set pone la infromacion que tenia el get
     public void setId(int id) {
         this.id = id;
     }
@@ -86,5 +86,5 @@ public class DatosConsultas {
     public void setTerapia_id(int terapia_id) {
         this.terapia_id = terapia_id;
     }
-
+   ///---------------------------------------------
 }

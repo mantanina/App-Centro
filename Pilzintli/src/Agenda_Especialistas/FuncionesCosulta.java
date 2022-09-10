@@ -39,7 +39,7 @@ public class FuncionesCosulta {
 
         try {
             conexion = new DbConnection();
-            
+            /// Se conecta a la tabala de Especialistas y su agenda
             estatuto0 = conexion.getConnection().createStatement();
             solicitudSQL0 = "SELECT id FROM paciente where apellido_paterno like '" + apP +"' and apellido_materno like '" + apM + "'";
             resultado0 = estatuto0.executeQuery(solicitudSQL0);
@@ -52,14 +52,14 @@ public class FuncionesCosulta {
             
             estatuto = conexion.getConnection().createStatement();
             consulta = new DatosCita();
-
+            /// Selecciona lo que tiene adentro la tabla de especialistas
             solicitudSQL = "SELECT id, fecha, hora, paciente_id, especialista_id, tipo_consulta_id, terapia_id FROM "
                     + "consulta where id like " + id + " and fecha like '" + fecha +"'";
 
             resultado = estatuto.executeQuery(solicitudSQL);
 
             while (resultado.next()) {
-
+             
                 consulta.setId(resultado.getInt("id"));
                 consulta.setFecha(resultado.getString("fecha"));
                 consulta.setHora(resultado.getString("hora"));
@@ -77,7 +77,7 @@ public class FuncionesCosulta {
             while(resultado1.next()){
                 consulta.setNombre_paciente(resultado1.getString("nombre"));
             }
-            
+            ///Selecciona la casilla para buscar el nombre de especialista
             estatuto2 = conexion.getConnection().createStatement();
             solicitudSQL2 = "SELECT nombre FROM especialista where id like " + consulta.getEspecialista_id();
             resultado2 = estatuto2.executeQuery(solicitudSQL2);
@@ -85,7 +85,7 @@ public class FuncionesCosulta {
             while(resultado2.next()){
                 consulta.setNombre_Especialista(resultado2.getString("nombre"));
             }
-            
+            /// Selecciona para la busquedade consulta
             estatuto3 = conexion.getConnection().createStatement();
             solicitudSQL3 = "SELECT tipo_consulta FROM tipo_consulta where id like " + consulta.getTipo_consulta_id();
             resultado3 = estatuto3.executeQuery(solicitudSQL3);
@@ -93,7 +93,7 @@ public class FuncionesCosulta {
             while(resultado3.next()){
                 consulta.setTipo_consulta(resultado3.getString("tipo_consulta"));
             }
-            
+            // Selecciona la busqueda de las casillas de terapias
             estatuto4 = conexion.getConnection().createStatement();
             solicitudSQL4 = "SELECT terapia FROM terapia where id like " + consulta.getTerapia_id();
             resultado4 = estatuto4.executeQuery(solicitudSQL4);
@@ -102,7 +102,7 @@ public class FuncionesCosulta {
                 consulta.setTerapia(resultado4.getString("terapia"));
             }
 
-            
+           ///---------------------------------------------------- 
             estatuto.close();
             estatuto1.close();
             estatuto2.close();
@@ -129,11 +129,11 @@ public class FuncionesCosulta {
 
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
-
+        // Agrega la hora y fecha 
             solicitudSQL = "UPDATE consulta SET hora = '"+ hora +"', fecha = '" + fecha +"' where id like " + id ;
             
             estatuto.executeUpdate(solicitudSQL);
-            
+         /// Indica que se a actualizada la agenda de especialistas   
             JOptionPane.showMessageDialog(null,"Datos Actualizados!","Informacion",JOptionPane.INFORMATION_MESSAGE);
             
             estatuto.close();
@@ -144,7 +144,7 @@ public class FuncionesCosulta {
             JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 
         }
-               
+      ///---------------------------------------------------------------         
     }
     
     public ArrayList<Pacientes> ConsultarPacienteCita(){
@@ -152,7 +152,7 @@ public class FuncionesCosulta {
         ArrayList<Pacientes> registroc = new ArrayList<Pacientes>();
         
         DbConnection conex = new DbConnection();
-        
+        /// Agregar nuevos Pacientes para la base de datos
         try{
             Pacientes registropaci = new Pacientes();
             PreparedStatement consultac = conex.getConnection().
@@ -173,7 +173,7 @@ public class FuncionesCosulta {
             conex.desconectar();
             
         }
-        
+        ///--------------------------------------------------------
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Hubo un error en la consulta de del paciente\n"+e);
         }

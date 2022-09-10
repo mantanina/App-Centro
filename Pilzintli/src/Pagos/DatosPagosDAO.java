@@ -11,7 +11,10 @@ import javax.swing.JOptionPane;
  * @author Arreola N
  */
 public class DatosPagosDAO {
-    
+    /*
+Con este metodo es para registrar los pagos 
+en la base de datos
+*/
 public DatoPagos RegistrosPagos(String id){
 DbConnection conexion;
         ResultSet resultado;

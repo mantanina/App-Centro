@@ -15,9 +15,15 @@ import javax.swing.JOptionPane;
  *
  * @author edgar
  */
+
+/*
+Con este metodo nos pemrite agregar nuevos 
+tutores en nuestra bas e de tados
+*/
 public class DatosTutorDAO {
     public void RegistrarDatosTutor(DatosPadreoTutor datostutor){
         DbConnection conex = new DbConnection();
+
         try{
             Statement estatuto = conex.getConnection().createStatement();
             
@@ -46,6 +52,7 @@ public class DatosTutorDAO {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se registro");
         }
-        ///pp
+        ///--------------------------------------------------------------------------
+
 }
 }

@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
  *
  * @author 1234
  */
+/*
+Con este metodo nos permite agregar
+nuevos de las terapias en la base de datos
+*/
 public class DAOTerapia {
     public void RegistrarDatosTerapia(DatosTerapia datostereapia){
         DbConnection conex = new DbConnection();

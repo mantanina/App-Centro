@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 /**
  *
  * @author Owen Axel H
+* Este metodo nos permite borrar la informacion 
+* de los pacienetes
  */
 public class eliminacion {
     DbConnection conex = new DbConnection();

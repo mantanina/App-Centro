@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class DatosUsuariosDAO {
 
+/*
+Con este metodo nos permite agregar nuevos 
+datos de usuarios a nuestra base de datos
+*/
+
     public DatoUsuarios RegistroUsuarios(String id) {
 
         DbConnection conexion;

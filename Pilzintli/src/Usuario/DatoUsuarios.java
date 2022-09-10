@@ -18,7 +18,10 @@ private int rol_id;
 
    public DatoUsuarios(){
 }
-
+/*
+Este metodo nos permite meternos 
+a la tabla de datos de usuarios
+*/
     public DatoUsuarios(int id, String user, String contraseña, int status, int rol_id) {
         this.id = id;
         this.user = user;

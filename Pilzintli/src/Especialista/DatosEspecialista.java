@@ -22,6 +22,7 @@ public class DatosEspecialista {
    public DatosEspecialista(){
        
    }
+  // Se conecta a la tabla de especialistas
 
     public DatosEspecialista(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String profesion, String cedula, String especialidad, String telefono, String correo, int status) {
         this.id = id;

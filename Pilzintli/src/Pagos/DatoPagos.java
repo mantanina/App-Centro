@@ -12,7 +12,11 @@ public class DatoPagos {
  private int id;
 private String cantidad;
 private int consulta_id;
-
+/*
+Este metodo nos permite meternos 
+a la tabla de los datos de pagos 
+en la base de datos 
+*/
     public DatoPagos() {
     }
 

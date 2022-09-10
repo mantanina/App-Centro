@@ -17,7 +17,7 @@ public class DatosCita {
 
     public DatosCita() {
     }
-
+   // Es para acceder a la base de datos de la agenda de especialista 
     public DatosCita(int id, String fecha, String hora, int paciente_id, String nombre_paciente, int especialista_id, String nombre_Especialista, int tipo_consulta_id, String tipo_consulta, int terapia_id, String terapia) {
         this.id = id;
         this.fecha = fecha;
@@ -128,7 +128,7 @@ public class DatosCita {
         this.apellidopaciente = apellidopaciente;
     }
     
-    
+//-------------------------------------------------------------------------------------    
 
     
 }

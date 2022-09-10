@@ -9,6 +9,11 @@ package Terapias;
  *
  * @author 1234
  */
+
+/*
+Este metodo nos permite meterle 
+la los datos de las terapias
+*/
 public class DatosTerapia {
     private int id;
     private String terapia;

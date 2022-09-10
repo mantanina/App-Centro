@@ -25,7 +25,10 @@ public class Pacientes {
     public Pacientes() {
     }
     
-    
+    /*
+Este metodo nos permite estar adentro de la 
+tabla de pacientes en la base de datos 
+*/
     
     public Pacientes(String nombre,String apellido_paterno,String apellido_materno,String fecha_nacimiento,String escolaridad, int padre_id, int status, int id){
         this.nombre = nombre;
