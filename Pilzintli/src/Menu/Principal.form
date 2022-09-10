@@ -146,7 +146,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="reporte_Diario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Diario"/>
+                <Property name="text" type="java.lang.String" value="Citas del D&#xed;a"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporte_DiarioActionPerformed"/>

@@ -17,29 +17,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `Piltzintli` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 USE `Piltzintli` ;
 
--- -----------------------------------------------------
--- Table `Piltzintli`.`rol`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`rol` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `rol` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Piltzintli`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`usuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(20) NOT NULL,
-  `password` VARCHAR(20) NOT NULL,
-  `status` TINYINT NOT NULL DEFAULT 1,
-  `rol_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`rol_id`) REFERENCES rol(id))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `Piltzintli`.`padre`
@@ -94,26 +71,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Piltzintli`.`tipo_consulta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`tipo_consulta` (
-  `id` INT NOT NULL,
-  `tipo_consulta` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Piltzintli`.`terapia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`terapia` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `terapia` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `Piltzintli`.`consulta`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Piltzintli`.`consulta` (
@@ -122,55 +79,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`consulta` (
   `hora` TIME NOT NULL,
   `paciente_id` INT NOT NULL,
   `especialista_id` INT NOT NULL,
-  `tipo_consulta_id` INT NOT NULL,
-  `terapia_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`paciente_id`) REFERENCES paciente(id),
-  FOREIGN KEY (`especialista_id`) REFERENCES especialista(id),
-  FOREIGN KEY (`tipo_consulta_id`) REFERENCES tipo_consulta(id),
-  FOREIGN KEY (`terapia_id`) REFERENCES terapia(id))
+  FOREIGN KEY (`especialista_id`) REFERENCES especialista(id))
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Piltzintli`.`pago`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`pago` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `cantidad` INT NOT NULL,
-  `consulta_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`consulta_id`) REFERENCES consulta(id))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Piltzintli`.`inventario`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Piltzintli`.`inventario`;
-
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`inventario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre_articulo` VARCHAR(50) NOT NULL,
-  `cantidad_disponible` INT NOT NULL,
-  `fecha_entrada` DATE NOT NULL,
-  `fecha_salida` DATE NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Piltzintli`.`contacto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Piltzintli`.`contacto` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `contacto` VARCHAR(70) NOT NULL,
-  `padre_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`padre_id`) REFERENCES padre(id))
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

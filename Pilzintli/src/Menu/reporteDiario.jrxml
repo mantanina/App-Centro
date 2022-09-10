@@ -23,22 +23,18 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
   consulta.id,
   consulta.hora,
   paciente.nombre,
   paciente.apellido_paterno,
-  paciente.apellido_materno,
-  especialista.nombre,
-  pago.cantidad
+  paciente.apellido_materno
 FROM consulta
   INNER JOIN paciente
     ON consulta.paciente_id = paciente.id
   INNER JOIN especialista
     ON consulta.especialista_id = especialista.id
-  INNER JOIN pago
-    ON pago.consulta_id = consulta.id
 WHERE consulta.fecha = CURDATE()]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
@@ -56,15 +52,6 @@ WHERE consulta.fecha = CURDATE()]]>
 	<field name="apellido_materno" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="cantidad" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<variable name="cantidad_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
-	</variable>
-	<variable name="cantidad_2" class="java.lang.Integer" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
-	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -93,7 +80,7 @@ WHERE consulta.fecha = CURDATE()]]>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Reporte Diario]]></text>
+				<text><![CDATA[Citas del Día]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -132,13 +119,6 @@ WHERE consulta.fecha = CURDATE()]]>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre del Paciente]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="504" y="0" width="68" height="20" forecolor="#990000" uuid="d17da130-1bea-4789-b056-38bf96aa468a"/>
-				<textElement textAlignment="Justified">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -180,32 +160,10 @@ WHERE consulta.fecha = CURDATE()]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apellido_materno}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="504" y="0" width="68" height="20" isPrintInFirstWholeBand="true" uuid="c8387052-339f-4c6c-aa4f-92b9e94c0641"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="27" splitType="Stretch">
-			<staticText>
-				<reportElement x="391" y="7" width="113" height="20" uuid="c50152e7-243d-4c0d-adfa-6d6f7f0a6d2c"/>
-				<textElement textAlignment="Justified">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cantidad total:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="504" y="7" width="68" height="20" uuid="9ea7b303-e6a9-4eda-8566-38f858ec2636"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{cantidad_2}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="27" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="1" splitType="Stretch"/>

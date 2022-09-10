@@ -227,7 +227,7 @@ public class Principal extends javax.swing.JFrame {
 
         menu_Reportes.setText("Reportes");
 
-        reporte_Diario.setText("Diario");
+        reporte_Diario.setText("Citas del Día");
         reporte_Diario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reporte_DiarioActionPerformed(evt);
@@ -341,9 +341,10 @@ public class Principal extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(url, login, password);
 
-            query = "SELECT consulta.id, consulta.hora, paciente.nombre, paciente.apellido_paterno, paciente.apellido_materno, especialista.nombre, pago.cantidad "
-                    + "FROM consulta INNER JOIN paciente ON consulta.paciente_id = paciente.id INNER JOIN especialista ON consulta.especialista_id = especialista.id INNER JOIN pago ON pago.consulta_id = consulta.id "
-                    + "WHERE consulta.fecha = CURDATE()";
+            query = "SELECT consulta.id, consulta.hora, paciente.nombre, paciente.apellido_paterno, paciente.apellido_materno "
+                    + "FROM consulta INNER JOIN paciente ON consulta.paciente_id = paciente.id "
+                    + "INNER JOIN especialista ON consulta.especialista_id = especialista.id "
+                    + "WHERE consulta.fecha = CURDATE();";
 
             InputStream archivoJRXML = Principal.class
                     .getResourceAsStream("reporteDiario.jrxml");
