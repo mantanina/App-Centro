@@ -10,13 +10,9 @@ import Paciente.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.Driver;
 import java.sql.*;
-import java.awt.Desktop;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +30,12 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import java.io.File; 
+import java.io.IOException; 
+import java.io.InputStream;
+import org.apache.pdfbox.pdmodel.PDDocument; 
+import org.apache.pdfbox.text.PDFTextStripper; 
+import org.apache.pdfbox.text.PDFTextStripperByArea;
 
 /**
  *
@@ -41,8 +43,8 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Principal extends javax.swing.JFrame {
 
-    ImageIcon logoPortada = new ImageIcon("logo_bcklss.png");
-    BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+    ImageIcon logoPortada = new ImageIcon(ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png")));
+    BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
     Connection conexion;
     PreparedStatement ps;
     static String bd = "Piltzintli";
@@ -343,12 +345,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_ayuda_aboutActionPerformed
 
     private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
-        try {
-            File objetofile = new File("archivo.pdf");
-            Desktop.getDesktop().open(objetofile);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+
+        
+        
+        
     }//GEN-LAST:event_ManualActionPerformed
 
     private void reporte_DiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_DiarioActionPerformed
@@ -364,7 +364,8 @@ public class Principal extends javax.swing.JFrame {
                     + "FROM consulta INNER JOIN paciente ON consulta.paciente_id = paciente.id INNER JOIN especialista ON consulta.especialista_id = especialista.id INNER JOIN pago ON pago.consulta_id = consulta.id "
                     + "WHERE consulta.fecha = CURDATE()";
 
-            InputStream archivoJRXML = Principal.class.getResourceAsStream("reporteDiario.jrxml");
+            InputStream archivoJRXML = Principal.class
+                    .getResourceAsStream("reporteDiario.jrxml");
             JasperDesign diario = JRXmlLoader.load(archivoJRXML);
             JRDesignQuery updateDiario = new JRDesignQuery();
             updateDiario.setText(query);
@@ -374,15 +375,18 @@ public class Principal extends javax.swing.JFrame {
             JasperReport jreport = JasperCompileManager.compileReport(diario);
 
             JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
-            
-            JasperViewer.viewReport(jprint,false);
+
+            JasperViewer.viewReport(jprint, false);
 
         } catch (JRException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_reporte_DiarioActionPerformed
@@ -395,7 +399,8 @@ public class Principal extends javax.swing.JFrame {
         try {
             new modificar_Cita().setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_mod_CitasActionPerformed
@@ -410,7 +415,8 @@ public class Principal extends javax.swing.JFrame {
 
             new modificar_Especialista().setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_mod_EspecialistaActionPerformed
@@ -423,7 +429,8 @@ public class Principal extends javax.swing.JFrame {
         try {
             new RegistrarTutor().setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_altas_tutoresActionPerformed

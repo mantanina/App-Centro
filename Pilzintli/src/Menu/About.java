@@ -23,7 +23,7 @@ import javax.swing.UIManager;
  */
 public class About extends javax.swing.JFrame {
 
-    BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+    BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
     
     public About() throws IOException{
         initComponents();

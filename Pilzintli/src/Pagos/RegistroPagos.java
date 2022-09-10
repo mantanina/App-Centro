@@ -58,7 +58,7 @@ try{
         initComponents();
 this.setLocationRelativeTo(null);
 
-        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+        BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Bajas Especialista");
         this.setIconImage(imagenIcono);
 

@@ -35,7 +35,7 @@ public class modificar_Cita extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         
-        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+        BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Modificar Citas");
         this.setIconImage(imagenIcono);
 

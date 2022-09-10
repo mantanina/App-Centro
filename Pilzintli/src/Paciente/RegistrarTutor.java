@@ -24,7 +24,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
 
         this.setLocationRelativeTo(null);
 
-        BufferedImage imagenIcono = ImageIO.read(new File("logo_bcklss.png"));
+        BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Altas Tutor");
         this.setIconImage(imagenIcono);
 
