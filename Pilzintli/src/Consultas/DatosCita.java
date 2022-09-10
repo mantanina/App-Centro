@@ -1,4 +1,4 @@
-package Agenda_Especialistas;
+package Consultas;
 
 public class DatosCita {
     

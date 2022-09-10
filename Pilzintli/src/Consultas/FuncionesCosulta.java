@@ -1,5 +1,5 @@
 
-package Agenda_Especialistas;
+package Consultas;
 
 import ConexionDB.DbConnection;
 import Paciente.Pacientes;

@@ -4,11 +4,9 @@
  */
 package Menu;
 
+import Consultas.modificar_Cita;
 import Especialista.*;
 import Paciente.*;
-import Usuario.*;
-import Agenda_Especialistas.*;
-import Inventario.Inventario_Bajas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.Driver;
 import java.sql.*;
@@ -92,23 +90,20 @@ public class Principal extends javax.swing.JFrame {
         menu_Archivo = new javax.swing.JMenu();
         archivo_Salir = new javax.swing.JMenuItem();
         menu_Altas = new javax.swing.JMenu();
-        altas_Especialista = new javax.swing.JMenuItem();
+        altas_citas = new javax.swing.JMenuItem();
         altas_Paciente = new javax.swing.JMenuItem();
-        altas_Usuario = new javax.swing.JMenuItem();
+        altas_tutores = new javax.swing.JMenuItem();
+        altas_Especialista = new javax.swing.JMenuItem();
         menu_Modificaciones = new javax.swing.JMenu();
-        mod_Especialista = new javax.swing.JMenuItem();
+        mod_Citas = new javax.swing.JMenuItem();
         mod_Paciente = new javax.swing.JMenuItem();
         mod_Tutor = new javax.swing.JMenuItem();
-        mod_Usuario = new javax.swing.JMenuItem();
-        mod_Citas = new javax.swing.JMenuItem();
+        mod_Especialista = new javax.swing.JMenuItem();
         menu_Bajas = new javax.swing.JMenu();
-        bajas_Especialista = new javax.swing.JMenuItem();
+        bajas_citas = new javax.swing.JMenuItem();
         bajas_Paciente = new javax.swing.JMenuItem();
         bajas_Tutor = new javax.swing.JMenuItem();
-        bajas_Usuario = new javax.swing.JMenuItem();
-        bajasinventario = new javax.swing.JMenuItem();
-        menu_Consultas = new javax.swing.JMenu();
-        citas_Especialista = new javax.swing.JMenuItem();
+        bajas_Especialista = new javax.swing.JMenuItem();
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
@@ -119,8 +114,8 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Sistema Administrativo para Piltzintli");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Sistema Administrativo de Control de Expedientes");
 
         menu_Archivo.setText("Archivo");
 
@@ -136,13 +131,13 @@ public class Principal extends javax.swing.JFrame {
 
         menu_Altas.setText("Altas");
 
-        altas_Especialista.setText("Especialistas");
-        altas_Especialista.addActionListener(new java.awt.event.ActionListener() {
+        altas_citas.setText("Citas");
+        altas_citas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altas_EspecialistaActionPerformed(evt);
+                altas_citasActionPerformed(evt);
             }
         });
-        menu_Altas.add(altas_Especialista);
+        menu_Altas.add(altas_citas);
 
         altas_Paciente.setText("Pacientes");
         altas_Paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -152,25 +147,33 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_Altas.add(altas_Paciente);
 
-        altas_Usuario.setText("Usuarios");
-        altas_Usuario.addActionListener(new java.awt.event.ActionListener() {
+        altas_tutores.setText("Tutores");
+        altas_tutores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altas_UsuarioActionPerformed(evt);
+                altas_tutoresActionPerformed(evt);
             }
         });
-        menu_Altas.add(altas_Usuario);
+        menu_Altas.add(altas_tutores);
+
+        altas_Especialista.setText("Especialistas");
+        altas_Especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altas_EspecialistaActionPerformed(evt);
+            }
+        });
+        menu_Altas.add(altas_Especialista);
 
         barraMenu.add(menu_Altas);
 
         menu_Modificaciones.setText("Modificaciones");
 
-        mod_Especialista.setText("Especialistas");
-        mod_Especialista.addActionListener(new java.awt.event.ActionListener() {
+        mod_Citas.setText("Citas");
+        mod_Citas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mod_EspecialistaActionPerformed(evt);
+                mod_CitasActionPerformed(evt);
             }
         });
-        menu_Modificaciones.add(mod_Especialista);
+        menu_Modificaciones.add(mod_Citas);
 
         mod_Paciente.setText("Pacientes");
         menu_Modificaciones.add(mod_Paciente);
@@ -183,28 +186,20 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_Modificaciones.add(mod_Tutor);
 
-        mod_Usuario.setText("Usuarios");
-        menu_Modificaciones.add(mod_Usuario);
-
-        mod_Citas.setText("Citas");
-        mod_Citas.addActionListener(new java.awt.event.ActionListener() {
+        mod_Especialista.setText("Especialistas");
+        mod_Especialista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mod_CitasActionPerformed(evt);
+                mod_EspecialistaActionPerformed(evt);
             }
         });
-        menu_Modificaciones.add(mod_Citas);
+        menu_Modificaciones.add(mod_Especialista);
 
         barraMenu.add(menu_Modificaciones);
 
         menu_Bajas.setText("Bajas");
 
-        bajas_Especialista.setText("Especialistas");
-        bajas_Especialista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bajas_EspecialistaActionPerformed(evt);
-            }
-        });
-        menu_Bajas.add(bajas_Especialista);
+        bajas_citas.setText("Citas");
+        menu_Bajas.add(bajas_citas);
 
         bajas_Paciente.setText("Pacientes");
         bajas_Paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -222,30 +217,15 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_Bajas.add(bajas_Tutor);
 
-        bajas_Usuario.setText("Usuarios");
-        menu_Bajas.add(bajas_Usuario);
-
-        bajasinventario.setText("Inventario");
-        bajasinventario.addActionListener(new java.awt.event.ActionListener() {
+        bajas_Especialista.setText("Especialistas");
+        bajas_Especialista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bajasinventarioActionPerformed(evt);
+                bajas_EspecialistaActionPerformed(evt);
             }
         });
-        menu_Bajas.add(bajasinventario);
+        menu_Bajas.add(bajas_Especialista);
 
         barraMenu.add(menu_Bajas);
-
-        menu_Consultas.setText("Consultas");
-
-        citas_Especialista.setText("Citas por Especialista");
-        citas_Especialista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                citas_EspecialistaActionPerformed(evt);
-            }
-        });
-        menu_Consultas.add(citas_Especialista);
-
-        barraMenu.add(menu_Consultas);
 
         menu_Reportes.setText("Reportes");
 
@@ -286,22 +266,23 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -318,18 +299,6 @@ public class Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_altas_EspecialistaActionPerformed
-
-    private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed
-
-        try {
-
-            new modificar_Especialista().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-
-    }//GEN-LAST:event_mod_EspecialistaActionPerformed
 
     private void bajas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_EspecialistaActionPerformed
         try {
@@ -364,15 +333,6 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_altas_PacienteActionPerformed
 
-    private void altas_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_UsuarioActionPerformed
-        try {
-            new registro_Usuario().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-    }//GEN-LAST:event_altas_UsuarioActionPerformed
-
     private void bajas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_TutorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bajas_TutorActionPerformed
@@ -384,31 +344,6 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ayuda_aboutActionPerformed
-
-    private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed
-        try {
-            new modificar_Cita().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-    }//GEN-LAST:event_mod_CitasActionPerformed
-
-    private void citas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citas_EspecialistaActionPerformed
-        try {
-            new Cosulta_citas_especialistas().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-
-    }//GEN-LAST:event_citas_EspecialistaActionPerformed
-
-    private void mod_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_TutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mod_TutorActionPerformed
 
     private void ManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualActionPerformed
         try {
@@ -459,15 +394,37 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bajas_PacienteActionPerformed
 
-    private void bajasinventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajasinventarioActionPerformed
+    private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed
         try {
-
-            new Inventario_Bajas().setVisible(true);
+            new modificar_Cita().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
-    }//GEN-LAST:event_bajasinventarioActionPerformed
+    }//GEN-LAST:event_mod_CitasActionPerformed
+
+    private void mod_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_TutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mod_TutorActionPerformed
+
+    private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed
+
+        try {
+
+            new modificar_Especialista().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_mod_EspecialistaActionPerformed
+
+    private void altas_citasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_citasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_altas_citasActionPerformed
+
+    private void altas_tutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_tutoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_altas_tutoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,16 +459,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Manual;
     private javax.swing.JMenuItem altas_Especialista;
     private javax.swing.JMenuItem altas_Paciente;
-    private javax.swing.JMenuItem altas_Usuario;
+    private javax.swing.JMenuItem altas_citas;
+    private javax.swing.JMenuItem altas_tutores;
     private javax.swing.JMenuItem archivo_Salir;
     private javax.swing.JMenuItem ayuda_about;
     private javax.swing.JMenuItem bajas_Especialista;
     private javax.swing.JMenuItem bajas_Paciente;
     private javax.swing.JMenuItem bajas_Tutor;
-    private javax.swing.JMenuItem bajas_Usuario;
-    private javax.swing.JMenuItem bajasinventario;
+    private javax.swing.JMenuItem bajas_citas;
     private javax.swing.JMenuBar barraMenu;
-    private javax.swing.JMenuItem citas_Especialista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JLabel logo_label;
@@ -519,14 +475,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_Archivo;
     private javax.swing.JMenu menu_Ayuda;
     private javax.swing.JMenu menu_Bajas;
-    private javax.swing.JMenu menu_Consultas;
     private javax.swing.JMenu menu_Modificaciones;
     private javax.swing.JMenu menu_Reportes;
     private javax.swing.JMenuItem mod_Citas;
     private javax.swing.JMenuItem mod_Especialista;
     private javax.swing.JMenuItem mod_Paciente;
     private javax.swing.JMenuItem mod_Tutor;
-    private javax.swing.JMenuItem mod_Usuario;
     private javax.swing.JMenuItem reporte_Diario;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,8 +25,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
     /**
      * Método que registra el especialista a partir de los campos de texto
      *
-     * @param datosEspecialista Trae consigo los datos insertados a los campos
-     * de texto
+     * @param datosEspecialista Trae consigo los datos insertados a los campos de texto
      * @since jPilzintli 1.0.0
      */
     public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
@@ -359,105 +358,33 @@ public class registro_Especialistas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     /**
-     * Botón de la interfaz que hace el evento de registro al sistema junto con
-     * la validación
+     * Botón de la interfaz que hace el evento de registro al sistema junto con la validación
+     *
      * @param evt Evento que registra el especialista
      * @since jPilzintli 1.0.0
      */
     private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
-        //Instancia de las validaciones(la clase)
-        FuncionesSQLEspecialista validaionesCampos = new FuncionesSQLEspecialista();
 
-        if (!telefono_Esp.getText().equalsIgnoreCase("") && !apellpate_Esp.getText().equalsIgnoreCase("")
-                && !apellmat_Esp.getText().equalsIgnoreCase("") && !profesion_Esp.getText().equalsIgnoreCase("")
-                && !cedula_esp.getText().equalsIgnoreCase("") && !Especialidad_Esp.getText().equalsIgnoreCase("")
-                && !nom_Esp.getText().equalsIgnoreCase("") && !correo_Esp.getText().equalsIgnoreCase("")
-                && cbx_status.getSelectedItem() != "Seleccionar") {
+        //seteos de los campos para el registro de los datos 
+        especialista.setNombre(telefono_Esp.getText());
+        especialista.setApellidoPaterno(apellpate_Esp.getText());
+        especialista.setApellidoMaterno(apellmat_Esp.getText());
+        especialista.setProfesion(profesion_Esp.getText());
+        especialista.setCedula(cedula_esp.getText());
+        especialista.setEspecialidad(Especialidad_Esp.getText());
+        especialista.setTelefono(nom_Esp.getText());
+        especialista.setCorreo(correo_Esp.getText());
 
-            //validacion de los campos (letras numeros)
-            if (validaionesCampos.valida_letras(nom_Esp.getText()) == true) {
-                if (validaionesCampos.valida_letras(apellpate_Esp.getText()) == true) {
-                    if (validaionesCampos.valida_letras(apellmat_Esp.getText()) == true) {
-                        if (validaionesCampos.valida_letras(profesion_Esp.getText()) == true) {
-                            if (validaionesCampos.valida_correo(correo_Esp.getText()) == true) {
-                                if (validaionesCampos.valida_Telefono(telefono_Esp.getText()) == true) {
-                                    if (validaionesCampos.valida_Cedula(cedula_esp.getText()) == true) {
-                                        if (validaionesCampos.valida_letras(Especialidad_Esp.getText()) == true) {
-                                            //seteos de los campos para el registro de los datos 
-                                            especialista.setNombre(telefono_Esp.getText());
-                                            especialista.setApellidoPaterno(apellpate_Esp.getText());
-                                            especialista.setApellidoMaterno(apellmat_Esp.getText());
-                                            especialista.setProfesion(profesion_Esp.getText());
-                                            especialista.setCedula(cedula_esp.getText());
-                                            especialista.setEspecialidad(Especialidad_Esp.getText());
-                                            especialista.setTelefono(nom_Esp.getText());
-                                            especialista.setCorreo(correo_Esp.getText());
+        RegistrarEspecialistA(especialista);
 
-                                            //ifs para ver la seleccion del status(combobox)
-                                            if (cbx_status.getSelectedItem() == "Activo") {
-                                                especialista.setStatus(1);
-
-                                            }
-
-                                            if (cbx_status.getSelectedItem() == "Inactivo") {
-                                                especialista.setStatus(0);
-                                            }
-
-                                            //Manda llamar el método y registra el especialista
-                                            RegistrarEspecialistA(especialista);
-
-                                        } else {
-                                            //Mensaje de error por datos erroneos
-                                            JOptionPane.showMessageDialog(null, "Especialidad inválida",
-                                                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                                        }
-                                    } else {
-                                        //Mensaje de error por datos erroneos
-                                        JOptionPane.showMessageDialog(null, "Cédula inválida,en caso de que la cedula contenga 7 numeros, coloque un cer al inicio de la cédula",
-                                                "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                                    }
-                                } else {
-                                    //Mensaje de error por datos erroneos
-                                    JOptionPane.showMessageDialog(null, "Teléfono inválido",
-                                            "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                                }
-                            } else {
-                                //Mensaje de error por datos erroneos
-                                JOptionPane.showMessageDialog(null, "Correo electrónico inválido",
-                                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                        } else {
-                            //Mensaje de error por datos erroneos
-                            JOptionPane.showMessageDialog(null, "Profesión inválida",
-                                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        //Mensaje de error por datos erroneos
-                        JOptionPane.showMessageDialog(null, "Apellido materno inválido",
-                                "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } else {
-                    //Mensaje de error por datos erroneos
-                    JOptionPane.showMessageDialog(null, "Apellido paterno inválido",
-                            "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                //Mensaje de error por datos erroneos
-                JOptionPane.showMessageDialog(null, "Nombre inválido",
-                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            //Mensaje de que llene todos los campos
-            JOptionPane.showMessageDialog(null, "Llene todos los campos incluyendo el status",
-                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        }
 
     }//GEN-LAST:event_btn_resgistrarActionPerformed
-/**
- * Botón para salir de la interfáz
- * @param evt Evento para salir del sistema
- * @since jPilzintli 1.0.0
- */
+    /**
+     * Botón para salir de la interfáz
+     *
+     * @param evt Evento para salir del sistema
+     * @since jPilzintli 1.0.0
+     */
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
 
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -509,11 +436,12 @@ public class registro_Especialistas extends javax.swing.JFrame {
     private void cbx_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_statusActionPerformed
 
     }//GEN-LAST:event_cbx_statusActionPerformed
-/**
- * Botón para limpiar los campos de texto de la interfáz
- * @param evt Evento para la ejecución del evento
- * @since jPilzintli 1.0.0
- */
+    /**
+     * Botón para limpiar los campos de texto de la interfáz
+     *
+     * @param evt Evento para la ejecución del evento
+     * @since jPilzintli 1.0.0
+     */
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         //Limpiar los campos de texto
         telefono_Esp.setText("");
