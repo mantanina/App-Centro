@@ -164,7 +164,7 @@ public class modificar_Cita extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("fecha:");
+        jLabel11.setText("Fecha:");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel12.setText("Buscar Cita");
