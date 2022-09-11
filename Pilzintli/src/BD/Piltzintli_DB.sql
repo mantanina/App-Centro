@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`padre` (
   `cp` VARCHAR(5) NOT NULL,
   `municipio` VARCHAR(50) NOT NULL,
   `estado` VARCHAR(30) NOT NULL,
+  `status` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -79,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`consulta` (
   `hora` TIME NOT NULL,
   `paciente_id` INT NOT NULL,
   `especialista_id` INT NOT NULL,
+  `observaciones` VARCHAR(500) NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`paciente_id`) REFERENCES paciente(id),
   FOREIGN KEY (`especialista_id`) REFERENCES especialista(id))
