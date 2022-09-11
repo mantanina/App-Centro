@@ -30,6 +30,7 @@ public class About extends javax.swing.JFrame {
         
         this.setIconImage(imagenIcono);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
          this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
          
          this.addWindowListener(new WindowAdapter() {

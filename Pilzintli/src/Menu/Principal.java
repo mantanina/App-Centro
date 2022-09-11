@@ -56,6 +56,8 @@ public class Principal extends javax.swing.JFrame {
 
         logo_label.setIcon(logoPortada);
         this.setIconImage(imagenIcono);
+        
+        this.setResizable(false);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 

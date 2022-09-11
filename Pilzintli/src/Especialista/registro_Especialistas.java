@@ -11,23 +11,11 @@ import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-/**
- * Éste Jframe de Java pretende el registro de especialistas al sistema
- *
- * @author Salvador Quiterio Saucedo
- * @author Cesar David Reyes Guillen
- * @since jPilzintli 1.0.0
- */
+
 public class registro_Especialistas extends javax.swing.JFrame {
 
     DatosEspecialista especialista = new DatosEspecialista();
 
-    /**
-     * Método que registra el especialista a partir de los campos de texto
-     *
-     * @param datosEspecialista Trae consigo los datos insertados a los campos de texto
-     * @since jPilzintli 1.0.0
-     */
     public void RegistrarEspecialistA(DatosEspecialista datosEspecialista) {
         DbConnection conex = new DbConnection();
 
@@ -50,9 +38,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Creates new form Especialistas
-     */
     public registro_Especialistas() throws IOException {
         initComponents();
 
@@ -132,21 +117,18 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         jLabel9.setText("Correo Electrónico:");
 
-        nom_Esp.setNextFocusableComponent(apellpate_Esp);
         nom_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nom_EspActionPerformed(evt);
             }
         });
 
-        apellpate_Esp.setNextFocusableComponent(apellmat_Esp);
         apellpate_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellpate_EspActionPerformed(evt);
             }
         });
 
-        apellmat_Esp.setNextFocusableComponent(profesion_Esp);
         apellmat_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellmat_EspActionPerformed(evt);
@@ -154,7 +136,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         telefono_Esp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        telefono_Esp.setNextFocusableComponent(correo_Esp);
         telefono_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefono_EspActionPerformed(evt);
@@ -167,21 +148,18 @@ public class registro_Especialistas extends javax.swing.JFrame {
             }
         });
 
-        profesion_Esp.setNextFocusableComponent(cedula_esp);
         profesion_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profesion_EspActionPerformed(evt);
             }
         });
 
-        cedula_esp.setNextFocusableComponent(Especialidad_Esp);
         cedula_esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedula_espActionPerformed(evt);
             }
         });
 
-        Especialidad_Esp.setNextFocusableComponent(telefono_Esp);
         Especialidad_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Especialidad_EspActionPerformed(evt);
@@ -189,7 +167,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_resgistrar.setText("Registrar");
-        btn_resgistrar.setNextFocusableComponent(btn_limpiar);
         btn_resgistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_resgistrarActionPerformed(evt);
@@ -197,7 +174,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_limpiar.setText("Limpiar");
-        btn_limpiar.setNextFocusableComponent(btn_salir);
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_limpiarActionPerformed(evt);
@@ -205,7 +181,6 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_salir.setText("Regresar");
-        btn_salir.setNextFocusableComponent(nom_Esp);
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
@@ -315,12 +290,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    /**
-     * Botón de la interfaz que hace el evento de registro al sistema junto con la validación
-     *
-     * @param evt Evento que registra el especialista
-     * @since jPilzintli 1.0.0
-     */
+
     private void btn_resgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resgistrarActionPerformed
 
         //seteos de los campos para el registro de los datos 
@@ -338,12 +308,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btn_resgistrarActionPerformed
-    /**
-     * Botón para salir de la interfáz
-     *
-     * @param evt Evento para salir del sistema
-     * @since jPilzintli 1.0.0
-     */
+
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
 
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -391,12 +356,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
     private void nom_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nom_EspActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nom_EspActionPerformed
-    /**
-     * Botón para limpiar los campos de texto de la interfáz
-     *
-     * @param evt Evento para la ejecución del evento
-     * @since jPilzintli 1.0.0
-     */
+   
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         //Limpiar los campos de texto
         telefono_Esp.setText("");
