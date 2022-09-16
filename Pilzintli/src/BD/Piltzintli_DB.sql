@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `Piltzintli`.`consulta` (
   `hora` TIME NOT NULL,
   `paciente_id` INT NOT NULL,
   `especialista_id` INT NOT NULL,
-  `observaciones` VARCHAR(500) NULL,
+  `observaciones` VARCHAR(6000) NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`paciente_id`) REFERENCES paciente(id),
   FOREIGN KEY (`especialista_id`) REFERENCES especialista(id))
