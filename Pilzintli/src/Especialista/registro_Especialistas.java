@@ -117,18 +117,21 @@ public class registro_Especialistas extends javax.swing.JFrame {
 
         jLabel9.setText("Correo Electrónico:");
 
+        nom_Esp.setNextFocusableComponent(apellpate_Esp);
         nom_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nom_EspActionPerformed(evt);
             }
         });
 
+        apellpate_Esp.setNextFocusableComponent(apellmat_Esp);
         apellpate_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellpate_EspActionPerformed(evt);
             }
         });
 
+        apellmat_Esp.setNextFocusableComponent(telefono_Esp);
         apellmat_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellmat_EspActionPerformed(evt);
@@ -136,30 +139,35 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         telefono_Esp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        telefono_Esp.setNextFocusableComponent(correo_Esp);
         telefono_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefono_EspActionPerformed(evt);
             }
         });
 
+        correo_Esp.setNextFocusableComponent(profesion_Esp);
         correo_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correo_EspActionPerformed(evt);
             }
         });
 
+        profesion_Esp.setNextFocusableComponent(cedula_esp);
         profesion_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profesion_EspActionPerformed(evt);
             }
         });
 
+        cedula_esp.setNextFocusableComponent(Especialidad_Esp);
         cedula_esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedula_espActionPerformed(evt);
             }
         });
 
+        Especialidad_Esp.setNextFocusableComponent(btn_resgistrar);
         Especialidad_Esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Especialidad_EspActionPerformed(evt);
@@ -167,6 +175,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_resgistrar.setText("Registrar");
+        btn_resgistrar.setNextFocusableComponent(btn_limpiar);
         btn_resgistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_resgistrarActionPerformed(evt);
@@ -174,6 +183,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_limpiar.setText("Limpiar");
+        btn_limpiar.setNextFocusableComponent(btn_salir);
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_limpiarActionPerformed(evt);
@@ -181,6 +191,7 @@ public class registro_Especialistas extends javax.swing.JFrame {
         });
 
         btn_salir.setText("Regresar");
+        btn_salir.setNextFocusableComponent(nom_Esp);
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
@@ -192,9 +203,12 @@ public class registro_Especialistas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,13 +244,9 @@ public class registro_Especialistas extends javax.swing.JFrame {
                             .addComponent(btn_limpiar)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_salir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_resgistrar))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addGap(129, 129, 129)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_resgistrar)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,11 +290,9 @@ public class registro_Especialistas extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_resgistrar)
-                    .addComponent(btn_salir))
+                            .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_resgistrar)
+                            .addComponent(btn_salir))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -305,6 +313,8 @@ public class registro_Especialistas extends javax.swing.JFrame {
         especialista.setStatus(1);
 
         RegistrarEspecialistA(especialista);
+        
+        btn_limpiarActionPerformed(evt);
 
 
     }//GEN-LAST:event_btn_resgistrarActionPerformed

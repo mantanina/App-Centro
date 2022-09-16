@@ -85,6 +85,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre(s):");
 
+        campo_nombre.setNextFocusableComponent(campo_ap_paterno);
         campo_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campo_nombreActionPerformed(evt);
@@ -93,17 +94,30 @@ public class RegistrarTutor extends javax.swing.JFrame {
 
         jLabel2.setText("Apellido Paterno:");
 
+        campo_ap_paterno.setNextFocusableComponent(campo_ap_materno);
+
         jLabel3.setText("Apellido Materno:");
+
+        campo_ap_materno.setNextFocusableComponent(campo_direccion);
 
         jLabel4.setText("Direccion:");
 
+        campo_direccion.setNextFocusableComponent(campo_cp);
+
         jLabel5.setText("Código Postal:");
 
+        campo_cp.setNextFocusableComponent(campo_municipio);
+
+        campo_municipio.setNextFocusableComponent(campo_estado);
+
         jLabel6.setText("Municipio:");
+
+        campo_estado.setNextFocusableComponent(btn_saveRes);
 
         jLabel7.setText("Estado:");
 
         btn_saveRes.setText("Registrar");
+        btn_saveRes.setNextFocusableComponent(btn_clear);
         btn_saveRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_saveResActionPerformed(evt);
@@ -111,6 +125,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
         });
 
         btn_back.setText("Regresar");
+        btn_back.setNextFocusableComponent(campo_nombre);
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
@@ -118,6 +133,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
         });
 
         btn_clear.setText("Limpiar");
+        btn_clear.setNextFocusableComponent(btn_back);
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clearActionPerformed(evt);
@@ -231,6 +247,8 @@ public class RegistrarTutor extends javax.swing.JFrame {
         data.setEstado(campo_estado.getText());
         
         tutor.RegistrarDatosTutor(data);
+        
+        btn_clearActionPerformed(evt);
     }//GEN-LAST:event_btn_saveResActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -260,8 +278,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
         campo_estado.setText("");
         campo_municipio.setText("");
         campo_nombre.setText("");
-               
-        
+                   
     }//GEN-LAST:event_btn_clearActionPerformed
 
     /**

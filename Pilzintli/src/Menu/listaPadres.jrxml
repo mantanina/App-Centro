@@ -34,7 +34,7 @@ FROM
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="217" y="10" width="152" height="32" forecolor="#00CCCC" uuid="3b30d4d3-5d41-40d5-855a-6555162d2054"/>
+				<reportElement x="217" y="10" width="152" height="32" forecolor="#47A2BF" uuid="3b30d4d3-5d41-40d5-855a-6555162d2054"/>
 				<textElement textAlignment="Justified">
 					<font size="24" isBold="true"/>
 				</textElement>
@@ -73,14 +73,14 @@ FROM
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" forecolor="#990000" uuid="6de4d1ca-3291-4122-b7ab-5ec7af72e7ad"/>
+				<reportElement x="0" y="0" width="117" height="20" forecolor="#990000" uuid="6de4d1ca-3291-4122-b7ab-5ec7af72e7ad"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Id Padre]]></text>
+				<text><![CDATA[Id Padre / Tutor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="117" y="0" width="100" height="20" forecolor="#990000" uuid="a04f9b9d-ea7b-4911-ba8e-444cb5adf788"/>
+				<reportElement x="132" y="1" width="100" height="20" forecolor="#990000" uuid="a04f9b9d-ea7b-4911-ba8e-444cb5adf788"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -96,9 +96,9 @@ FROM
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<textField>
-				<reportElement x="117" y="14" width="100" height="20" uuid="5382f3d5-9652-4bd4-8497-9adb55ac03ee"/>
+				<reportElement x="132" y="14" width="100" height="20" uuid="5382f3d5-9652-4bd4-8497-9adb55ac03ee"/>
 				<textFieldExpression><![CDATA[$F{padre_nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -110,13 +110,16 @@ FROM
 				<textFieldExpression><![CDATA[$F{padre_apellido_materno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="14" width="80" height="20" uuid="045d1045-4a4f-4f06-a733-151dd724ad1f"/>
+				<reportElement x="37" y="14" width="80" height="20" uuid="045d1045-4a4f-4f06-a733-151dd724ad1f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{padre_id}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="12" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="1" splitType="Stretch"/>

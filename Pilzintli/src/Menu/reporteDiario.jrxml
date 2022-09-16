@@ -65,7 +65,7 @@ WHERE consulta.fecha = CURDATE()]]>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="207" y="0" width="152" height="32" forecolor="#00CCCC" uuid="1c387c0c-31e7-484b-80a3-8240d2115bed"/>
+				<reportElement x="207" y="0" width="152" height="32" forecolor="#47A2BF" uuid="1c387c0c-31e7-484b-80a3-8240d2115bed"/>
 				<textElement textAlignment="Justified">
 					<font size="24" isBold="true"/>
 				</textElement>
