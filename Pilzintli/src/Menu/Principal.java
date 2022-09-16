@@ -33,7 +33,6 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
  *
  * @author david
@@ -56,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
 
         logo_label.setIcon(logoPortada);
         this.setIconImage(imagenIcono);
-        
+
         this.setResizable(false);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -107,6 +106,7 @@ public class Principal extends javax.swing.JFrame {
         bajas_Especialista = new javax.swing.JMenuItem();
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
+        reporte_ListaPadres = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
 
@@ -237,6 +237,14 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_Reportes.add(reporte_Diario);
 
+        reporte_ListaPadres.setText("Lista de Tutores");
+        reporte_ListaPadres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_ListaPadresActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_ListaPadres);
+
         barraMenu.add(menu_Reportes);
 
         menu_Ayuda.setText("Programa");
@@ -362,13 +370,7 @@ public class Principal extends javax.swing.JFrame {
 
             JasperViewer.viewReport(jprint, false);
 
-        } catch (JRException ex) {
-            Logger.getLogger(Principal.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Principal.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (JRException | ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Principal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
@@ -418,6 +420,38 @@ public class Principal extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_altas_tutoresActionPerformed
+
+    private void reporte_ListaPadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_ListaPadresActionPerformed
+
+        String query;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, login, password);
+
+            query = "SELECT padre.id AS padre_id, padre.nombre AS padre_nombre, padre.apellido_paterno AS padre_apellido_paterno, padre.apellido_materno AS padre_apellido_materno FROM padre";
+
+            InputStream archivoJRXML = Principal.class
+                    .getResourceAsStream("listaPadres.jrxml");
+            JasperDesign diario = JRXmlLoader.load(archivoJRXML);
+            JRDesignQuery updateDiario = new JRDesignQuery();
+            updateDiario.setText(query);
+
+            diario.setQuery(updateDiario);
+
+            JasperReport jreport = JasperCompileManager.compileReport(diario);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
+
+            JasperViewer.viewReport(jprint, false);
+
+        } catch (JRException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_reporte_ListaPadresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,5 +508,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mod_Paciente;
     private javax.swing.JMenuItem mod_Tutor;
     private javax.swing.JMenuItem reporte_Diario;
+    private javax.swing.JMenuItem reporte_ListaPadres;
     // End of variables declaration//GEN-END:variables
 }

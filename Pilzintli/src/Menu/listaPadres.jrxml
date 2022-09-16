@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9a5f4f16-3d20-4a63-8c14-ac78259a1220">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     padre.`id` AS padre_id,
+     padre.`nombre` AS padre_nombre,
+     padre.`apellido_paterno` AS padre_apellido_paterno,
+     padre.`apellido_materno` AS padre_apellido_materno
+FROM
+     `padre` padre]]>
+	</queryString>
+	<field name="padre_id" class="java.lang.Integer"/>
+	<field name="padre_nombre" class="java.lang.String"/>
+	<field name="padre_apellido_paterno" class="java.lang.String"/>
+	<field name="padre_apellido_materno" class="java.lang.String"/>
+	<group name="padre_id">
+		<groupExpression><![CDATA[$F{padre_id}]]></groupExpression>
+	</group>
+	<group name="padre_nombre">
+		<groupExpression><![CDATA[$F{padre_nombre}]]></groupExpression>
+	</group>
+	<group name="padre_apellido_paterno">
+		<groupExpression><![CDATA[$F{padre_apellido_paterno}]]></groupExpression>
+	</group>
+	<group name="padre_apellido_materno">
+		<groupExpression><![CDATA[$F{padre_apellido_materno}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="217" y="10" width="152" height="32" forecolor="#00CCCC" uuid="3b30d4d3-5d41-40d5-855a-6555162d2054"/>
+				<textElement textAlignment="Justified">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piltzintli A.C.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="79" uuid="e5121948-f2c9-4b92-9340-3de880040798"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/Recursos/logo.jpg")]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="472" y="22" width="100" height="20" uuid="01926a63-4a6b-4ff2-b608-dbcaa59bd4f0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="59" width="161" height="20" uuid="72ebfb71-21ee-4ac8-be84-e94115f8b876"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Padres / Tutores]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="472" y="0" width="60" height="20" uuid="5f2db728-8190-43ef-9a6e-f5ab7fc556cf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="40" height="20" uuid="eab1de6b-3ed2-4d63-bea8-b0652ecede36"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#990000" uuid="6de4d1ca-3291-4122-b7ab-5ec7af72e7ad"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Padre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="100" height="20" forecolor="#990000" uuid="a04f9b9d-ea7b-4911-ba8e-444cb5adf788"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="1" width="100" height="20" forecolor="#990000" uuid="947aeda0-27e0-41b8-a189-30fbe9c801e7"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="117" y="14" width="100" height="20" uuid="5382f3d5-9652-4bd4-8497-9adb55ac03ee"/>
+				<textFieldExpression><![CDATA[$F{padre_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="14" width="100" height="20" uuid="443f344f-3608-4149-b8ef-26aec62709f1"/>
+				<textFieldExpression><![CDATA[$F{padre_apellido_paterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="14" width="100" height="20" uuid="3778f502-61c8-4fa3-a6b2-1887582fc61f"/>
+				<textFieldExpression><![CDATA[$F{padre_apellido_materno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="80" height="20" uuid="045d1045-4a4f-4f06-a733-151dd724ad1f"/>
+				<textFieldExpression><![CDATA[$F{padre_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="1" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
