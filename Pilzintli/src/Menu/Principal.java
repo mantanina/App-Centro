@@ -3,6 +3,7 @@ package Menu;
 import Consultas.modificar_Cita;
 import Especialista.*;
 import Paciente.*;
+import Consultas.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.jdbc.Driver;
 import java.sql.*;
@@ -404,7 +405,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mod_EspecialistaActionPerformed
 
     private void altas_citasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_citasActionPerformed
-        // TODO add your handling code here:
+        try {
+            new RegistrarCita().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_altas_citasActionPerformed
 
     private void altas_tutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altas_tutoresActionPerformed

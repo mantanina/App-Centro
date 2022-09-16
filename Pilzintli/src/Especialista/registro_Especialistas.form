@@ -57,7 +57,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -74,8 +74,9 @@
                                   <Component id="cedula_esp" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="btn_limpiar" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="btn_limpiar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_salir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_resgistrar" min="-2" max="-2" attributes="0"/>
@@ -130,21 +131,17 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_limpiar" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="telefono_Esp" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="correo_Esp" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btn_resgistrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_salir" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="telefono_Esp" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="correo_Esp" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="btn_resgistrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_salir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -285,7 +282,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_resgistrar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registrar"/>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btn_limpiar"/>
         </Property>
