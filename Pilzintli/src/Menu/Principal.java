@@ -8,7 +8,7 @@ import Consultas.modificar_Cita;
 import Especialista.*;
 import Paciente.*;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.mysql.jdbc.Driver;
+import org.mariadb.jdbc.*;
 import java.sql.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -107,6 +107,9 @@ public class Principal extends javax.swing.JFrame {
         bajas_Especialista = new javax.swing.JMenuItem();
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        reporte_ListaPadres = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
 
@@ -236,6 +239,25 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Reportes.add(reporte_Diario);
+
+        jMenuItem2.setText("Listado de Pacientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(jMenuItem2);
+
+        reporte_ListaPadres.setText("Listado de Padres");
+        reporte_ListaPadres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_ListaPadresActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_ListaPadres);
+
+        jMenuItem3.setText("Listado de Especialistas");
+        menu_Reportes.add(jMenuItem3);
 
         barraMenu.add(menu_Reportes);
 
@@ -419,6 +441,14 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_altas_tutoresActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void reporte_ListaPadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_ListaPadresActionPerformed
+        
+    }//GEN-LAST:event_reporte_ListaPadresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +492,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel logo_label;
     private javax.swing.JMenu menu_Altas;
     private javax.swing.JMenu menu_Archivo;
@@ -474,5 +506,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mod_Paciente;
     private javax.swing.JMenuItem mod_Tutor;
     private javax.swing.JMenuItem reporte_Diario;
+    private javax.swing.JMenuItem reporte_ListaPadres;
     // End of variables declaration//GEN-END:variables
 }
