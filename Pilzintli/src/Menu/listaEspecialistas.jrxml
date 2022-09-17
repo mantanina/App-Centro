@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5e08be41-50fa-41c6-880c-c8a66fad7c29">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     especialista.`id` AS especialista_id,
+     especialista.`nombre` AS especialista_nombre,
+     especialista.`apellido_paterno` AS especialista_apellido_paterno,
+     especialista.`apellido_materno` AS especialista_apellido_materno
+FROM
+     `especialista` especialista]]>
+	</queryString>
+	<field name="especialista_id" class="java.lang.Integer"/>
+	<field name="especialista_nombre" class="java.lang.String"/>
+	<field name="especialista_apellido_paterno" class="java.lang.String"/>
+	<field name="especialista_apellido_materno" class="java.lang.String"/>
+	<group name="especialista_id">
+		<groupExpression><![CDATA[$F{especialista_id}]]></groupExpression>
+	</group>
+	<group name="especialista_nombre">
+		<groupExpression><![CDATA[$F{especialista_nombre}]]></groupExpression>
+	</group>
+	<group name="especialista_apellido_paterno">
+		<groupExpression><![CDATA[$F{especialista_apellido_paterno}]]></groupExpression>
+	</group>
+	<group name="especialista_apellido_materno">
+		<groupExpression><![CDATA[$F{especialista_apellido_materno}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="229" y="0" width="152" height="32" forecolor="#47A2BF" uuid="35581250-6c1d-4b2b-9021-0b40d210b505"/>
+				<textElement textAlignment="Justified">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piltzintli A.C.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="46" width="142" height="20" uuid="6f9ce8c6-4976-4358-926b-6bba4bfad71c"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Especialistas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="79" uuid="3c72ae4a-ed1d-4b68-a4ac-b6480613f5b1"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/Recursos/logo.jpg")]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="472" y="26" width="100" height="20" uuid="f2b96995-b4e3-4641-a7d1-becf97a76045"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="59" width="61" height="20" uuid="4e6d8de6-e04e-484b-be54-a0c55950e4dc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="535" y="59" width="37" height="20" uuid="43ba082c-cd1d-4533-8915-f368200056c0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="117" height="20" forecolor="#990000" uuid="2f731fda-702a-4315-9372-df5843a5a9fe"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Especialista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="4" width="100" height="20" forecolor="#990000" uuid="f04fcefc-93d6-482e-9b39-f7b6d36cf130"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="4" width="100" height="20" forecolor="#990000" uuid="54b7b554-d5ed-456f-8f86-775bd021bc6a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="10" width="80" height="20" uuid="0ff6559e-9d95-4ec0-87c5-a406afe4eb92"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especialista_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="10" width="100" height="20" uuid="b51ecffd-46e5-4636-880e-eb1a8599aa66"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especialista_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="10" width="100" height="20" uuid="2dc494b5-531f-4bd4-bd31-89cee95b4cf0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especialista_apellido_paterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="10" width="100" height="20" uuid="387ed7c1-b15e-43d3-9e92-e612abc9c9af"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especialista_apellido_materno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

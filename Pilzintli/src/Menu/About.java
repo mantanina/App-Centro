@@ -31,6 +31,7 @@ public class About extends javax.swing.JFrame {
         this.setIconImage(imagenIcono);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("Acerca De");
          this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
          
          this.addWindowListener(new WindowAdapter() {
@@ -67,7 +68,7 @@ public class About extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Acerca de");
 
         jLabel2.setText("Febrero - Diciembre 2022");

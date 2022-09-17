@@ -103,7 +103,10 @@ public class Principal extends javax.swing.JFrame {
         bajas_Especialista = new javax.swing.JMenuItem();
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
+        repote_BuscarCitaFecha = new javax.swing.JMenuItem();
+        reporte_listaPacientes = new javax.swing.JMenuItem();
         reporte_ListaPadres = new javax.swing.JMenuItem();
+        reporte_listaEspecialistas = new javax.swing.JMenuItem();
         menu_Ayuda = new javax.swing.JMenu();
         ayuda_about = new javax.swing.JMenuItem();
 
@@ -226,13 +229,29 @@ public class Principal extends javax.swing.JFrame {
 
         menu_Reportes.setText("Reportes");
 
-        reporte_Diario.setText("Citas del Día");
+        reporte_Diario.setText("Citas de Hoy");
         reporte_Diario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reporte_DiarioActionPerformed(evt);
             }
         });
         menu_Reportes.add(reporte_Diario);
+
+        repote_BuscarCitaFecha.setText("Citas por Fecha");
+        repote_BuscarCitaFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repote_BuscarCitaFechaActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(repote_BuscarCitaFecha);
+
+        reporte_listaPacientes.setText("Lista de Pacientes");
+        reporte_listaPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_listaPacientesActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_listaPacientes);
 
         reporte_ListaPadres.setText("Lista de Tutores");
         reporte_ListaPadres.addActionListener(new java.awt.event.ActionListener() {
@@ -241,6 +260,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Reportes.add(reporte_ListaPadres);
+
+        reporte_listaEspecialistas.setText("Lista de Especialistas");
+        reporte_listaEspecialistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_listaEspecialistasActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_listaEspecialistas);
 
         barraMenu.add(menu_Reportes);
 
@@ -456,6 +483,74 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_reporte_ListaPadresActionPerformed
 
+    private void reporte_listaEspecialistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_listaEspecialistasActionPerformed
+        String query;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, login, password);
+
+            query = "SELECT especialista.id AS especialista_id, especialista.nombre AS especialista_nombre, especialista.apellido_paterno AS especialista_apellido_paterno, especialista.apellido_materno AS especialista_apellido_materno FROM especialista";
+
+            InputStream archivoJRXML = Principal.class
+                    .getResourceAsStream("listaEspecialistas.jrxml");
+            JasperDesign diario = JRXmlLoader.load(archivoJRXML);
+            JRDesignQuery updateDiario = new JRDesignQuery();
+            updateDiario.setText(query);
+
+            diario.setQuery(updateDiario);
+
+            JasperReport jreport = JasperCompileManager.compileReport(diario);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
+
+            JasperViewer.viewReport(jprint, false);
+
+        } catch (JRException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reporte_listaEspecialistasActionPerformed
+
+    private void reporte_listaPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_listaPacientesActionPerformed
+        String query;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, login, password);
+
+            query = "SELECT paciente.id AS paciente_id, paciente.nombre AS paciente_nombre, paciente.apellido_paterno AS paciente_apellido_paterno, paciente.apellido_materno AS paciente_apellido_materno FROM paciente";
+
+            InputStream archivoJRXML = Principal.class
+                    .getResourceAsStream("listaPacientes.jrxml");
+            JasperDesign diario = JRXmlLoader.load(archivoJRXML);
+            JRDesignQuery updateDiario = new JRDesignQuery();
+            updateDiario.setText(query);
+
+            diario.setQuery(updateDiario);
+
+            JasperReport jreport = JasperCompileManager.compileReport(diario);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
+
+            JasperViewer.viewReport(jprint, false);
+
+        } catch (JRException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reporte_listaPacientesActionPerformed
+
+    private void repote_BuscarCitaFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repote_BuscarCitaFechaActionPerformed
+        try {
+            new BuscarCitaFecha().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_repote_BuscarCitaFechaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -512,5 +607,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mod_Tutor;
     private javax.swing.JMenuItem reporte_Diario;
     private javax.swing.JMenuItem reporte_ListaPadres;
+    private javax.swing.JMenuItem reporte_listaEspecialistas;
+    private javax.swing.JMenuItem reporte_listaPacientes;
+    private javax.swing.JMenuItem repote_BuscarCitaFecha;
     // End of variables declaration//GEN-END:variables
 }

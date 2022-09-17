@@ -146,10 +146,26 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="reporte_Diario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Citas del D&#xed;a"/>
+                <Property name="text" type="java.lang.String" value="Citas de Hoy"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporte_DiarioActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="repote_BuscarCitaFecha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Citas por Fecha"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="repote_BuscarCitaFechaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="reporte_listaPacientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lista de Pacientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporte_listaPacientesActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="reporte_ListaPadres">
@@ -158,6 +174,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporte_ListaPadresActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="reporte_listaEspecialistas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lista de Especialistas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporte_listaEspecialistasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
