@@ -423,8 +423,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         String apellidoP = apellpate_Esp.getText();
         String apellidoM = apellmat_Esp.getText();
+        String id = id_Esp.getText();
         
-         especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM);
+         especialista = FSQLE.BuscarEspecialista(apellidoP, apellidoM,id);
 
         if (!(especialista.getNombre().equals(""))) {
 

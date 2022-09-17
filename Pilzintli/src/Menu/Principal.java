@@ -416,7 +416,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mod_CitasActionPerformed
 
     private void mod_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_TutorActionPerformed
-        // TODO add your handling code here:
+        try {
+
+            new ModificarTutor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_mod_TutorActionPerformed
 
     private void mod_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_EspecialistaActionPerformed

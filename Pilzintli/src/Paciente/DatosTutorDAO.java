@@ -55,4 +55,30 @@ public class DatosTutorDAO {
         ///--------------------------------------------------------------------------
 
 }
+    public void ModificarDatosTutor(DatosPadreoTutor datostutor){
+        DbConnection conex = new DbConnection();
+
+        try{
+            Statement estatuto = conex.getConnection().createStatement();
+            
+            String insertSql1 = "UPDATE padre SET nombre = '" + datostutor.getNombretutor() + "' , apellido_paterno = '" + datostutor.getApellidopaterno() + "', apellido_materno = '" + datostutor.getApellidomaterno() + "', direccion = '" + datostutor.getDireccion() + "', cp = '" + datostutor.getCodigopostal() + "', municipio = '" + datostutor.getMunicipio() + "', estado = '" + datostutor.getEstado() + "', status = '" + datostutor.getStatus() + "' where id like " + datostutor.getIdtutor();
+ 
+                System.out.println(""+insertSql1);
+                estatuto.executeUpdate(insertSql1);
+                
+//                System.out.println(""+sqlInsert);
+//                estatuto.executeUpdate(sqlInsert);
+                
+                JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente",
+                                              "Informacion",JOptionPane.INFORMATION_MESSAGE);
+                estatuto.close();
+                conex.desconectar();
+                
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
+        }
+        ///--------------------------------------------------------------------------
+
+}
 }

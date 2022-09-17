@@ -10,6 +10,7 @@ package Paciente;
  * @author edgar
  */
 public class DatosPadreoTutor {
+
     private String nombretutor;
     private String apellidopaterno;
     private String apellidomaterno;
@@ -18,16 +19,17 @@ public class DatosPadreoTutor {
     private String municipio;
     private String estado;
     private int idtutor;
+    private int status;
 
     public DatosPadreoTutor() {
     }
+
     /*
    Este metodo nos permite estar en la tabla de Tutores
    y nos mostrara lo que tiene en la base de datos
-*/
-    
-    
-    public DatosPadreoTutor(String nombretutor,String apellidopaterno,String apellidomaterno,String direccion,String codigopostal, String municipio, String estado,int idtutor){
+     */
+
+    public DatosPadreoTutor(String nombretutor, String apellidopaterno, String apellidomaterno, String direccion, String codigopostal, String municipio, String estado, int idtutor, int status) {
         this.nombretutor = nombretutor;
         this.apellidopaterno = apellidopaterno;
         this.apellidomaterno = apellidomaterno;
@@ -35,8 +37,9 @@ public class DatosPadreoTutor {
         this.codigopostal = codigopostal;
         this.municipio = municipio;
         this.estado = estado;
-        this.idtutor =idtutor;
-     
+        this.idtutor = idtutor;
+        this.status = status;
+
     }
 
     public String getNombretutor() {
@@ -102,6 +105,14 @@ public class DatosPadreoTutor {
     public void setIdtutor(int idtutor) {
         this.idtutor = idtutor;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
-    
+
 }
