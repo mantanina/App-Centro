@@ -176,6 +176,11 @@ public class Principal extends javax.swing.JFrame {
         menu_Modificaciones.add(mod_Citas);
 
         mod_Paciente.setText("Pacientes");
+        mod_Paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_PacienteActionPerformed(evt);
+            }
+        });
         menu_Modificaciones.add(mod_Paciente);
 
         mod_Tutor.setText("Tutores");
@@ -556,6 +561,16 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_repote_BuscarCitaFechaActionPerformed
+
+    private void mod_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_PacienteActionPerformed
+        try {
+
+            new ModificarPacientes().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_mod_PacienteActionPerformed
 
     /**
      * @param args the command line arguments

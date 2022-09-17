@@ -18,36 +18,55 @@ import javax.swing.JOptionPane;
  * @author 1234
  */
 public class PacientesDAO {
-    
-    public void RegistrarPacientes(Pacientes pacientes){
+
+    public void RegistrarPacientes(Pacientes pacientes) {
         DbConnection conex = new DbConnection();
-/*
-Este metodo es para agredar los datos de los 
-nuevos pacientes en la base de datos
-*/
-        try{
+
+        try {
             Statement estatuto = conex.getConnection().createStatement();
-            
-                String sqlInsert = "INSERT INTO paciente (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, escolaridad, diagnostico,padre_id) VALUES "
+
+            String sqlInsert = "INSERT INTO paciente (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, escolaridad, diagnostico,padre_id) VALUES "
                     + "('" + pacientes.getNombre()
                     + "', '" + pacientes.getApellido_paterno()
                     + "', '" + pacientes.getApellido_materno()
                     + "', '" + pacientes.getFecha_nacimiento()
                     + "', '" + pacientes.getEscolaridad()
                     + "', '" + pacientes.getDiagnostico()
-                    + "','" + pacientes.getPadre_id()+ "')";
-                System.out.println(""+sqlInsert);
-                estatuto.executeUpdate(sqlInsert);
-                
-                JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente al paciente",
-                                              "Informacion",JOptionPane.INFORMATION_MESSAGE);
-                estatuto.close();
-                conex.desconectar();
-                
-        }catch(SQLException e){
+                    + "','" + pacientes.getPadre_id() + "')";
+            System.out.println("" + sqlInsert);
+            estatuto.executeUpdate(sqlInsert);
+
+            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente al paciente",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            estatuto.close();
+            conex.desconectar();
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se registro");
         }
 
-}
+    }
+
+    public void ModificarPacientes(Pacientes pacientes) {
+        DbConnection conex = new DbConnection();
+
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+
+            String sqlInsert = "UPDATE paciente SET nombre = '" + pacientes.getNombre() + "' , apellido_paterno = '" + pacientes.getApellido_paterno() + "', apellido_materno = '" + pacientes.getApellido_materno() + "', fecha_nacimiento = '" + pacientes.getFecha_nacimiento() + "', escolaridad = '" + pacientes.getEscolaridad() + "', diagnostico = '" + pacientes.getDiagnostico() + "', padre_id = '" + pacientes.getPadre_id() + "', status = '" + pacientes.getStatus() + "' where id like " + pacientes.getId();;
+            System.out.println("" + sqlInsert);
+            estatuto.executeUpdate(sqlInsert);
+
+            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente al paciente",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            estatuto.close();
+            conex.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se registro");
+        }
+
+    }
 }
