@@ -46,7 +46,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         });
         
-        id_Esp.setEditable(false);
+        id_Esp.setEditable(true);
         nom_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
         cedula_esp.setEditable(false);
@@ -350,18 +350,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                 nuevoStatus = "0";
                 FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
             }
-        }
-        
-        id_Esp.setText("");
-        nom_Esp.setText("");
-        profesion_Esp.setText("");
-        cedula_esp.setText("");
-        Especialidad_Esp.setText("");
-        telefono_Esp.setText("");
-        correo_Esp.setText("");
-        status_esp.setText("");
-
-        botonBuscarActionPerformed(evt);
+        }       
 
     }//GEN-LAST:event_botonGuardarActionPerformed
 

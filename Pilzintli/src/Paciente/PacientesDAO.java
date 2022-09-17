@@ -54,7 +54,7 @@ public class PacientesDAO {
         try {
             Statement estatuto = conex.getConnection().createStatement();
 
-            String sqlInsert = "UPDATE paciente SET nombre = '" + pacientes.getNombre() + "' , apellido_paterno = '" + pacientes.getApellido_paterno() + "', apellido_materno = '" + pacientes.getApellido_materno() + "', fecha_nacimiento = '" + pacientes.getFecha_nacimiento() + "', escolaridad = '" + pacientes.getEscolaridad() + "', diagnostico = '" + pacientes.getDiagnostico() + "', padre_id = '" + pacientes.getPadre_id() + "', status = '" + pacientes.getStatus() + "' where id like " + pacientes.getId();;
+            String sqlInsert = "UPDATE paciente SET nombre = '" + pacientes.getNombre() + "' , apellido_paterno = '" + pacientes.getApellido_paterno() + "', apellido_materno = '" + pacientes.getApellido_materno() + "', fecha_nacimiento = '" + pacientes.getFecha_nacimiento() + "', escolaridad = '" + pacientes.getEscolaridad() + "', diagnostico = '" + pacientes.getDiagnostico() + "', padre_id = '" + pacientes.getPadre_id() + "', status = '" + pacientes.getStatus() + "' where id like " + pacientes.getId();
             System.out.println("" + sqlInsert);
             estatuto.executeUpdate(sqlInsert);
 
