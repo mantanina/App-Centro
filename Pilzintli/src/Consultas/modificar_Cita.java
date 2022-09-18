@@ -27,11 +27,11 @@ import javax.swing.UIManager;
  *
  * @author 1234
  */
-public class modificar_Cita extends javax.swing.JFrame {
+public class modificar_cita extends javax.swing.JFrame {
 
     DatosCita dc = new DatosCita();
 
-    public modificar_Cita() throws IOException {
+    public modificar_cita() throws IOException {
         initComponents();
 
         this.setLocationRelativeTo(null);
@@ -396,9 +396,9 @@ public class modificar_Cita extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new modificar_Cita().setVisible(true);
+                    new modificar_cita().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(modificar_Cita.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(modificar_cita.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

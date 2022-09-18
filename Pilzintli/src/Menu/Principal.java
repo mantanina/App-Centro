@@ -1,6 +1,6 @@
 package Menu;
 
-import Consultas.modificar_Cita;
+import Consultas.modificar_cita;
 import Especialista.*;
 import Paciente.*;
 import Consultas.*;
@@ -419,7 +419,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed
         try {
-            new modificar_Cita().setVisible(true);
+            new modificar_cita().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class
                     .getName()).log(Level.SEVERE, null, ex);
