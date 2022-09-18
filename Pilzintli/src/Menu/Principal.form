@@ -114,6 +114,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="bajas_citas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Citas"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="bajas_Paciente">

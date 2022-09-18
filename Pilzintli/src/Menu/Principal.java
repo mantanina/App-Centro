@@ -70,6 +70,8 @@ public class Principal extends javax.swing.JFrame {
             }
 
         });
+        
+        
 
     }
 
@@ -204,6 +206,7 @@ public class Principal extends javax.swing.JFrame {
         menu_Bajas.setText("Bajas");
 
         bajas_citas.setText("Citas");
+        bajas_citas.setEnabled(false);
         menu_Bajas.add(bajas_citas);
 
         bajas_Paciente.setText("Pacientes");
@@ -359,7 +362,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_altas_PacienteActionPerformed
 
     private void bajas_TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_TutorActionPerformed
-        // TODO add your handling code here:
+        try {
+            new EliminarTutor().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_bajas_TutorActionPerformed
 
     private void ayuda_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayuda_aboutActionPerformed
