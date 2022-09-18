@@ -19,6 +19,7 @@ public class modificar_Especialista extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
         BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Modificaciones Especialista");

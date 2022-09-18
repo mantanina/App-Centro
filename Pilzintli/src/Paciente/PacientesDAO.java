@@ -58,7 +58,7 @@ public class PacientesDAO {
             System.out.println("" + sqlInsert);
             estatuto.executeUpdate(sqlInsert);
 
-            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente al paciente",
+            JOptionPane.showMessageDialog(null, "Se ha modificado Exitosamente al paciente",
                     "Informacion", JOptionPane.INFORMATION_MESSAGE);
             estatuto.close();
             conex.desconectar();
@@ -68,5 +68,38 @@ public class PacientesDAO {
             JOptionPane.showMessageDialog(null, "No se registro");
         }
 
+    }
+    
+    public void ModificarStatus(String status, String id) {
+
+        DbConnection conexion;
+        Statement estatuto;
+        String solicitudSQL;
+
+        String idBusqueda;
+        String situacion;
+
+        try {
+
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+            idBusqueda = id;
+            situacion = status;
+
+            solicitudSQL = "UPDATE paciente SET status = '" + situacion + "' where id like " + idBusqueda;
+            System.out.println(solicitudSQL);
+
+            estatuto.executeUpdate(solicitudSQL);
+
+            JOptionPane.showMessageDialog(null, "Status Actualizado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al Actualizar!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }
 }

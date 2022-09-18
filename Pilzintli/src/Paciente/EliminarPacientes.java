@@ -27,7 +27,7 @@ import javax.swing.UIManager;
  *
  * @author 1234
  */
-public class ModificarPacientes extends javax.swing.JFrame {
+public class EliminarPacientes extends javax.swing.JFrame {
 
     private boolean paciente = false;
     DefaultTableModel modelo = new DefaultTableModel();
@@ -36,14 +36,14 @@ public class ModificarPacientes extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarPacientes
      */
-    public ModificarPacientes() throws IOException {
+    public EliminarPacientes() throws IOException {
         initComponents();
 
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
         BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
-        this.setTitle("Modificaciones Paciente");
+        this.setTitle("Bajas Paciente");
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -66,6 +66,13 @@ public class ModificarPacientes extends javax.swing.JFrame {
 
             }
 
+        });
+        
+        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cbx_status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_statusActionPerformed(evt);
+            }
         });
 
         textNombre.setEditable(false);
@@ -108,6 +115,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         textDiagnostico = new javax.swing.JTextField();
+        cbx_status = new javax.swing.JComboBox<>();
 
         jLabel2.setText("jLabel2");
 
@@ -124,7 +132,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1500, 700));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("Modificar Pacientes");
+        jLabel1.setText("Eliminar Pacientes");
 
         jLabel3.setText("Nombre:");
 
@@ -229,6 +237,13 @@ public class ModificarPacientes extends javax.swing.JFrame {
             }
         });
 
+        cbx_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_statusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,7 +278,8 @@ public class ModificarPacientes extends javax.swing.JFrame {
                                 .addGap(205, 205, 205)
                                 .addComponent(btn_back)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGuardar))
+                                .addComponent(btnGuardar)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -284,7 +300,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(textEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel10)
@@ -293,7 +309,8 @@ public class ModificarPacientes extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addGap(18, 18, 18)
-                                        .addComponent(textDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(textDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbx_status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(jLabel1)))
@@ -304,7 +321,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -331,7 +348,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,9 +356,9 @@ public class ModificarPacientes extends javax.swing.JFrame {
                             .addComponent(textApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btn_buscar)
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campo_IDPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
@@ -349,11 +366,13 @@ public class ModificarPacientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campo_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar)
-                            .addComponent(btn_back))
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btn_back))
+                .addContainerGap())
         );
 
         pack();
@@ -377,31 +396,20 @@ public class ModificarPacientes extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        //Registra los datos del paciente.
-        PacientesDAO daoPaciente = new PacientesDAO();
-        Pacientes mipaciente = new Pacientes();
+        PacientesDAO FSQLE = new PacientesDAO();
+        String idBusqueda = textID.getText();
+        String status = cbx_status.getSelectedItem().toString();
+        String nuevoStatus;
 
-        mipaciente.setNombre((textNombre.getText()));
-        mipaciente.setApellido_paterno(textApellidoPaterno.getText());
-        mipaciente.setApellido_materno(textApellidoMaterno.getText());
-        mipaciente.setFecha_nacimiento(textFecha.getText());
-        mipaciente.setEscolaridad(textEscolaridad.getText());
-        mipaciente.setDiagnostico(textDiagnostico.getText());
-        mipaciente.setPadre_id(Integer.parseInt(campo_IDPadre.getText()));
-        mipaciente.setStatus(1);
-        mipaciente.setId(Integer.parseInt(textID.getText()));
-
-        daoPaciente.ModificarPacientes(mipaciente);
-
-        textID.setText("");
-        textNombre.setText("");
-        textApellidoPaterno.setText("");
-        textApellidoMaterno.setText("");
-        textFecha.setText("");
-        textEscolaridad.setText("");
-        textDiagnostico.setText("");
-        campo_IDPadre.setText("");
-        campo_Status.setText("");
+        if (status.equals("Activo")) {
+            nuevoStatus = "1";
+            FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
+        } else {
+            if (status.equals("Inactivo")) {
+                nuevoStatus = "0";
+                FSQLE.ModificarStatus(nuevoStatus, idBusqueda);
+            }
+        }
 
 
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -471,12 +479,6 @@ public class ModificarPacientes extends javax.swing.JFrame {
 
             }
 
-            textNombre.setEditable(true);
-            textFecha.setEditable(true);
-            textEscolaridad.setEditable(true);
-            textDiagnostico.setEditable(true);
-            campo_IDPadre.setEditable(true);
-
             estatuto.close();
             conexion.desconectar();
 
@@ -493,6 +495,10 @@ public class ModificarPacientes extends javax.swing.JFrame {
     private void textDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDiagnosticoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDiagnosticoActionPerformed
+
+    private void cbx_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_statusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,9 +520,9 @@ public class ModificarPacientes extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new ModificarPacientes().setVisible(true);
+                    new EliminarPacientes().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(ModificarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EliminarPacientes.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -528,6 +534,7 @@ public class ModificarPacientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_buscar;
     private javax.swing.JTextField campo_IDPadre;
     private javax.swing.JTextField campo_Status;
+    private javax.swing.JComboBox<String> cbx_status;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

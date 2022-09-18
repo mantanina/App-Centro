@@ -20,6 +20,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
         BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Bajas Especialista");
@@ -61,6 +62,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         telefono_Esp.setEditable(false);
         correo_Esp.setEditable(false);
         status_esp.setEditable(false);
+        
         
     }
     
@@ -413,16 +415,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             cedula_esp.setText(especialista.getCedula());
             Especialidad_Esp.setText(especialista.getEspecialidad());
             telefono_Esp.setText(especialista.getTelefono());
-            correo_Esp.setText(especialista.getCorreo());
-            
-            nom_Esp.setEditable(true);
-            apellpate_Esp.setEditable(true);
-            apellmat_Esp.setEditable(true);
-            profesion_Esp.setEditable(true);
-            cedula_esp.setEditable(true);
-            Especialidad_Esp.setEditable(true);
-            telefono_Esp.setEditable(true);
-            correo_Esp.setEditable(true);
+            correo_Esp.setText(especialista.getCorreo());           
             
             if (especialista.getStatus() == 1) {
                 status_esp.setText("Activo");

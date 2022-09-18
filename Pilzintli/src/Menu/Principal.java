@@ -414,7 +414,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_reporte_DiarioActionPerformed
 
     private void bajas_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_PacienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            new EliminarPacientes().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_bajas_PacienteActionPerformed
 
     private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed

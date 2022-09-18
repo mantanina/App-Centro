@@ -29,9 +29,10 @@ public class EliminarTutor extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
 
         BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
-        this.setTitle("Modificaciones Tutor");
+        this.setTitle("Bajas Tutor");
         this.setIconImage(imagenIcono);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

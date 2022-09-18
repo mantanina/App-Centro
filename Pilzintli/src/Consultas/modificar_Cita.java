@@ -35,6 +35,7 @@ public class modificar_cita extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
 
         BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
         this.setTitle("Modificaciones Citas");
@@ -292,6 +293,13 @@ public class modificar_cita extends javax.swing.JFrame {
 
             estatuto.close();
             conexion.desconectar();
+            
+            campo_IDCita.setText("");
+            campo_fecha.setText("");
+            campo_hora.setText("");
+            campo_idEspecialista.setText("");
+            campo_idPaciente.setText("");
+            campo_Observaciones.setText("");
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
