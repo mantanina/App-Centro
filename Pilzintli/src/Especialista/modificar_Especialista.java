@@ -324,7 +324,6 @@ public class modificar_Especialista extends javax.swing.JFrame {
         correo_Esp.setText("");
         status_esp.setText("");
         
-        botonBuscarActionPerformed(evt);
 
     }//GEN-LAST:event_botonGuardarActionPerformed
 

@@ -328,7 +328,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void bajas_EspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajas_EspecialistaActionPerformed
         try {
-
             new eliminar_Especialistas().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);

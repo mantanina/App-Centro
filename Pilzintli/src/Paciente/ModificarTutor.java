@@ -290,6 +290,17 @@ public class ModificarTutor extends javax.swing.JFrame {
         data.setIdtutor(Integer.parseInt(campo_id.getText()));
 
         tutor.ModificarDatosTutor(data);
+        
+        campo_ap_materno.setText("");
+        campo_ap_paterno.setText("");
+        campo_cp.setText("");
+        campo_direccion.setText("");
+        campo_estado.setText("");
+        campo_id.setText("");
+        campo_municipio.setText("");
+        campo_nombre.setText("");
+        campo_status.setText("");
+        
 
     }//GEN-LAST:event_btn_saveResActionPerformed
 
