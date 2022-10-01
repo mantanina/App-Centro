@@ -50,6 +50,46 @@ public class RegistrarTutor extends javax.swing.JFrame {
             }
 
         });
+        
+        cbx_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+        "Aguascalientes ",
+        "Baja California",
+        "Baja California Sur",
+        "Campeche",
+        "Chiapas",
+        "Chihuahua",
+        "Ciudad de México",
+        "Coahuila",
+        "Colima",
+        "Durango",
+        "Estado de México",
+        "Guanajuato",
+        "Guerrero",
+        "Hidalgo",
+        "Jalisco",
+        "Michoacán",
+        "Morelos",
+        "Nayarit",
+        "Nuevo León",
+        "Oaxaca",
+        "Puebla",
+        "Querétaro",
+        "Quintana Roo",
+        "San Luis Potosí",
+        "Sinaloa",
+        "Tabasco",
+        "Tamaulipas",
+        "Tlaxcala",
+        "Tlaxcala",
+        "Veracruz",
+        "Yucatán",
+        "Zacatecas"
+        }));
+        cbx_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_estadoActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -72,11 +112,11 @@ public class RegistrarTutor extends javax.swing.JFrame {
         campo_cp = new javax.swing.JTextField();
         campo_municipio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        campo_estado = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btn_saveRes = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
+        cbx_estado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -109,11 +149,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
 
         campo_cp.setNextFocusableComponent(campo_municipio);
 
-        campo_municipio.setNextFocusableComponent(campo_estado);
-
         jLabel6.setText("Municipio:");
-
-        campo_estado.setNextFocusableComponent(btn_saveRes);
 
         jLabel7.setText("Estado:");
 
@@ -138,6 +174,13 @@ public class RegistrarTutor extends javax.swing.JFrame {
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clearActionPerformed(evt);
+            }
+        });
+
+        cbx_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_estadoActionPerformed(evt);
             }
         });
 
@@ -178,11 +221,11 @@ public class RegistrarTutor extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
-                                            .addComponent(campo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(123, 123, 123)
                                 .addComponent(jLabel9)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -213,11 +256,12 @@ public class RegistrarTutor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campo_cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(campo_cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(34, 34, 34)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -243,7 +287,7 @@ public class RegistrarTutor extends javax.swing.JFrame {
         data.setDireccion(campo_direccion.getText());
         data.setCodigopostal(campo_cp.getText());
         data.setMunicipio(campo_municipio.getText());
-        data.setEstado(campo_estado.getText());
+        data.setEstado(cbx_estado.getSelectedItem().toString());
         
         tutor.RegistrarDatosTutor(data);
         
@@ -274,11 +318,14 @@ public class RegistrarTutor extends javax.swing.JFrame {
         campo_ap_paterno.setText("");
         campo_cp.setText("");
         campo_direccion.setText("");
-        campo_estado.setText("");
         campo_municipio.setText("");
         campo_nombre.setText("");
                    
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void cbx_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_estadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,9 +364,9 @@ public class RegistrarTutor extends javax.swing.JFrame {
     private javax.swing.JTextField campo_ap_paterno;
     private javax.swing.JTextField campo_cp;
     private javax.swing.JTextField campo_direccion;
-    private javax.swing.JTextField campo_estado;
     private javax.swing.JTextField campo_municipio;
     private javax.swing.JTextField campo_nombre;
+    private javax.swing.JComboBox<String> cbx_estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
