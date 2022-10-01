@@ -6,6 +6,7 @@
 package Consultas;
 
 import ConexionDB.DbConnection;
+import java.sql.*;
 import Menu.Principal;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.WindowAdapter;
@@ -82,6 +83,86 @@ public class RegistrarCita extends javax.swing.JFrame {
                 cbx_horaActionPerformed(evt);
             }
         });
+        
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_paciente.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM paciente";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_paciente.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_pacienteActionPerformed(evt);
+            }
+        });
+        
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_especialista.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM especialista";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_especialista.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_especialistaActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -98,13 +179,12 @@ public class RegistrarCita extends javax.swing.JFrame {
         btn_bacck = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btn_limpiar = new javax.swing.JButton();
-        campo_idPaciente = new javax.swing.JTextField();
-        campo_idEspecialista = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         calendario = new com.toedter.calendar.JDateChooser();
         cbx_hora = new javax.swing.JComboBox<>();
+        cbx_paciente = new javax.swing.JComboBox<>();
+        cbx_especialista = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +192,6 @@ public class RegistrarCita extends javax.swing.JFrame {
         jLabel1.setText("Registrar Cita");
 
         btn_res.setText("Guardar");
-        btn_res.setNextFocusableComponent(btn_limpiar);
         btn_res.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_resActionPerformed(evt);
@@ -126,35 +205,13 @@ public class RegistrarCita extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Hora: (HH:MM:SS)");
+        jLabel2.setText("Hora:");
 
-        jLabel6.setText("Fecha: (aaaa-mm-dd)  ");
+        jLabel6.setText("Fecha:");
 
-        btn_limpiar.setText("Limpiar");
-        btn_limpiar.setNextFocusableComponent(btn_bacck);
-        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_limpiarActionPerformed(evt);
-            }
-        });
+        jLabel7.setText("Paciente");
 
-        campo_idPaciente.setNextFocusableComponent(campo_idEspecialista);
-        campo_idPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_idPacienteActionPerformed(evt);
-            }
-        });
-
-        campo_idEspecialista.setNextFocusableComponent(btn_res);
-        campo_idEspecialista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_idEspecialistaActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("ID Paciente");
-
-        jLabel8.setText("ID Especialista");
+        jLabel8.setText("Especialista");
 
         cbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbx_hora.addActionListener(new java.awt.event.ActionListener() {
@@ -163,43 +220,49 @@ public class RegistrarCita extends javax.swing.JFrame {
             }
         });
 
+        cbx_paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_paciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_pacienteActionPerformed(evt);
+            }
+        });
+
+        cbx_especialista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_especialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_especialistaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btn_limpiar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btn_bacck)
                             .addGap(18, 18, 18)
                             .addComponent(btn_res))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGap(21, 21, 21)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
                                 .addComponent(jLabel6)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(jLabel2)))
+                                .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(cbx_hora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbx_especialista, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbx_paciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(cbx_hora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63))
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel1)))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,15 +279,14 @@ public class RegistrarCita extends javax.swing.JFrame {
                     .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(cbx_paciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(cbx_especialista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_limpiar)
                     .addComponent(btn_bacck)
                     .addComponent(btn_res))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -243,8 +305,51 @@ public class RegistrarCita extends javax.swing.JFrame {
         
         String hora = cbx_hora.getSelectedItem().toString();
         String fecha = df.format(fechaCalendario);
-        String idPaciente = campo_idPaciente.getText();
-        String idEspecialista = campo_idEspecialista.getText();
+        
+        
+        
+        String idPaciente = "";
+        String idEspecialista = "";
+        
+        String nombrePaciente = cbx_paciente.getSelectedItem().toString();
+
+        for (int i = 0; i < nombrePaciente.length() - 1; i++) {
+
+            if (nombrePaciente.charAt(i) == '0'
+                    || nombrePaciente.charAt(i) == '1'
+                    || nombrePaciente.charAt(i) == '2'
+                    || nombrePaciente.charAt(i) == '3'
+                    || nombrePaciente.charAt(i) == '4'
+                    || nombrePaciente.charAt(i) == '5'
+                    || nombrePaciente.charAt(i) == '6'
+                    || nombrePaciente.charAt(i) == '7'
+                    || nombrePaciente.charAt(i) == '8'
+                    || nombrePaciente.charAt(i) == '9') {
+                
+                idPaciente += nombrePaciente.charAt(i);
+            }
+
+        }
+        
+        String nombreEspecialista = cbx_especialista.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreEspecialista.length() - 1; i++) {
+
+            if (nombreEspecialista.charAt(i) == '0'
+                    || nombreEspecialista.charAt(i) == '1'
+                    || nombreEspecialista.charAt(i) == '2'
+                    || nombreEspecialista.charAt(i) == '3'
+                    || nombreEspecialista.charAt(i) == '4'
+                    || nombreEspecialista.charAt(i) == '5'
+                    || nombreEspecialista.charAt(i) == '6'
+                    || nombreEspecialista.charAt(i) == '7'
+                    || nombreEspecialista.charAt(i) == '8'
+                    || nombreEspecialista.charAt(i) == '9') {
+                
+                idEspecialista += nombreEspecialista.charAt(i);
+            }
+
+        }
         
 
         try {
@@ -260,9 +365,7 @@ public class RegistrarCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Cita Registrada con Exito!","Informacion",JOptionPane.INFORMATION_MESSAGE);
             
             estatuto.close();
-            conexion.desconectar();
-            
-            btn_limpiarActionPerformed(evt);
+            conexion.desconectar();          
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -286,23 +389,17 @@ public class RegistrarCita extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_bacckActionPerformed
 
-    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
-
-        campo_idEspecialista.setText("");
-        campo_idPaciente.setText("");            
-    }//GEN-LAST:event_btn_limpiarActionPerformed
-
-    private void campo_idPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_idPacienteActionPerformed
-
-    private void campo_idEspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idEspecialistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_idEspecialistaActionPerformed
-
     private void cbx_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_horaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_horaActionPerformed
+
+    private void cbx_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_pacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_pacienteActionPerformed
+
+    private void cbx_especialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_especialistaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_especialistaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,12 +431,11 @@ public class RegistrarCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_bacck;
-    private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_res;
     private com.toedter.calendar.JDateChooser calendario;
-    private javax.swing.JTextField campo_idEspecialista;
-    private javax.swing.JTextField campo_idPaciente;
+    private javax.swing.JComboBox<String> cbx_especialista;
     private javax.swing.JComboBox<String> cbx_hora;
+    private javax.swing.JComboBox<String> cbx_paciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;

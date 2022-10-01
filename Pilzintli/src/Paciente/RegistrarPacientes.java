@@ -1,47 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Paciente;
 
 import Menu.*;
 import ConexionDB.DbConnection;
-import Especialista.eliminacion;
+import java.sql.*;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import javax.swing.table.DefaultTableModel;
-import java.sql.Connection;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-/**
- *
- * @author 1234
- */
 public class RegistrarPacientes extends javax.swing.JFrame {
 
-    private boolean paciente = false;
-    DefaultTableModel modelo = new DefaultTableModel();
-    Object fila[] = new Object[3];
-
-    /**
-     * Creates new form RegistrarPacientes
-     */
-    public RegistrarPacientes() throws IOException {
+    public RegistrarPacientes() throws IOException, SQLException {
         initComponents();
 
         this.setLocationRelativeTo(null);
@@ -72,6 +52,46 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             }
 
         });
+
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_Padres.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM padre";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_Padres.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -96,10 +116,10 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textApellidoMaterno = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
-        textFecha = new javax.swing.JTextField();
-        campo_IDPadre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
+        calendario = new com.toedter.calendar.JDateChooser();
+        cbx_Padres = new javax.swing.JComboBox<>();
 
         jLabel2.setText("jLabel2");
 
@@ -146,18 +166,16 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             }
         });
 
-        textEscolaridad.setNextFocusableComponent(campo_IDPadre);
         textEscolaridad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textEscolaridadActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Fecha de nacimiento: (aaaa-mm-dd)  ");
+        jLabel6.setText("Fecha de nacimiento:  ");
 
         jLabel7.setText("Escolaridad:");
 
-        textApellidoMaterno.setNextFocusableComponent(textFecha);
         textApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textApellidoMaternoActionPerformed(evt);
@@ -172,27 +190,20 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             }
         });
 
-        textFecha.setNextFocusableComponent(textEscolaridad);
-        textFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFechaActionPerformed(evt);
-            }
-        });
-
-        campo_IDPadre.setNextFocusableComponent(btnGuardar);
-        campo_IDPadre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_IDPadreActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("ID Padre/Tutor Responsable:");
+        jLabel8.setText("Padre/Tutor Responsable:");
 
         btn_back.setText("Regresar");
         btn_back.setNextFocusableComponent(textNombre);
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
+            }
+        });
+
+        cbx_Padres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
             }
         });
 
@@ -203,46 +214,46 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(textApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(textApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(btnCancelar))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_back)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGuardar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_IDPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel6))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(textEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCancelar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_back)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnGuardar)))))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,11 +264,12 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,8 +279,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campo_IDPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -301,18 +313,47 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         //Registra los datos del paciente.
         PacientesDAO daoPaciente = new PacientesDAO();
         Pacientes mipaciente = new Pacientes();
+        String fecha;
+        java.util.Date fechaCalendario = calendario.getDate();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        fecha = df.format(fechaCalendario);
+        String id = "";
 
-        mipaciente.setNombre((textNombre.getText()));
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+                
+                id += nombreTutor.charAt(i);
+            }
+
+        }
+
+        mipaciente.setNombre(
+                (textNombre.getText()));
         mipaciente.setApellido_paterno(textApellidoPaterno.getText());
         mipaciente.setApellido_materno(textApellidoMaterno.getText());
-        mipaciente.setFecha_nacimiento(textFecha.getText());
+        mipaciente.setFecha_nacimiento(fecha);
+
         mipaciente.setEscolaridad(textEscolaridad.getText());
-        mipaciente.setDiagnostico(null);
-        mipaciente.setPadre_id(Integer.parseInt(campo_IDPadre.getText()));
-        mipaciente.setStatus(1);
-        
+        mipaciente.setDiagnostico(
+                null);
+        mipaciente.setPadre_id(Integer.parseInt(id));
+        mipaciente.setStatus(
+                1);
+
         daoPaciente.RegistrarPacientes(mipaciente);
-        
+
         btnCancelarActionPerformed(evt);
 
 
@@ -323,38 +364,34 @@ public class RegistrarPacientes extends javax.swing.JFrame {
         textNombre.setText("");
         textApellidoPaterno.setText("");
         textApellidoMaterno.setText("");
-        textFecha.setText("");
-        textEscolaridad.setText(""); 
-        campo_IDPadre.setText("");
+        textEscolaridad.setText("");
 
 
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void textFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFechaActionPerformed
-
-    }//GEN-LAST:event_textFechaActionPerformed
 
     private void textApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textApellidoPaternoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textApellidoPaternoActionPerformed
 
-    private void campo_IDPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_IDPadreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_IDPadreActionPerformed
-
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Regresar al Menú Principal?", "Regresar", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        
+
         if (opc == JOptionPane.YES_OPTION) {
-            
+
             try {
                 new Menu.Principal().setVisible(true);
+
             } catch (IOException ex) {
-                Logger.getLogger(RegistrarTutor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarTutor.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
             dispose();
         }
     }//GEN-LAST:event_btn_backActionPerformed
+
+    private void cbx_PadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_PadresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_PadresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,8 +414,14 @@ public class RegistrarPacientes extends javax.swing.JFrame {
             public void run() {
                 try {
                     new RegistrarPacientes().setVisible(true);
+
                 } catch (IOException ex) {
-                    Logger.getLogger(RegistrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RegistrarPacientes.class
+                            .getName()).log(Level.SEVERE, null, ex);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(RegistrarPacientes.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -388,7 +431,8 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btn_back;
-    private javax.swing.JTextField campo_IDPadre;
+    private com.toedter.calendar.JDateChooser calendario;
+    private javax.swing.JComboBox<String> cbx_Padres;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -402,7 +446,6 @@ public class RegistrarPacientes extends javax.swing.JFrame {
     private javax.swing.JTextField textApellidoMaterno;
     private javax.swing.JTextField textApellidoPaterno;
     private javax.swing.JTextField textEscolaridad;
-    private javax.swing.JTextField textFecha;
     private javax.swing.JTextField textNombre;
     // End of variables declaration//GEN-END:variables
 }

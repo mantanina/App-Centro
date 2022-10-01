@@ -356,6 +356,8 @@ public class Principal extends javax.swing.JFrame {
             new RegistrarPacientes().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
 
