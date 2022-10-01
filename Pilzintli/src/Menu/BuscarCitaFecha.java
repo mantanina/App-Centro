@@ -9,6 +9,7 @@ import static Menu.Principal.login;
 import static Menu.Principal.password;
 import static Menu.Principal.url;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -31,36 +32,31 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
-/**
- *
- * @author david
- */
 public class BuscarCitaFecha extends javax.swing.JFrame {
 
     BufferedImage imagenIcono = ImageIO.read(getClass().getResource("/Recursos/logo_bcklss.png"));
     Connection conexion;
-    
-    
-    public BuscarCitaFecha() throws IOException{
+
+    public BuscarCitaFecha() throws IOException {
         initComponents();
-        
         this.setIconImage(imagenIcono);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Reporte Citas - Fecha");
-         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-         
-         this.addWindowListener(new WindowAdapter() {
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
 
             @Override
             public void windowClosing(WindowEvent e) {
                 dispose();
-                
 
             }
-
         });
+
     }
 
     /**
@@ -70,11 +66,11 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        campo_Fecha = new javax.swing.JTextField();
         btn_generate = new javax.swing.JButton();
+        calendario = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,8 +79,6 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ingresar Fecha para generar reporte de citas");
-
-        jLabel3.setText("(aaaa-mm-dd)");
 
         btn_generate.setText("Generar");
         btn_generate.addActionListener(new java.awt.event.ActionListener() {
@@ -97,26 +91,21 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(0, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campo_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_generate))
+                                .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_generate)
+                                .addGap(6, 6, 6))
                             .addComponent(jLabel2))
-                        .addGap(41, 41, 41))))
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(91, 91, 91))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +115,8 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_generate))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -140,15 +127,16 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
     private void btn_generateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateActionPerformed
         String query;
         String fecha;
-        
-        fecha = campo_Fecha.getText();
-        
+        java.util.Date fechaCalendario = calendario.getDate();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        fecha = df.format(fechaCalendario);
+
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(url, login, password);
 
-            query = "SELECT consulta.id AS consulta_id, consulta.fecha AS consulta_fecha, consulta.hora AS consulta_hora, paciente.nombre AS paciente_nombre, paciente.apellido_paterno AS paciente_apellido_paterno, paciente.apellido_materno AS paciente_apellido_materno FROM paciente paciente INNER JOIN consulta consulta ON paciente.id = consulta.paciente_id WHERE fecha LIKE '"+fecha+"'";
+            query = "SELECT consulta.id AS consulta_id, consulta.fecha AS consulta_fecha, consulta.hora AS consulta_hora, paciente.nombre AS paciente_nombre, paciente.apellido_paterno AS paciente_apellido_paterno, paciente.apellido_materno AS paciente_apellido_materno FROM paciente paciente INNER JOIN consulta consulta ON paciente.id = consulta.paciente_id WHERE fecha LIKE '" + fecha + "'";
 
             InputStream archivoJRXML = Principal.class
                     .getResourceAsStream("citasFecha.jrxml");
@@ -179,7 +167,7 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-       try {
+        try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
@@ -200,9 +188,9 @@ public class BuscarCitaFecha extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_generate;
-    private javax.swing.JTextField campo_Fecha;
+    private com.toedter.calendar.JDateChooser calendario;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

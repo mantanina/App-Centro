@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -59,6 +61,27 @@ public class RegistrarCita extends javax.swing.JFrame {
             }
 
         });
+        
+        cbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+        "07:00:00",
+        "08:00:00",
+        "09:00:00",
+        "10:00:00",
+        "11:00:00",
+        "12:00:00",
+        "13:00:00",
+        "14:00:00",
+        "15:00:00",
+        "16:00:00",
+        "17:00:00",
+        "18:00:00",
+        "19:00:00",
+        }));
+        cbx_hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_horaActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -74,14 +97,14 @@ public class RegistrarCita extends javax.swing.JFrame {
         btn_res = new javax.swing.JButton();
         btn_bacck = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        campo_hora = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        campo_fecha = new javax.swing.JTextField();
         btn_limpiar = new javax.swing.JButton();
         campo_idPaciente = new javax.swing.JTextField();
         campo_idEspecialista = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        calendario = new com.toedter.calendar.JDateChooser();
+        cbx_hora = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,8 +120,6 @@ public class RegistrarCita extends javax.swing.JFrame {
         });
 
         btn_bacck.setText("Regresar");
-        btn_bacck.setNextFocusableComponent(campo_hora);
-        btn_bacck.setOpaque(false);
         btn_bacck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_bacckActionPerformed(evt);
@@ -107,21 +128,7 @@ public class RegistrarCita extends javax.swing.JFrame {
 
         jLabel2.setText("Hora: (HH:MM:SS)");
 
-        campo_hora.setNextFocusableComponent(campo_fecha);
-        campo_hora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_horaActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Fecha: (aaaa-mm-dd)  ");
-
-        campo_fecha.setNextFocusableComponent(campo_idPaciente);
-        campo_fecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_fechaActionPerformed(evt);
-            }
-        });
 
         btn_limpiar.setText("Limpiar");
         btn_limpiar.setNextFocusableComponent(btn_bacck);
@@ -149,6 +156,13 @@ public class RegistrarCita extends javax.swing.JFrame {
 
         jLabel8.setText("ID Especialista");
 
+        cbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_horaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,21 +175,22 @@ public class RegistrarCita extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(campo_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(campo_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(btn_limpiar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btn_bacck)
                             .addGap(18, 18, 18)
-                            .addComponent(btn_res)))
+                            .addComponent(btn_res))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(14, 14, 14)
+                                    .addComponent(jLabel2)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(cbx_hora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
@@ -194,11 +209,11 @@ public class RegistrarCita extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campo_hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(campo_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,9 +238,11 @@ public class RegistrarCita extends javax.swing.JFrame {
         DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
+        java.util.Date fechaCalendario = calendario.getDate();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
-        String hora = campo_hora.getText();
-        String fecha = campo_fecha.getText();
+        String hora = cbx_hora.getSelectedItem().toString();
+        String fecha = df.format(fechaCalendario);
         String idPaciente = campo_idPaciente.getText();
         String idEspecialista = campo_idEspecialista.getText();
         
@@ -269,17 +286,8 @@ public class RegistrarCita extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_bacckActionPerformed
 
-    private void campo_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_horaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_horaActionPerformed
-
-    private void campo_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_fechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_fechaActionPerformed
-
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
-        campo_fecha.setText("");
-        campo_hora.setText("");
+
         campo_idEspecialista.setText("");
         campo_idPaciente.setText("");            
     }//GEN-LAST:event_btn_limpiarActionPerformed
@@ -291,6 +299,10 @@ public class RegistrarCita extends javax.swing.JFrame {
     private void campo_idEspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idEspecialistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_idEspecialistaActionPerformed
+
+    private void cbx_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_horaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_horaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,10 +336,10 @@ public class RegistrarCita extends javax.swing.JFrame {
     private javax.swing.JButton btn_bacck;
     private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_res;
-    private javax.swing.JTextField campo_fecha;
-    private javax.swing.JTextField campo_hora;
+    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JTextField campo_idEspecialista;
     private javax.swing.JTextField campo_idPaciente;
+    private javax.swing.JComboBox<String> cbx_hora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
