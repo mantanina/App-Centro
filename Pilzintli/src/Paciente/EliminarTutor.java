@@ -63,8 +63,50 @@ public class EliminarTutor extends javax.swing.JFrame {
                 cbx_statusActionPerformed(evt);
             }
         });
+        
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_Padres.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM padre";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_Padres.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
 
         campo_nombre.setEditable(false);
+        campo_ap_materno.setEditable(false);
+        campo_ap_paterno.setEditable(false);
         campo_direccion.setEditable(false);
         campo_cp.setEditable(false);
         campo_municipio.setEditable(false);
@@ -97,11 +139,11 @@ public class EliminarTutor extends javax.swing.JFrame {
         btn_saveRes = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        campo_id = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         campo_status = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbx_status = new javax.swing.JComboBox<>();
+        cbx_Padres = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -159,13 +201,6 @@ public class EliminarTutor extends javax.swing.JFrame {
 
         jLabel8.setText("ID:");
 
-        campo_id.setNextFocusableComponent(campo_ap_paterno);
-        campo_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_idActionPerformed(evt);
-            }
-        });
-
         btn_buscar.setText("Buscar");
         btn_buscar.setNextFocusableComponent(campo_nombre);
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +220,13 @@ public class EliminarTutor extends javax.swing.JFrame {
             }
         });
 
+        cbx_Padres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,37 +242,35 @@ public class EliminarTutor extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(campo_ap_materno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
-                        .addComponent(campo_id, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_buscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_back)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_saveRes))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campo_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(campo_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(campo_cp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(campo_status, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(campo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(0, 0, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campo_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(campo_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(campo_cp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(campo_status, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(campo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_back)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_saveRes)))))
+                        .addContainerGap(88, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jLabel9)
@@ -243,9 +283,9 @@ public class EliminarTutor extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campo_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -297,9 +337,29 @@ public class EliminarTutor extends javax.swing.JFrame {
 
     private void btn_saveResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveResActionPerformed
         DatosTutorDAO FSQLE = new DatosTutorDAO();
-        String idBusqueda = campo_id.getText();
         String status = cbx_status.getSelectedItem().toString();
         String nuevoStatus;
+        
+        String idBusqueda = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                idBusqueda += nombreTutor.charAt(i);
+            }
+
+        }
 
         if (status.equals("Activo")) {
             nuevoStatus = "1";
@@ -332,23 +392,40 @@ public class EliminarTutor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_nombreActionPerformed
 
-    private void campo_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_idActionPerformed
-
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
 
         DbConnection conexion;
         Statement estatuto;
         String solicitudSQL;
         ResultSet resultado;
+        
+        String idBusqueda = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                idBusqueda += nombreTutor.charAt(i);
+            }
+
+        }
 
         try {
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
 
             solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, direccion, cp, municipio, estado, status FROM "
-                    + "padre where apellido_paterno like '" + campo_ap_paterno.getText() + "' and apellido_materno like '" + campo_ap_materno.getText() + "' and id like " + campo_id.getText();
+                    + "padre where id like " + idBusqueda;
 
             System.out.println(solicitudSQL);
 
@@ -356,7 +433,7 @@ public class EliminarTutor extends javax.swing.JFrame {
 
             while (resultado.next()) {
 
-                campo_id.setText(String.valueOf(resultado.getInt("id")));
+                resultado.getInt("id");
                 campo_nombre.setText(resultado.getString("nombre"));
                 campo_ap_paterno.setText(resultado.getString("apellido_paterno"));
                 campo_ap_materno.setText(resultado.getString("apellido_materno"));
@@ -384,6 +461,10 @@ public class EliminarTutor extends javax.swing.JFrame {
     private void cbx_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_statusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_statusActionPerformed
+
+    private void cbx_PadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_PadresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_PadresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,10 +504,10 @@ public class EliminarTutor extends javax.swing.JFrame {
     private javax.swing.JTextField campo_cp;
     private javax.swing.JTextField campo_direccion;
     private javax.swing.JTextField campo_estado;
-    private javax.swing.JTextField campo_id;
     private javax.swing.JTextField campo_municipio;
     private javax.swing.JTextField campo_nombre;
     private javax.swing.JTextField campo_status;
+    private javax.swing.JComboBox<String> cbx_Padres;
     private javax.swing.JComboBox<String> cbx_status;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
