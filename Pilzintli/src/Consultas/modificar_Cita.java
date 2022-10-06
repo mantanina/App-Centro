@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -62,12 +64,51 @@ public class modificar_cita extends javax.swing.JFrame {
             }
 
         });
+        
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_Padres.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM paciente";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_Padres.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
 
         campo_Observaciones.setEditable(false);
-        campo_fecha.setEditable(false);
+        campo_IDCita.setEditable(false);
         campo_hora.setEditable(false);
         campo_idEspecialista.setEditable(false);
-        campo_idPaciente.setEditable(false);
 
     }
 
@@ -84,8 +125,6 @@ public class modificar_cita extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         campo_hora = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        campo_fecha = new javax.swing.JTextField();
-        campo_idPaciente = new javax.swing.JTextField();
         campo_idEspecialista = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -95,6 +134,8 @@ public class modificar_cita extends javax.swing.JFrame {
         campo_IDCita = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JButton();
+        calendario = new com.toedter.calendar.JDateChooser();
+        cbx_Padres = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +151,6 @@ public class modificar_cita extends javax.swing.JFrame {
 
         btn_bacck.setText("Regresar");
         btn_bacck.setNextFocusableComponent(campo_hora);
-        btn_bacck.setOpaque(false);
         btn_bacck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_bacckActionPerformed(evt);
@@ -119,28 +159,13 @@ public class modificar_cita extends javax.swing.JFrame {
 
         jLabel2.setText("Hora: (HH:MM:SS)");
 
-        campo_hora.setNextFocusableComponent(campo_fecha);
         campo_hora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campo_horaActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Fecha: (aaaa-mm-dd)  ");
-
-        campo_fecha.setNextFocusableComponent(campo_idPaciente);
-        campo_fecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_fechaActionPerformed(evt);
-            }
-        });
-
-        campo_idPaciente.setNextFocusableComponent(campo_idEspecialista);
-        campo_idPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_idPacienteActionPerformed(evt);
-            }
-        });
+        jLabel6.setText("Fecha:  ");
 
         campo_idEspecialista.setNextFocusableComponent(btn_res);
         campo_idEspecialista.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +174,7 @@ public class modificar_cita extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("ID Paciente");
+        jLabel7.setText("Paciente");
 
         jLabel8.setText("ID Especialista");
 
@@ -159,7 +184,6 @@ public class modificar_cita extends javax.swing.JFrame {
         campo_Observaciones.setRows(5);
         jScrollPane1.setViewportView(campo_Observaciones);
 
-        campo_IDCita.setNextFocusableComponent(campo_fecha);
         campo_IDCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campo_IDCitaActionPerformed(evt);
@@ -175,6 +199,13 @@ public class modificar_cita extends javax.swing.JFrame {
             }
         });
 
+        cbx_Padres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,68 +213,67 @@ public class modificar_cita extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(campo_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btn_buscar))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btn_bacck)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btn_res)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(campo_IDCita, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                        .addComponent(cbx_Padres, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(campo_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(campo_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(campo_IDCita, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_buscar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btn_bacck)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btn_res))))))
+                .addGap(18, 80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(campo_hora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(campo_IDCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(campo_hora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(campo_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_idPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
@@ -255,7 +285,7 @@ public class modificar_cita extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btn_buscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -274,11 +304,34 @@ public class modificar_cita extends javax.swing.JFrame {
         String solicitudSQL;
 
         String hora = campo_hora.getText();
-        String fecha = campo_fecha.getText();
         String idCita = campo_IDCita.getText();
-        String idPaciente = campo_idPaciente.getText();
         String idEspecialista = campo_idEspecialista.getText();
         String observaciones = campo_Observaciones.getText();
+        
+        java.util.Date fechaCalendario = calendario.getDate();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = df.format(fechaCalendario);
+        
+        String idPaciente = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                idPaciente += nombreTutor.charAt(i);
+            }
+
+        }
 
         try {
 
@@ -295,10 +348,8 @@ public class modificar_cita extends javax.swing.JFrame {
             conexion.desconectar();
             
             campo_IDCita.setText("");
-            campo_fecha.setText("");
             campo_hora.setText("");
             campo_idEspecialista.setText("");
-            campo_idPaciente.setText("");
             campo_Observaciones.setText("");
 
         } catch (SQLException ex) {
@@ -327,14 +378,6 @@ public class modificar_cita extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_horaActionPerformed
 
-    private void campo_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_fechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_fechaActionPerformed
-
-    private void campo_idPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_idPacienteActionPerformed
-
     private void campo_idEspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idEspecialistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_idEspecialistaActionPerformed
@@ -348,13 +391,38 @@ public class modificar_cita extends javax.swing.JFrame {
         Statement estatuto;
         String solicitudSQL;
         ResultSet resultado;
+        
+        String id = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                id += nombreTutor.charAt(i);
+            }
+
+        }
+        
+        java.util.Date fechaCalendario = calendario.getDate();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = df.format(fechaCalendario);
 
         try {
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
 
             solicitudSQL = "SELECT id, fecha, hora, paciente_id, especialista_id, observaciones FROM "
-                    + "consulta where id like " + campo_IDCita.getText();
+                    + "consulta where paciente_id like " + id + " and fecha like '" + fecha +"'";
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
@@ -362,9 +430,9 @@ public class modificar_cita extends javax.swing.JFrame {
             while (resultado.next()) {
 
                 campo_IDCita.setText(String.valueOf(resultado.getInt("id")));
-                campo_fecha.setText(resultado.getString("fecha"));
+                resultado.getString("fecha");
                 campo_hora.setText(resultado.getString("hora"));
-                campo_idPaciente.setText(String.valueOf(resultado.getInt("paciente_id")));
+                resultado.getInt("paciente_id");
                 campo_idEspecialista.setText(String.valueOf(resultado.getInt("especialista_id")));
                 campo_Observaciones.setText(resultado.getString("observaciones"));
             }
@@ -373,16 +441,18 @@ public class modificar_cita extends javax.swing.JFrame {
             conexion.desconectar();
 
             campo_Observaciones.setEditable(true);
-            campo_fecha.setEditable(true);
             campo_hora.setEditable(true);
             campo_idEspecialista.setEditable(true);
-            campo_idPaciente.setEditable(true);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "No se Encontraron Datos!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void cbx_PadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_PadresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_PadresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,12 +486,12 @@ public class modificar_cita extends javax.swing.JFrame {
     private javax.swing.JButton btn_bacck;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_res;
+    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JTextField campo_IDCita;
     private javax.swing.JTextArea campo_Observaciones;
-    private javax.swing.JTextField campo_fecha;
     private javax.swing.JTextField campo_hora;
     private javax.swing.JTextField campo_idEspecialista;
-    private javax.swing.JTextField campo_idPaciente;
+    private javax.swing.JComboBox<String> cbx_Padres;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
