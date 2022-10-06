@@ -1,5 +1,6 @@
 package Especialista;
 
+import ConexionDB.DbConnection;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
 import java.awt.event.WindowAdapter;
@@ -7,6 +8,9 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -54,8 +58,50 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                 cbx_statusActionPerformed(evt);
             }
         });
+        
+        try {
+            DbConnection conexion;
+            Statement estatuto;
+            String solicitudSQL;
+            ResultSet resultado;
+
+            cbx_Padres.removeAllItems();
+            conexion = new DbConnection();
+            estatuto = conexion.getConnection().createStatement();
+
+            solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno FROM especialista";
+            System.out.println(solicitudSQL);
+
+            resultado = estatuto.executeQuery(solicitudSQL);
+
+            while (resultado.next()) {
+
+                int identificador = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apP = resultado.getString("apellido_paterno");
+                String apM = resultado.getString("apellido_materno");
+
+                String complexBuildString = String.valueOf(identificador) + "/" + nombre + " " + apP + " " + apM;
+                cbx_Padres.addItem(complexBuildString);
+
+            }
+
+            estatuto.close();
+            conexion.desconectar();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
          
         nom_Esp.setEditable(false);
+        apellpate_Esp.setEditable(false);
+        apellmat_Esp.setEditable(false);
         profesion_Esp.setEditable(false);
         cedula_esp.setEditable(false);
         Especialidad_Esp.setEditable(false);
@@ -91,10 +137,10 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         nom_Esp = new javax.swing.JTextField();
         telefono_Esp = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        id_Esp = new javax.swing.JTextField();
         status_esp = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbx_status = new javax.swing.JComboBox<>();
+        cbx_Padres = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,12 +234,6 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
         jLabel11.setText("ID");
 
-        id_Esp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_EspActionPerformed(evt);
-            }
-        });
-
         status_esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 status_espActionPerformed(evt);
@@ -209,72 +249,74 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             }
         });
 
+        cbx_Padres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Padres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_PadresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(botonBuscar)
-                                    .addComponent(status_esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel11))
-                                        .addGap(40, 40, 40)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(apellpate_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(id_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(apellmat_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(profesion_Esp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cedula_esp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Especialidad_Esp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(telefono_Esp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(boton_Salir)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(botonGuardar))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel9))
-                                        .addGap(40, 40, 40)
-                                        .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(46, 46, 46)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(44, 44, 44)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(botonBuscar)
+                                .addComponent(status_esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel11))
+                                    .addGap(40, 40, 40)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(apellpate_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(nom_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(apellmat_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(profesion_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(cedula_esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(Especialidad_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(telefono_Esp, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(cbx_Padres, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(boton_Salir)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(botonGuardar))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel9))
+                                    .addGap(40, 40, 40)
+                                    .addComponent(correo_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(id_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(17, 17, 17)
+                    .addComponent(jLabel11)
+                    .addComponent(cbx_Padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nom_Esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -314,9 +356,9 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(status_esp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbx_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonGuardar)
                     .addComponent(boton_Salir))
@@ -329,7 +371,27 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
-        String idBusqueda = id_Esp.getText();
+        String idBusqueda = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                idBusqueda += nombreTutor.charAt(i);
+            }
+
+        }
+        
         String status = cbx_status.getSelectedItem().toString();
         String nuevoStatus;
 
@@ -397,9 +459,26 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
         
         FuncionesSQLEspecialista FSQLE = new FuncionesSQLEspecialista();
         DatosEspecialista especialista;
-        String apellidoP = apellpate_Esp.getText();
-        String apellidoM = apellmat_Esp.getText();
-        String id = id_Esp.getText();
+        String id = "";
+        String nombreTutor = cbx_Padres.getSelectedItem().toString();
+
+        for (int i = 0; i < nombreTutor.length() - 1; i++) {
+
+            if (nombreTutor.charAt(i) == '0'
+                    || nombreTutor.charAt(i) == '1'
+                    || nombreTutor.charAt(i) == '2'
+                    || nombreTutor.charAt(i) == '3'
+                    || nombreTutor.charAt(i) == '4'
+                    || nombreTutor.charAt(i) == '5'
+                    || nombreTutor.charAt(i) == '6'
+                    || nombreTutor.charAt(i) == '7'
+                    || nombreTutor.charAt(i) == '8'
+                    || nombreTutor.charAt(i) == '9') {
+
+                id += nombreTutor.charAt(i);
+            }
+
+        }
         
         especialista = FSQLE.BuscarEspecialista(id);
         
@@ -407,7 +486,7 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Datos Encontrados!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             
-            id_Esp.setText(Integer.toString(especialista.getId()));
+            especialista.getId();
             nom_Esp.setText(especialista.getNombre());
             apellpate_Esp.setText(especialista.getApellidoPaterno());
             apellmat_Esp.setText(especialista.getApellidoMaterno());
@@ -430,10 +509,6 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonBuscarActionPerformed
 
-    private void id_EspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_EspActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_id_EspActionPerformed
-
     private void status_espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_espActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_status_espActionPerformed
@@ -441,6 +516,10 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     private void cbx_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_statusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_statusActionPerformed
+
+    private void cbx_PadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_PadresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_PadresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,10 +565,10 @@ public class eliminar_Especialistas extends javax.swing.JFrame {
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton boton_Salir;
+    private javax.swing.JComboBox<String> cbx_Padres;
     private javax.swing.JComboBox<String> cbx_status;
     private javax.swing.JTextField cedula_esp;
     private javax.swing.JTextField correo_Esp;
-    private javax.swing.JTextField id_Esp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
