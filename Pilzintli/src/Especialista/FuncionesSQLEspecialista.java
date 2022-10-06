@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class FuncionesSQLEspecialista {
 
-    public DatosEspecialista BuscarEspecialista(String apP, String apM, String id) {
+    public DatosEspecialista BuscarEspecialista(String id) {
 
         DbConnection conexion;
         Statement estatuto;
@@ -23,7 +23,7 @@ public class FuncionesSQLEspecialista {
             especialista = new DatosEspecialista();
 
             solicitudSQL = "SELECT id, nombre, apellido_paterno, apellido_materno, profesion, cedula, especialidad, telefono, correo, status FROM "
-                    + "especialista where apellido_paterno like '" + apP + "' and apellido_materno like '" + apM + "' and id like " + id;
+                    + "especialista where id like " + id;
             System.out.println(solicitudSQL);
 
             resultado = estatuto.executeQuery(solicitudSQL);
