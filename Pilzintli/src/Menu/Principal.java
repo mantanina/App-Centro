@@ -70,8 +70,6 @@ public class Principal extends javax.swing.JFrame {
             }
 
         });
-        
-        
 
     }
 
@@ -106,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
         repote_BuscarCitaFecha = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         reporte_listaPacientes = new javax.swing.JMenuItem();
         reporte_ListaPadres = new javax.swing.JMenuItem();
         reporte_listaEspecialistas = new javax.swing.JMenuItem();
@@ -252,6 +251,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Reportes.add(repote_BuscarCitaFecha);
+
+        jMenuItem1.setText("Historial por Paciente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(jMenuItem1);
 
         reporte_listaPacientes.setText("Lista de Pacientes");
         reporte_listaPacientes.addActionListener(new java.awt.event.ActionListener() {
@@ -587,6 +594,15 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_mod_PacienteActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+
+            new HistorialPaciente().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -630,6 +646,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logo_label;
     private javax.swing.JMenu menu_Altas;
     private javax.swing.JMenu menu_Archivo;

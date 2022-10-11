@@ -49,7 +49,7 @@ FROM
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="217" y="59" width="161" height="20" uuid="72ebfb71-21ee-4ac8-be84-e94115f8b876"/>
+				<reportElement x="208" y="59" width="175" height="20" uuid="72ebfb71-21ee-4ac8-be84-e94115f8b876"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
