@@ -29,11 +29,11 @@ import javax.swing.UIManager;
  *
  * @author 1234
  */
-public class modificar_cita extends javax.swing.JFrame {
+public class modificar_Cita extends javax.swing.JFrame {
 
     DatosCita dc = new DatosCita();
 
-    public modificar_cita() throws IOException {
+    public modificar_Cita() throws IOException {
         initComponents();
 
         this.setLocationRelativeTo(null);

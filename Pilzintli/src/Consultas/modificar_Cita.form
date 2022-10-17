@@ -169,11 +169,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campo_hora">
-      <Properties>
-        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo_horaActionPerformed"/>
       </Events>
@@ -224,11 +219,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="campo_IDCita">
-      <Properties>
-        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo_IDCitaActionPerformed"/>
       </Events>
