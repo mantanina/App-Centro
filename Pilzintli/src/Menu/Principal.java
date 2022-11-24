@@ -1,6 +1,6 @@
 package Menu;
 
-import Consultas.modificar_cita;
+import Consultas.modificar_Cita;
 import Especialista.*;
 import Paciente.*;
 import Consultas.*;
@@ -104,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
         menu_Reportes = new javax.swing.JMenu();
         reporte_Diario = new javax.swing.JMenuItem();
         repote_BuscarCitaFecha = new javax.swing.JMenuItem();
+        reporte_pagosHoy = new javax.swing.JCheckBoxMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         reporte_listaPacientes = new javax.swing.JMenuItem();
         reporte_ListaPadres = new javax.swing.JMenuItem();
@@ -251,6 +252,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_Reportes.add(repote_BuscarCitaFecha);
+
+        reporte_pagosHoy.setSelected(true);
+        reporte_pagosHoy.setText("Pagos Citas Hoy");
+        reporte_pagosHoy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporte_pagosHoyActionPerformed(evt);
+            }
+        });
+        menu_Reportes.add(reporte_pagosHoy);
 
         jMenuItem1.setText("Historial por Paciente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -434,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void mod_CitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_CitasActionPerformed
         try {
-            new modificar_cita().setVisible(true);
+            new modificar_Cita().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -603,6 +613,39 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void reporte_pagosHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporte_pagosHoyActionPerformed
+        
+        String query;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, login, password);
+
+            query = "SELECT paciente.id AS paciente_id, paciente.nombre AS paciente_nombre, paciente.apellido_paterno AS paciente_apellido_paterno, paciente.apellido_materno AS paciente_apellido_materno FROM paciente";
+
+            InputStream archivoJRXML = Principal.class
+                    .getResourceAsStream("listaPacientes.jrxml");
+            JasperDesign diario = JRXmlLoader.load(archivoJRXML);
+            JRDesignQuery updateDiario = new JRDesignQuery();
+            updateDiario.setText(query);
+
+            diario.setQuery(updateDiario);
+
+            JasperReport jreport = JasperCompileManager.compileReport(diario);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conexion);
+
+            JasperViewer.viewReport(jprint, false);
+
+        } catch (JRException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Principal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_reporte_pagosHoyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -662,6 +705,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem reporte_ListaPadres;
     private javax.swing.JMenuItem reporte_listaEspecialistas;
     private javax.swing.JMenuItem reporte_listaPacientes;
+    private javax.swing.JCheckBoxMenuItem reporte_pagosHoy;
     private javax.swing.JMenuItem repote_BuscarCitaFecha;
     // End of variables declaration//GEN-END:variables
 }

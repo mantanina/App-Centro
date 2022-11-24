@@ -104,6 +104,17 @@ public class modificar_Cita extends javax.swing.JFrame {
                 cbx_PadresActionPerformed(evt);
             }
         });
+        
+        cbx_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+        "150",
+        "200",
+        "1000",
+        }));
+        cbx_pago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_pagoActionPerformed(evt);
+            }
+        });
 
         campo_Observaciones.setEditable(false);
         campo_IDCita.setEditable(false);
@@ -136,6 +147,8 @@ public class modificar_Cita extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         calendario = new com.toedter.calendar.JDateChooser();
         cbx_Padres = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        cbx_pago = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -206,6 +219,15 @@ public class modificar_Cita extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Pago");
+
+        cbx_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_pago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_pagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,10 +258,6 @@ public class modificar_Cita extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(campo_IDCita, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(campo_idEspecialista, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel9)
@@ -249,7 +267,15 @@ public class modificar_Cita extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btn_bacck)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btn_res))))))
+                                    .addComponent(btn_res)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campo_idEspecialista, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(cbx_pago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(18, 80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -285,7 +311,11 @@ public class modificar_Cita extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btn_buscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbx_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -332,13 +362,37 @@ public class modificar_Cita extends javax.swing.JFrame {
             }
 
         }
+        
+        String cantidadPago = cbx_pago.getSelectedItem().toString();
+        int pago = 0;
+        String tempPago = "";
+
+        for (int i = 0; i < cantidadPago.length(); i++) {
+
+            if (cantidadPago.charAt(i) == '0'
+                    || cantidadPago.charAt(i) == '1'
+                    || cantidadPago.charAt(i) == '2'
+                    || cantidadPago.charAt(i) == '3'
+                    || cantidadPago.charAt(i) == '4'
+                    || cantidadPago.charAt(i) == '5'
+                    || cantidadPago.charAt(i) == '6'
+                    || cantidadPago.charAt(i) == '7'
+                    || cantidadPago.charAt(i) == '8'
+                    || cantidadPago.charAt(i) == '9') {
+
+                tempPago += cantidadPago.charAt(i);
+            }
+
+        }
+        
+        pago = Integer.parseInt(tempPago);
 
         try {
 
             conexion = new DbConnection();
             estatuto = conexion.getConnection().createStatement();
             // Agrega la hora y fecha 
-            solicitudSQL = "UPDATE consulta SET fecha = '" + fecha + "' , hora = '" + hora + "', paciente_id = '" + idPaciente + "', especialista_id = '" + idEspecialista + "', observaciones = '" + observaciones + "' where id like " + idCita;
+            solicitudSQL = "UPDATE consulta SET fecha = '" + fecha + "' , hora = '" + hora + "', paciente_id = '" + idPaciente + "', especialista_id = '" + idEspecialista + "', observaciones = '" + observaciones + "', pago = '" + pago + "' where id like " + idCita;
 
             estatuto.executeUpdate(solicitudSQL);
             /// Indica que se a actualizada la agenda de especialistas   
@@ -413,6 +467,7 @@ public class modificar_Cita extends javax.swing.JFrame {
 
         }
         
+        
         java.util.Date fechaCalendario = calendario.getDate();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = df.format(fechaCalendario);
@@ -454,6 +509,10 @@ public class modificar_Cita extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_PadresActionPerformed
 
+    private void cbx_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_pagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_pagoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -474,9 +533,9 @@ public class modificar_Cita extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new modificar_cita().setVisible(true);
+                    new modificar_Cita().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(modificar_cita.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(modificar_Cita.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -492,7 +551,9 @@ public class modificar_Cita extends javax.swing.JFrame {
     private javax.swing.JTextField campo_hora;
     private javax.swing.JTextField campo_idEspecialista;
     private javax.swing.JComboBox<String> cbx_Padres;
+    private javax.swing.JComboBox<String> cbx_pago;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
